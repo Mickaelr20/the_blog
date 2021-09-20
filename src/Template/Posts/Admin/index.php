@@ -1,0 +1,1 @@
+Index admin posts
