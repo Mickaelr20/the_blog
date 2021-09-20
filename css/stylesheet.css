@@ -15,3 +15,7 @@ body {
 .content-container {
     padding: 0rem 1rem 0rem 1rem;
 }
+
+.filter-invert {
+    filter: invert(1);
+}

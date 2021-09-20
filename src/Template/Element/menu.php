@@ -2,7 +2,7 @@
     <div class="container">
         <div class="fw-bold d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
             <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
-                <img class="img-fluid" src="/img/favicon.svg" alt="Logo" width="50rem">
+                <img class="img-fluid" src="/img/favicon_black.svg" alt="Logo" width="100rem">
             </a>
 
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
