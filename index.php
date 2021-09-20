@@ -40,6 +40,11 @@ $router->get('/users/logout', function () {
     $resolver->resolve([]);
 });
 
+$router->get('/publications', function () {
+    $resolver = new Resolver("PostsController", "index");
+    $resolver->resolve([]);
+});
+
 if (str_starts_with($request_url, "/admin")) {
     $error = "";
 
