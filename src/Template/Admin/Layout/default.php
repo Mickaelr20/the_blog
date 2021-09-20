@@ -24,14 +24,14 @@
 </head>
 
 <body class="sb-nav-fixed">
-    <?= $renderer->element("topnav.php"); ?>
+    <?= $renderer->element("topnav"); ?>
     <div id="layoutSidenav">
-        <?= $renderer->element('sidenav.php'); ?>
+        <?= $renderer->element('sidenav'); ?>
         <div id="layoutSidenav_content">
             <div class="p-2 content-container">
                 <?= $content ?>
             </div>
-            <?= $renderer->element("footer.php"); ?>
+            <?= $renderer->element("footer"); ?>
         </div>
     </div>
 

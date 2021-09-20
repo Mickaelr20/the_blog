@@ -31,7 +31,12 @@ class Renderer
     public function template($modele, $elem, $templateVars = [])
     {
         extract($templateVars);
-        include "src/Template/" . $modele . (empty($this->namespace) ? "/" : "/" . $this->namespace . "/") . $elem . ".php";
+        include sprintf(
+            'src/Template%s/%s/%s.php',
+            empty($this->namespace) ? "" : "/" . $this->namespace,
+            $modele,
+            $elem
+        );
     }
 
     public function element($url, $vars = [])
@@ -43,7 +48,11 @@ class Renderer
         ]);
 
         extract($vars_to_extract);
-        include "src/Template/Element" . (empty($this->namespace) ? "/" : "/" . $this->namespace . "/") . $url;
+        include sprintf(
+            'src/Template%s/Element/%s.php',
+            empty($this->namespace) ? "" : "/" . $this->namespace,
+            $url
+        );
     }
 
     public function renderLayout($layout, $vars = [])
@@ -51,7 +60,11 @@ class Renderer
 
         extract($vars);
 
-        include "src/Template/Layout"  . (empty($this->namespace) ? "/" : "/" . $this->namespace . "/") . $layout;
+        include sprintf(
+            'src/Template%s/Layout/%s.php',
+            empty($this->namespace) ? "" : "/" . $this->namespace,
+            $layout
+        );
     }
 
     public function render($elem, $vars = [])
@@ -72,6 +85,6 @@ class Renderer
             "content" => $content
         ]);
 
-        $this->renderLayout($this->layout . ".php", $layoutVars);
+        $this->renderLayout($this->layout, $layoutVars);
     }
 }
