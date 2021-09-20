@@ -4,6 +4,8 @@ namespace App\Helper;
 
 class Renderer
 {
+
+    const DEFAULT_VARS = [];
     var $modele;
     var $namespace;
     var $layout = "default";
@@ -34,7 +36,13 @@ class Renderer
 
     public function element($url, $vars = [])
     {
-        extract($vars);
+        $vars_to_extract = array_merge($vars, [
+            "renderer" => $this,
+            "pageHelper" => new \App\Helper\PageHelper(),
+            "user" => empty($_SESSION["user"]) ? [] : $_SESSION['user']
+        ]);
+
+        extract($vars_to_extract);
         include "src/Template/Element" . (empty($this->namespace) ? "/" : "/" . $this->namespace . "/") . $url;
     }
 
@@ -50,6 +58,7 @@ class Renderer
     {
         $templateVars = array_merge($vars, [
             "renderer" => $this,
+            "pageHelper" => new \App\Helper\PageHelper(),
             "user" => empty($_SESSION["user"]) ? [] : $_SESSION['user']
         ]);
 

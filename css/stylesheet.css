@@ -19,3 +19,17 @@ body {
 .filter-invert {
     filter: invert(1);
 }
+
+a {
+    color: #2A9D8F;
+    transition: 0.15s;
+}
+
+a:hover {
+    color: #2A9D8F;
+    opacity: .75;
+}
+
+a:visited {
+    color: #264653;
+}

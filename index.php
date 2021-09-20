@@ -74,12 +74,6 @@ if (str_starts_with($request_url, "/admin")) {
     });
 }
 
-
-
-
-
-
-
 try {
     $router->run();
 } catch (\Exception $e) {

@@ -8,7 +8,7 @@
     <link href="/css/stylesheet.css" type="text/css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/line-awesome/css/line-awesome.min.css">
-
+    <link href="/css/menu.css" type="text/css" rel="stylesheet">
     <link rel="icon" href="/img/favicon_black.svg" />
 
 </head>
