@@ -51,8 +51,9 @@ $router->get('/publications/:page', function ($page) {
 });
 
 if (str_starts_with($request_url, "/admin")) {
+    $session = new SessionHelper();
     $error = "";
-    $user = SessionHelper::get("user");
+    $user = $session->get("user");
 
     if (!empty($user)) {
         if (!$user['is_validated']) {

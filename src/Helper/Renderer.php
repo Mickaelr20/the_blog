@@ -43,10 +43,11 @@ class Renderer
 
     public function element($url, $vars = [])
     {
+        $session = new SessionHelper();
         $vars_to_extract = array_merge($vars, [
             "renderer" => $this,
             "pageHelper" => new \App\Helper\PageHelper(),
-            "user" => SessionHelper::get("user")
+            "user" => $session->get("user")
         ]);
 
         extract($vars_to_extract);
@@ -71,10 +72,11 @@ class Renderer
 
     public function render($elem, $vars = [])
     {
+        $session = new SessionHelper();
         $templateVars = array_merge($vars, [
             "renderer" => $this,
             "pageHelper" => new \App\Helper\PageHelper(),
-            "user" => SessionHelper::get("user")
+            "user" => $session->get("user")
         ]);
 
         ob_start();
