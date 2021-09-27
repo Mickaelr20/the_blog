@@ -4,15 +4,6 @@ namespace App\Helper;
 
 class RequestHelper
 {
-    var $post_vars;
-    var $get_vars;
-
-    public function __construct()
-    {
-        $this->get_vars = $_GET;
-        $this->post_vars = $_POST;
-    }
-
     public function getType(): String
     {
         return !empty($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : "none";
@@ -20,12 +11,14 @@ class RequestHelper
 
     public function getRequestData(): array
     {
-        $post = !empty($this->post_vars) ? $this->post_vars : [];
-        $get = !empty($this->get_vars) ? $this->get_vars : [];
+        $array = [
+            "post" => !empty($_POST) ? $_POST : [],
+            "get" => empty($_GET) ? $_GET : []
+        ];
 
         $request_type = strtolower($this->getType());
 
-        return !empty($$request_type) ? $$request_type : [];
+        return !empty($array[$request_type]) ? $array[$request_type] : [];
     }
 
     public function getServer(): array
