@@ -45,6 +45,11 @@ $router->get('/publications', function () {
     $resolver->resolve([]);
 });
 
+$router->get('/publications/:page', function ($page) {
+    $resolver = new Resolver("PostsController", "index");
+    $resolver->resolve($page);
+});
+
 if (str_starts_with($request_url, "/admin")) {
     $error = "";
 
@@ -71,6 +76,16 @@ if (str_starts_with($request_url, "/admin")) {
     $router->get('/admin/posts', function () use ($error) {
         if (empty($error)) {
             $resolver = new Resolver("Admin\PostsController", "index");
+            $resolver->resolve([]);
+        } else {
+            $resolver = new Resolver("ErrorsController", "error");
+            $resolver->resolve(["code" => "401", 'message' => $error]);
+        }
+    });
+
+    $router->get('/admin/posts/new', function () use ($error) {
+        if (empty($error)) {
+            $resolver = new Resolver("Admin\PostsController", "new");
             $resolver->resolve([]);
         } else {
             $resolver = new Resolver("ErrorsController", "error");
