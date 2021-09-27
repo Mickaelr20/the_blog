@@ -4,14 +4,18 @@ namespace App;
 
 use App\Route;
 
+use App\Helper\RequestHelper;
+
 class Router
 {
     private $url;
     private $routes = [];
     private $namedRoutes = [];
+    private $request;
 
     public function __construct($url)
     {
+        $this->request = new RequestHelper();
         $this->url = $url;
     }
 
@@ -46,10 +50,10 @@ class Router
 
     public function run()
     {
-        if (!isset($this->routes[empty($_SERVER['REQUEST_METHOD']) ? "" : $_SERVER['REQUEST_METHOD']])) {
+        if (!isset($this->routes[$this->request->getServer()["REQUEST_METHOD"]])) {
             throw new \Exception('REQUEST_METHOD does not exist');
         }
-        foreach ($this->routes[empty($_SERVER['REQUEST_METHOD']) ? "" : $_SERVER['REQUEST_METHOD']] as $route) {
+        foreach ($this->routes[$this->request->getServer()["REQUEST_METHOD"]] as $route) {
             if ($route->match($this->url)) {
                 return $route->call();
             }

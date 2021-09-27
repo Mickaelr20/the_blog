@@ -22,10 +22,9 @@ class PostsController extends AppController
     {
         $errors = [];
         $form = [];
-        $server_request_method = $_SERVER['REQUEST_METHOD'];
 
-        if (!empty($server_request_method) && $server_request_method === "POST") {
-            $form = empty($_POST) ? [] : $_POST;
+        if ($this->request->getType() === "POST") {
+            $form = $this->request->getRequestData();
 
             if (!empty($form['email']) && !empty($form['password'])) {
                 try {

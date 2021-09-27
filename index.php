@@ -4,11 +4,12 @@ session_start();
 
 require "vendor/autoload.php";
 
-use App\Helper\SessionHelper;
+use App\Helper\{SessionHelper, Resolver, RequestHelper};
 use App\Router;
-use App\Helper\Resolver;
 
-$request_url = empty($_SERVER['REQUEST_URI']) ? "/" : $_SERVER['REQUEST_URI'];
+$request = new RequestHelper();
+
+$request_url = $request->getServer()["REQUEST_URI"];
 $router = new Router($request_url);
 $router->get('/', function () {
     $resolver = new Resolver("PagesController", "display");

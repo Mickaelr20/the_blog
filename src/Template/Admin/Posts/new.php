@@ -16,8 +16,8 @@
 <div class="mt-3 bg-light container">
     <form class="p-3" method="POST" action="/admin/posts/new">
         <div class="form-group pb-2">
-            <label for="author">Autheur</label>
-            <input name="author" type="text" class="form-control" placeholder="Autheur" value="<?= !empty($form['author']) ? $form['author'] : "" ?>" required>
+            <label for="author">Auteur</label>
+            <input name="author" type="text" class="form-control" placeholder="Auteur" value="<?= !empty($form['author']) ? $form['author'] : "" ?>" required>
         </div>
         <div class="form-group pb-2">
             <label for="title">Titre</label>
@@ -31,6 +31,6 @@
             <label for="content">Contenu</label>
             <input name="content" class="form-control" placeholder="Contenu" required>
         </div>
-        <button type="submit" class="btn btn-primary">Se connecter</button>
+        <button type="submit" class="btn btn-primary">Ajouter</button>
     </form>
 </div>

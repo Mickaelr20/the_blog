@@ -2,15 +2,17 @@
 
 namespace App\Controller;
 
-use App\Helper\{Renderer};
+use App\Helper\{RequestHelper, Renderer};
 
 class AppController
 {
     protected $renderer;
+    protected $request;
 
     public function __construct($modele, $namespace = "")
     {
         $this->renderer = new Renderer($modele, $namespace);
+        $this->request = new RequestHelper();
     }
 
     public function __call($name, $args)

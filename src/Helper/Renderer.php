@@ -2,12 +2,10 @@
 
 namespace App\Helper;
 
-use App\Helper\SessionHelper;
+use App\Helper\{PageHelper, SessionHelper};
 
 class Renderer
 {
-
-    const DEFAULT_VARS = [];
     var $modele;
     var $namespace;
     var $layout = "default";
@@ -46,7 +44,7 @@ class Renderer
         $session = new SessionHelper();
         $vars_to_extract = array_merge($vars, [
             "renderer" => $this,
-            "pageHelper" => new \App\Helper\PageHelper(),
+            "pageHelper" => new PageHelper(),
             "user" => $session->get("user")
         ]);
 
@@ -75,7 +73,7 @@ class Renderer
         $session = new SessionHelper();
         $templateVars = array_merge($vars, [
             "renderer" => $this,
-            "pageHelper" => new \App\Helper\PageHelper(),
+            "pageHelper" => new PageHelper(),
             "user" => $session->get("user")
         ]);
 

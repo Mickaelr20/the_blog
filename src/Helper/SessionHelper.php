@@ -4,8 +4,6 @@ namespace App\Helper;
 
 class SessionHelper
 {
-
-
     public function put($key, $value)
     {
         $_SESSION[$key] = $value;
@@ -13,7 +11,7 @@ class SessionHelper
 
     public function get($key)
     {
-        return (isset($_SESSION[$key]) ? $_SESSION[$key] : null);
+        return (!empty($_SESSION[$key]) ? $_SESSION[$key] : null);
     }
 
     public function remove($key)
