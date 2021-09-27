@@ -20,7 +20,7 @@ class UsersController extends AppController
         $server_request_method = $_SERVER['REQUEST_METHOD'];
 
         if (!empty($server_request_method) && $server_request_method === "POST") {
-            $form = $_POST;
+            $form = empty($_POST) ? [] : $_POST;
 
             if (!empty($form['email']) && !empty($form['password'])) {
                 try {
@@ -67,7 +67,7 @@ class UsersController extends AppController
         $server_request_method = $_SERVER['REQUEST_METHOD'];
 
         if (!empty($server_request_method) && $server_request_method === "POST") {
-            $form = $_POST;
+            $form = empty($_POST) ? [] : $_POST;
             $userEntity->fromArray($form);
             $errors = $userEntity->verifyEntity();
 
