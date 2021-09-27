@@ -17,4 +17,31 @@ class PostsController extends AppController
 
         $this->renderer->render("index", ["title" => "Publications"]);
     }
+
+    public function new()
+    {
+        $errors = [];
+        $form = [];
+
+        if ($_SERVER['REQUEST_METHOD'] === "POST") {
+            $form = $_POST;
+
+            if (!empty($form['email']) && !empty($form['password'])) {
+                try {
+                    //TODO: save
+                } catch (\Exception $e) {
+                    $error = "Une erreure est survenue, veuillez réessayer ultérieurement.";
+                    switch ($e->getCode()) {
+                        case "":
+                            break;
+                    }
+
+                    $errors[] = $error;
+                }
+            } else {
+            }
+        }
+
+        $this->renderer->render("new", ["title" => "Nouvelle publication", "errors" => $errors, "form" => $form]);
+    }
 }

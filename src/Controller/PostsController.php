@@ -13,8 +13,12 @@ class PostsController extends AppController
         parent::__construct("Posts");
     }
 
-    public function index()
+    public function index($page)
     {
-        $this->renderer->render("index", ["title" => "Publications"]);
+
+        $postTable = new PostTable();
+        $liste_posts = $postTable->liste($page);
+
+        $this->renderer->render("index", ["title" => "Publications", "liste_posts" => $liste_posts]);
     }
 }

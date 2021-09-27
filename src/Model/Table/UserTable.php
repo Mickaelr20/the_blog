@@ -13,7 +13,7 @@ class UserTable extends Table
     //     return new UserEntity($queryResult);
     // }
 
-    public function save(UserEntity $userEntity)
+    public function save(UserEntity $userEntity): UserEntity
     {
         $this->sqlConnection->query('INSERT INTO users (last_name, first_name, email, nickname, password) VALUES(?, ?, ?, ?, ?)', [
             $userEntity->last_name,

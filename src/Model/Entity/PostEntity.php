@@ -7,6 +7,11 @@ use App\Helper\EntityChecker;
 class PostEntity extends Entity
 {
     public $id;
+    public $author;
+    public $hat;
+    public $title;
+    public $content;
+    public $created;
 
     public function __construct()
     {
