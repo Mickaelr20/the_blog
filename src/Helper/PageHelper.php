@@ -11,7 +11,7 @@ class PageHelper
 
     public function is_menu_link_active($link): bool
     {
-        $temp_page = explode('/', $_SERVER['REQUEST_URI']);
+        $temp_page = explode('/', empty($_SERVER['REQUEST_URI']) ? "" : $_SERVER['REQUEST_URI']);
         $page = $temp_page[count($temp_page) - 1];
         $res = false;
 

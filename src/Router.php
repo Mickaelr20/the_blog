@@ -46,10 +46,10 @@ class Router
 
     public function run()
     {
-        if (!isset($this->routes[$_SERVER['REQUEST_METHOD']])) {
+        if (!isset($this->routes[empty($_SERVER['REQUEST_METHOD']) ? "" : $_SERVER['REQUEST_METHOD']])) {
             throw new \Exception('REQUEST_METHOD does not exist');
         }
-        foreach ($this->routes[$_SERVER['REQUEST_METHOD']] as $route) {
+        foreach ($this->routes[empty($_SERVER['REQUEST_METHOD']) ? "" : $_SERVER['REQUEST_METHOD']] as $route) {
             if ($route->match($this->url)) {
                 return $route->call();
             }

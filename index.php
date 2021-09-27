@@ -8,7 +8,7 @@ require "vendor/autoload.php";
 use App\Router;
 use App\Helper\Resolver;
 
-$request_url = $_SERVER['REQUEST_URI'];
+$request_url = empty($_SERVER['REQUEST_URI']) ? "/" : $_SERVER['REQUEST_URI'];
 $router = new Router($request_url);
 $router->get('/', function () {
     $resolver = new Resolver("PagesController", "display");
