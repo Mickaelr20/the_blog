@@ -2,6 +2,8 @@
 
 namespace App\Helper;
 
+use App\Helper\SessionHelper;
+
 class Renderer
 {
 
@@ -44,7 +46,7 @@ class Renderer
         $vars_to_extract = array_merge($vars, [
             "renderer" => $this,
             "pageHelper" => new \App\Helper\PageHelper(),
-            "user" => empty($_SESSION["user"]) ? [] : $_SESSION['user']
+            "user" => SessionHelper::get("user")
         ]);
 
         extract($vars_to_extract);
@@ -72,7 +74,7 @@ class Renderer
         $templateVars = array_merge($vars, [
             "renderer" => $this,
             "pageHelper" => new \App\Helper\PageHelper(),
-            "user" => empty($_SESSION["user"]) ? [] : $_SESSION['user']
+            "user" => SessionHelper::get("user")
         ]);
 
         ob_start();

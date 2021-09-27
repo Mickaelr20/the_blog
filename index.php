@@ -4,7 +4,7 @@ session_start();
 
 require "vendor/autoload.php";
 
-
+use App\Helper\SessionHelper;
 use App\Router;
 use App\Helper\Resolver;
 
@@ -52,10 +52,9 @@ $router->get('/publications/:page', function ($page) {
 
 if (str_starts_with($request_url, "/admin")) {
     $error = "";
+    $user = SessionHelper::get("user");
 
-    if (!empty($_SESSION['user'])) {
-        $user = $_SESSION['user'];
-
+    if (!empty($user)) {
         if (!$user['is_validated']) {
             $error = "vous devez être validé pour accéder a cette partie du site.";
         }

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Model\Table\UserTable;
 use App\Model\Entity\UserEntity;
+use App\Helper\SessionHelper;
 
 class UsersController extends AppController
 {
@@ -31,7 +32,7 @@ class UsersController extends AppController
                     $password_verified = password_verify($form['password'], $first_user['password']);
 
                     if ($password_verified) {
-                        $_SESSION['user'] = $first_user;
+                        SessionHelper::put("user", $first_user);
                         header('Location: ' . "/users/login_success");
                     } else {
                         $errors[] = "Mot de passe incorrecte.";
