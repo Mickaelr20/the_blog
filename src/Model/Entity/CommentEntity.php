@@ -4,12 +4,11 @@ namespace App\Model\Entity;
 
 use App\Helper\EntityChecker;
 
-class PostEntity extends Entity
+class CommentEntity extends Entity
 {
     public $id;
+    public $post_id;
     public $author;
-    public $hat;
-    public $title;
     public $content;
     public $created;
 
@@ -17,7 +16,7 @@ class PostEntity extends Entity
     {
     }
 
-    protected function checkCallable(EntityChecker $entityChecker, string $action = null): array
+    protected function checkCallable(EntityChecker $entityChecker): array
     {
         $entityChecker->check("id", function ($value, $res): string {
             if (!empty($value)) {
@@ -25,7 +24,7 @@ class PostEntity extends Entity
             }
 
             return $res;
-        }, "create");
+        });
 
         return $entityChecker->getErrors();
     }

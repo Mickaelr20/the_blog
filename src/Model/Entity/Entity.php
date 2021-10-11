@@ -17,15 +17,31 @@ abstract class Entity
         }
     }
 
-    abstract protected function checkCallable(EntityChecker $entityChecker): array;
+    abstract protected function checkCallable(EntityChecker $entityChecker, string|null $action = null): array;
 
-    public function verifyEntity(): array
+    public function verifyEntity(string|null $action = null): array
     {
-        return $this->checkCallable(new EntityChecker($this));
+        return $this->checkCallable(new EntityChecker($this, $action));
     }
 
-    public function toArray()
+    public function toArray($options = [])
     {
-        return (array) $this;
+        $res = (array) $this;
+
+        if (!empty($options)) {
+            $t_res = [];
+            foreach ($options as $key => $value) {
+
+                if (!empty($value) && is_array($value)) {
+                    $t_res[$key] = [$res[$key], $value[0]];
+                } else {
+                    $t_res[$value] = $res[$value];
+                }
+            }
+
+            $res = $t_res;
+        }
+
+        return $res;
     }
 }

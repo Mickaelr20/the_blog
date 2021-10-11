@@ -13,8 +13,42 @@
     </div>
 <?php } ?>
 
+<?php
+if (!empty($_GET['editState']) && $_GET['editState'] === 'success') {
+?>
+    <div class="m-auto container">
+        <div class="text-center alert alert-success" role="alert">
+            <h3>La publication a été mise à jour</h3>
+        </div>
+    </div>
+<?php } ?>
+
+<?php
+if (!empty($_GET['saveState']) && $_GET['saveState'] === 'success') {
+?>
+    <div class="m-auto container">
+        <div class="text-center alert alert-success" role="alert">
+            <h3>La publication a été sauvegardé</h3>
+        </div>
+    </div>
+<?php } ?>
+
+<?php
+if (!empty($_GET['deletedId']) && is_numeric($_GET['deletedId'])) {
+?>
+    <div class="m-auto container">
+        <div class="text-center alert alert-success" role="alert">
+            <h3>La publication <?= $_GET['deletedId'] ?> a été supprimé avec succès</h3>
+        </div>
+    </div>
+<?php } ?>
+
 <div class="mt-3 bg-light container">
-    <form class="p-3" method="POST" action="/admin/posts/new">
+    <form class="p-3" method="POST" action="">
+        <div class="d-none form-group pb-2">
+            <label for="id">Id</label>
+            <input name="id" type="text" class="form-control" placeholder="Auteur" value="<?= !empty($form['id']) ? $form['id'] : "" ?>" required>
+        </div>
         <div class="form-group pb-2">
             <label for="author">Auteur</label>
             <input name="author" type="text" class="form-control" placeholder="Auteur" value="<?= !empty($form['author']) ? $form['author'] : "" ?>" required>
@@ -31,6 +65,6 @@
             <label for="content">Contenu</label>
             <textarea name="content" class="form-control" placeholder="Contenu" required><?= !empty($form['content']) ? $form['content'] : "" ?></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Ajouter</button>
+        <button type="submit" class="btn btn-primary">Modifier</button>
     </form>
 </div>

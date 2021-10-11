@@ -2,10 +2,6 @@
 <html lang="fr">
 
 <head>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script> -->
-
-    <!-- -->
-
     <title><?= $title ?></title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +13,7 @@
     <link href="/css/Admin/menu.css" rel="stylesheet" />
     <link href="/sb-admin/css/styles.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+    <link href="/css/Admin/listing.css" rel="stylesheet" />
     <link rel="stylesheet" href="/css/vendors/line-awesome/css/line-awesome.min.css">
 
     <link rel="icon" href="/img/favicon_black.svg" />

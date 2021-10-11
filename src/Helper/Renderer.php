@@ -70,6 +70,7 @@ class Renderer
 
     public function render($elem, $vars = [])
     {
+
         $session = new SessionHelper();
         $templateVars = array_merge($vars, [
             "renderer" => $this,

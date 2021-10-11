@@ -8,20 +8,23 @@ class EntityChecker
 {
 
     private array $errors;
+    private string|null $action;
     private Entity $entity;
 
-    public function __construct(Entity $entity)
+    public function __construct(Entity $entity, string|null $action)
     {
         $this->entity = $entity;
+        $this->action = $action;
     }
 
-    public function check($field_name, callable $callable): EntityChecker
+    public function check($field_name, callable $callable, string|null $when = null): EntityChecker
     {
-        $res = $callable($this->entity->$field_name, $res = "");
-        if (!empty($res)) {
-            $this->errors[$field_name] = $res;
+        if (empty($when) || $when === $this->action) {
+            $res = $callable($this->entity->$field_name, $res = "", $when);
+            if (!empty($res)) {
+                $this->errors[$field_name] = $res;
+            }
         }
-
         return $this; //Pour le chainage
     }
 

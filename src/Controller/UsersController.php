@@ -63,7 +63,7 @@ class UsersController extends AppController
     public function signup()
     {
         $errors = [];
-        $form = [];
+        $requestData = [];
         $userEntity = new UserEntity();
 
         if ($this->request->getServer()["REQUEST_METHOD"] === "POST") {
@@ -91,7 +91,7 @@ class UsersController extends AppController
             }
         }
 
-        $this->renderer->render("signup", ["title" => "Inscription", "errors" => $errors, "form" => $form]);
+        $this->renderer->render("signup", ["title" => "Inscription", "errors" => $errors, "form" => $requestData]);
     }
 
     public function signup_success()

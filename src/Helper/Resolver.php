@@ -18,7 +18,7 @@ class Resolver
     {
         // try {
         $controller = new $this->controllerName();
-        $controller->__call($this->action, $params);
+        $controller->call($this->action, $params);
         // } catch (\Exception $e) {
         //     $resolver = new Resolver("ErrorsController", "error");
         //     $resolver->resolve(['code' => '404']);

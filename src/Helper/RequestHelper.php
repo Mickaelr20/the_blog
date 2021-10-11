@@ -12,11 +12,11 @@ class RequestHelper
     public function getRequestData(): array
     {
         $array = [
-            "post" => !empty($_POST) ? $_POST : [],
-            "get" => empty($_GET) ? $_GET : []
+            "POST" => !empty($_POST) ? $_POST : [],
+            "GET" => !empty($_GET) ? $_GET : []
         ];
 
-        $request_type = strtolower($this->getType());
+        $request_type = $this->getType();
 
         return !empty($array[$request_type]) ? $array[$request_type] : [];
     }

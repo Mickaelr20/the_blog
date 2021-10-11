@@ -15,7 +15,7 @@ class AppController
         $this->request = new RequestHelper();
     }
 
-    public function __call($name, $args)
+    public function call($name, $args)
     {
         if (method_exists($this, $name)) {
             $this->$name($args);
