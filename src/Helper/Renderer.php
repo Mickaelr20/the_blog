@@ -49,11 +49,26 @@ class Renderer
         ]);
 
         extract($vars_to_extract);
-        include sprintf(
+
+        $path_to_test = [sprintf(
             'src/Template%s/Element/%s.php',
             empty($this->namespace) ? "" : "/" . $this->namespace,
             $url
-        );
+        ), sprintf(
+            'src/Template/Element/%s.php',
+            $url
+        )];
+        $found = false;
+
+        do {
+            $path = array_shift($path_to_test);
+            if (file_exists($path)) {
+                $found = true;
+            }
+        } while (!empty($path) && !$found);
+
+
+        include $path;
     }
 
     public function renderLayout($layout, $vars = [])

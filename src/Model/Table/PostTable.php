@@ -41,6 +41,13 @@ class PostTable extends Table
         return $res;
     }
 
+    public function count(): int
+    {
+        $res = $this->sqlConnection->query("SELECT count(*) AS nb_posts FROM posts", []);
+
+        return (int) $res[0]['nb_posts'];
+    }
+
     public function delete($id)
     {
         $this->sqlConnection->query("DELETE FROM posts WHERE id = :id", [

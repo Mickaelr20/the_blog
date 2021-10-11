@@ -7,4 +7,7 @@
         }
         ?>
     </div>
+
+    <?= $renderer->element("pagination", ['nb_page_max' => $nb_page_max, 'actual_page' => $actual_page, 'base_link' => $base_link]); ?>
+
 </div>
