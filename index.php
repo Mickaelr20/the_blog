@@ -51,9 +51,19 @@ $router->get('/publications/:page', function ($page) {
     $resolver->resolve(["page" => $page]);
 });
 
-$router->get('/publication/:id', function ($id) {
+$router->get('/publication/:id/', function ($id) {
     $resolver = new Resolver("PostsController", "view");
-    $resolver->resolve(["id" => $id]);
+    $resolver->resolve(["id" => $id, "comment_page" => 0]);
+});
+
+$router->get('/publication/:id/:comment_page', function ($id, $comment_page) {
+    $resolver = new Resolver("PostsController", "view");
+    $resolver->resolve(["id" => $id, "comment_page" => $comment_page]);
+});
+
+$router->post('/comments/new', function () {
+    $resolver = new Resolver("CommentsController", "new");
+    $resolver->resolve([]);
 });
 
 if (str_starts_with($request_url, "/admin")) {
@@ -79,6 +89,7 @@ if (str_starts_with($request_url, "/admin")) {
         }
     });
 
+    /* POSTS */
     $router->both('/admin/posts/', function () use ($error) {
         if (empty($error)) {
             $resolver = new Resolver("Admin\PostsController", "index");
@@ -93,6 +104,16 @@ if (str_starts_with($request_url, "/admin")) {
         if (empty($error)) {
             $resolver = new Resolver("Admin\PostsController", "new");
             $resolver->resolve([]);
+        } else {
+            $resolver = new Resolver("ErrorsController", "error");
+            $resolver->resolve(["code" => "401", 'message' => $error]);
+        }
+    });
+
+    $router->get('/admin/posts/:page', function ($page) use ($error) {
+        if (empty($error)) {
+            $resolver = new Resolver("Admin\PostsController", "index");
+            $resolver->resolve(["page" => $page]);
         } else {
             $resolver = new Resolver("ErrorsController", "error");
             $resolver->resolve(["code" => "401", 'message' => $error]);
@@ -119,16 +140,6 @@ if (str_starts_with($request_url, "/admin")) {
         }
     });
 
-    $router->get('/admin/posts/deleted_post/:post_id', function ($post_id) use ($error) {
-        if (empty($error)) {
-            $resolver = new Resolver("Admin\PostsController", "deleted_post");
-            $resolver->resolve(["post_id" => $post_id]);
-        } else {
-            $resolver = new Resolver("ErrorsController", "error");
-            $resolver->resolve(["code" => "401", 'message' => $error]);
-        }
-    });
-
     $router->both('/admin/posts/delete/:post_id', function ($post_id) use ($error) {
         if (empty($error)) {
             $resolver = new Resolver("Admin\PostsController", "delete");
@@ -139,10 +150,81 @@ if (str_starts_with($request_url, "/admin")) {
         }
     });
 
-    $router->get('/admin/posts/:page', function ($page) use ($error) {
+    $router->get('/admin/posts/deleted_post/:post_id', function ($post_id) use ($error) {
         if (empty($error)) {
-            $resolver = new Resolver("Admin\PostsController", "index");
+            $resolver = new Resolver("Admin\PostsController", "deleted_post");
+            $resolver->resolve(["post_id" => $post_id]);
+        } else {
+            $resolver = new Resolver("ErrorsController", "error");
+            $resolver->resolve(["code" => "401", 'message' => $error]);
+        }
+    });
+
+    /* COMMENTS */
+    $router->get('/admin/comments/', function () use ($error) {
+        if (empty($error)) {
+            $resolver = new Resolver("Admin\CommentsController", "index");
+            $resolver->resolve(["page" => 0]);
+        } else {
+            $resolver = new Resolver("ErrorsController", "error");
+            $resolver->resolve(["code" => "401", 'message' => $error]);
+        }
+    });
+
+    $router->both('/admin/comments/new/', function () use ($error) {
+        if (empty($error)) {
+            $resolver = new Resolver("Admin\CommentsController", "new");
+            $resolver->resolve([]);
+        } else {
+            $resolver = new Resolver("ErrorsController", "error");
+            $resolver->resolve(["code" => "401", 'message' => $error]);
+        }
+    });
+
+    $router->get('/admin/comments/:page', function ($page) use ($error) {
+        if (empty($error)) {
+            $resolver = new Resolver("Admin\CommentsController", "index");
             $resolver->resolve(["page" => $page]);
+        } else {
+            $resolver = new Resolver("ErrorsController", "error");
+            $resolver->resolve(["code" => "401", 'message' => $error]);
+        }
+    });
+
+    $router->both('/admin/comments/edit/:comment_id', function ($comment_id) use ($error) {
+        if (empty($error)) {
+            $resolver = new Resolver("Admin\CommentsController", "edit");
+            $resolver->resolve(["comment_id" => $comment_id]);
+        } else {
+            $resolver = new Resolver("ErrorsController", "error");
+            $resolver->resolve(["code" => "401", 'message' => $error]);
+        }
+    });
+
+    $router->post('/admin/comments/update/', function () use ($error) {
+        if (empty($error)) {
+            $resolver = new Resolver("Admin\CommentsController", "update");
+            $resolver->resolve([]);
+        } else {
+            $resolver = new Resolver("ErrorsController", "error");
+            $resolver->resolve(["code" => "401", 'message' => $error]);
+        }
+    });
+
+    $router->both('/admin/comments/delete/:comment_id', function ($comment_id) use ($error) {
+        if (empty($error)) {
+            $resolver = new Resolver("Admin\CommentsController", "delete");
+            $resolver->resolve(["comment_id" => $comment_id]);
+        } else {
+            $resolver = new Resolver("ErrorsController", "error");
+            $resolver->resolve(["code" => "401", 'message' => $error]);
+        }
+    });
+
+    $router->get('/admin/comments/deleted_comment/:comment_id', function ($comment_id) use ($error) {
+        if (empty($error)) {
+            $resolver = new Resolver("Admin\CommentsController", "deleted_comment");
+            $resolver->resolve(["comment_id" => $comment_id]);
         } else {
             $resolver = new Resolver("ErrorsController", "error");
             $resolver->resolve(["code" => "401", 'message' => $error]);

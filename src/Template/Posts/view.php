@@ -3,6 +3,34 @@
     <p class="text-justify card-text"><?= $post['content'] ?></p>
     <p>Le <?= date_create($post['created'])->format("d/m/Y") ?> par <?= $post['author'] ?></p>
     <hr />
+
+    <?php
+    if (!empty($_GET['saveState']) && $_GET['saveState'] === "success") {
+    ?>
+        <div class="m-auto container">
+            <div class="text-center alert alert-success" role="alert">
+                <h3>Demande d'ajout de commentaire envoyé!</h3>
+            </div>
+        </div>
+    <?php } ?>
+
+    <h1>Laisse un commentaire:</h1>
+    <form class="" method="POST" action="/comments/new/">
+        <div class="d-none form-group pb-2">
+            <label for="post_id">Id de la publication</label>
+            <input name="post_id" type="text" class="form-control" placeholder="Id de la publication" value="<?= !empty($post['id']) ? $post['id'] : "" ?>" required>
+        </div>
+        <div class="form-group pb-2">
+            <label for="author">Auteur</label>
+            <input name="author" type="text" class="form-control" placeholder="Auteur" value="<?= !empty($comment['author']) ? $comment['author'] : "" ?>" required>
+        </div>
+        <div class="form-group pb-2">
+            <label for="content">Contenu</label>
+            <textarea name="content" class="form-control" placeholder="Contenu" required><?= !empty($forcommentm['content']) ? $comment['content'] : "" ?></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Envoyer</button>
+    </form>
+    <hr />
     <h1>Commentaires</h1>
     <div class="row">
         <?php
@@ -14,4 +42,6 @@
             <h5>Aucun commentaires</h5>
         <?php } ?>
     </div>
+
+    <?= $renderer->element("pagination", ['nb_page_max' => $nb_page_comments_max, 'actual_page' => $actual_comments_page, 'base_link' => $base_comments_link]); ?>
 </div>

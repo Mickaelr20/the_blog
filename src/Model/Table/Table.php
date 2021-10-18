@@ -8,10 +8,10 @@ abstract class Table
 {
 
     protected SqlConnection $sqlConnection;
+    protected string $TABLE_NAME;
 
     public function __construct()
     {
-
         $this->sqlConnection = new SqlConnection("localhost", "blog");
     }
 }

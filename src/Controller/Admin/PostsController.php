@@ -142,7 +142,6 @@ class PostsController extends AppController
     public function deleted_post($params)
     {
         $post_id = $params['post_id'];
-        var_dump($post_id);
         $this->renderer->render("deleted_post", ["title" => "Publication supprimé", "deleted_post_id" => $post_id]);
     }
 }

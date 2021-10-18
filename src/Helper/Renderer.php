@@ -68,7 +68,11 @@ class Renderer
         } while (!empty($path) && !$found);
 
 
-        include $path;
+        if (!empty($path)) {
+            include $path;
+        } else {
+            echo "element namespace: $this->namespace, url: $url n'a pas été trouvé.";
+        }
     }
 
     public function renderLayout($layout, $vars = [])

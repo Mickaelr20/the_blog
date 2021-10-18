@@ -19,7 +19,7 @@ class UserEntity extends Entity
     {
     }
 
-    protected function checkCallable(EntityChecker $entityChecker): array
+    protected function checkCallable(EntityChecker $entityChecker, string $action = null): array
     {
         $entityChecker->check("id", function ($value, $res): string {
             if (!empty($value)) {
