@@ -27,7 +27,7 @@ class UserEntity extends Entity
             }
 
             return $res;
-        });
+        }, "create");
 
         $entityChecker->check("first_name", function ($value, $res): string {
             if (!empty($value)) {
@@ -45,7 +45,7 @@ class UserEntity extends Entity
             }
 
             return $res;
-        });
+        }, "create");
 
         $entityChecker->check("last_name", function ($value, $res): string {
             if (!empty($value)) {
@@ -63,7 +63,7 @@ class UserEntity extends Entity
             }
 
             return $res;
-        });
+        }, "create");
 
         $entityChecker->check("nickname", function ($value, $res): string {
             if (!empty($value)) {
@@ -100,7 +100,7 @@ class UserEntity extends Entity
             }
 
             return $res;
-        });
+        }, "create");
 
         $entityChecker->check("email", function ($value, $res): string {
             if (!empty($value)) {
@@ -116,7 +116,15 @@ class UserEntity extends Entity
             }
 
             return $res;
-        });
+        }, "create");
+
+        $entityChecker->check("is_validated", function ($value, $res): string {
+            if (!empty($value) || is_bool($value)) {
+                $res = "La validité de l'utilisateur ne pas être définie à la création.";
+            }
+
+            return $res;
+        }, "create");
 
         return $entityChecker->getErrors();
     }

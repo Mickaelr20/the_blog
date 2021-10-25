@@ -51,6 +51,10 @@ class CommentsController extends AppController
             $errors = $commentEntity->verifyEntity("update");
 
             if (empty($errors)) {
+                if (empty($commentEntity->is_validated) || !filter_var($commentEntity->is_validated, FILTER_VALIDATE_BOOLEAN)) {
+                    $commentEntity->is_validated = false;
+                }
+
                 try {
                     $commentTable = new CommentTable();
                     $commentTable->update($commentEntity);

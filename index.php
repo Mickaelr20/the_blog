@@ -230,6 +230,77 @@ if (str_starts_with($request_url, "/admin")) {
             $resolver->resolve(["code" => "401", 'message' => $error]);
         }
     });
+
+    /* USERS */
+    $router->both('/admin/users/', function () use ($error) {
+        if (empty($error)) {
+            $resolver = new Resolver("Admin\UsersController", "index");
+            $resolver->resolve(["page" => 0]);
+        } else {
+            $resolver = new Resolver("ErrorsController", "error");
+            $resolver->resolve(["code" => "401", 'message' => $error]);
+        }
+    });
+
+    $router->both('/admin/users/new/', function () use ($error) {
+        if (empty($error)) {
+            $resolver = new Resolver("Admin\UsersController", "new");
+            $resolver->resolve([]);
+        } else {
+            $resolver = new Resolver("ErrorsController", "error");
+            $resolver->resolve(["code" => "401", 'message' => $error]);
+        }
+    });
+
+    $router->get('/admin/users/:page', function ($page) use ($error) {
+        if (empty($error)) {
+            $resolver = new Resolver("Admin\UsersController", "index");
+            $resolver->resolve(["page" => $page]);
+        } else {
+            $resolver = new Resolver("ErrorsController", "error");
+            $resolver->resolve(["code" => "401", 'message' => $error]);
+        }
+    });
+
+    $router->both('/admin/users/edit/:user_id', function ($user_id) use ($error) {
+        if (empty($error)) {
+            $resolver = new Resolver("Admin\UsersController", "edit");
+            $resolver->resolve(["user_id" => $user_id]);
+        } else {
+            $resolver = new Resolver("ErrorsController", "error");
+            $resolver->resolve(["code" => "401", 'message' => $error]);
+        }
+    });
+
+    $router->post('/admin/users/update/', function () use ($error) {
+        if (empty($error)) {
+            $resolver = new Resolver("Admin\UsersController", "update");
+            $resolver->resolve([]);
+        } else {
+            $resolver = new Resolver("ErrorsController", "error");
+            $resolver->resolve(["code" => "401", 'message' => $error]);
+        }
+    });
+
+    $router->both('/admin/users/delete/:user_id', function ($user_id) use ($error) {
+        if (empty($error)) {
+            $resolver = new Resolver("Admin\UsersController", "delete");
+            $resolver->resolve(["user_id" => $user_id]);
+        } else {
+            $resolver = new Resolver("ErrorsController", "error");
+            $resolver->resolve(["code" => "401", 'message' => $error]);
+        }
+    });
+
+    $router->get('/admin/users/deleted_user/:user_id', function ($user_id) use ($error) {
+        if (empty($error)) {
+            $resolver = new Resolver("Admin\UsersController", "deleted_user");
+            $resolver->resolve(["user_id" => $user_id]);
+        } else {
+            $resolver = new Resolver("ErrorsController", "error");
+            $resolver->resolve(["code" => "401", 'message' => $error]);
+        }
+    });
 }
 
 try {

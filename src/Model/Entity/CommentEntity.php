@@ -11,7 +11,7 @@ class CommentEntity extends Entity
     public $author;
     public $content;
     public $created;
-    public $validated;
+    public $is_validated;
 
     public function __construct()
     {
@@ -59,9 +59,9 @@ class CommentEntity extends Entity
             return $res;
         }, "create");
 
-        $entityChecker->check("validated", function ($value, $res): string {
-            if (!empty($value)) {
-                $res = "La validité du commentaire ne peut pas être précisé";
+        $entityChecker->check("is_validated", function ($value, $res): string {
+            if (!empty($value) || is_bool($value)) {
+                $res = "La validité du commentaire ne pas être définie à la création.";
             }
 
             return $res;

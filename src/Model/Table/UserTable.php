@@ -23,10 +23,63 @@ class UserTable extends Table
         return $userEntity;
     }
 
-    public function get($email): array
+    public function getForLogin($email): array
     {
         return $this->sqlConnection->query("SELECT * FROM $this->TABLE_NAME WHERE email = :email", [
             "email" => $email
+        ]);
+    }
+
+    public function get($id): array
+    {
+        return $this->sqlConnection->query("SELECT * FROM $this->TABLE_NAME WHERE id = :id", [
+            "id" => [$id, \PDO::PARAM_INT]
+        ])[0];
+    }
+
+    public function getForEdit($id): array
+    {
+        return $this->sqlConnection->query("SELECT * FROM $this->TABLE_NAME WHERE id = :id", [
+            "id" => [$id, \PDO::PARAM_INT]
+        ])[0];
+    }
+
+    public function liste($page, $limit = 5): array
+    {
+        $offset = $limit * ($page);
+
+        $res = $this->sqlConnection->query("SELECT id, email, first_name, last_name, nickname, is_validated FROM $this->TABLE_NAME ORDER BY id DESC LIMIT :offset, :limit", [
+            "offset" => [$offset, \PDO::PARAM_INT],
+            "limit" => [$limit, \PDO::PARAM_INT]
+        ]);
+
+        return $res;
+    }
+
+    public function count(): int
+    {
+        $res = $this->sqlConnection->query("SELECT count(*) AS nb_users FROM $this->TABLE_NAME", []);
+
+        return (int) $res[0]['nb_users'];
+    }
+
+
+    public function update(UserEntity $userEntity): UserEntity
+    {
+        $transform_userEntity = $userEntity->toArray(["first_name", "last_name", "email", "nickname", "is_validated" => [\PDO::PARAM_BOOL], "id" => [\PDO::PARAM_INT]]);
+
+        $this->sqlConnection->query(
+            "UPDATE $this->TABLE_NAME SET first_name = :first_name, last_name = :last_name, email = :email, nickname = :nickname, is_validated = :is_validated WHERE id = :id",
+            $transform_userEntity
+        );
+
+        return $userEntity;
+    }
+
+    public function delete($id)
+    {
+        $this->sqlConnection->query("DELETE FROM $this->TABLE_NAME WHERE id = :id", [
+            "id" => $id
         ]);
     }
 }

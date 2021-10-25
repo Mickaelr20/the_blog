@@ -15,14 +15,7 @@ class PageHelper
 
     public function is_menu_link_active($link): bool
     {
-        $temp_page = explode('/', $this->request->getServer()["REQUEST_URI"]);
-        $page = $temp_page[count($temp_page) - 1];
-        $res = false;
-
-        if ($page != null && $link === $page) {
-            $res = true;
-        }
-
-        return $res;
+        $requested_page = $this->request->getServer()["REQUEST_URI"];
+        return str_contains($requested_page, $link);
     }
 }

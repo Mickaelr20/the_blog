@@ -48,6 +48,10 @@ class CommentsController extends AppController
             $errors = $commentEntity->verifyEntity("create");
 
             if (empty($errors)) {
+                if (empty($commentEntity->is_validated) || !is_bool($commentEntity->is_validated)) {
+                    $commentEntity->is_validated = false;
+                }
+
                 try {
                     $commentTable = new CommentTable();
                     $commentTable->save($commentEntity);

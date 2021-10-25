@@ -36,9 +36,9 @@ class CommentTable extends Table
 
     public function update(CommentEntity $commentEntity): CommentEntity
     {
-        $transform_commentEntity = $commentEntity->toArray(["author", "content", "validated" => [\PDO::PARAM_BOOL], "id" => [\PDO::PARAM_INT]]);
+        $transform_commentEntity = $commentEntity->toArray(["author", "content", "is_validated" => [\PDO::PARAM_BOOL], "id" => [\PDO::PARAM_INT]]);
         $this->sqlConnection->query(
-            "UPDATE $this->TABLE_NAME SET author = :author, content = :content, validated = :validated WHERE id = :id",
+            "UPDATE $this->TABLE_NAME SET author = :author, content = :content, is_validated = :is_validated WHERE id = :id",
             $transform_commentEntity
         );
 
@@ -63,7 +63,7 @@ class CommentTable extends Table
     {
         $offset = $limit * ($page);
 
-        $res = $this->sqlConnection->query("SELECT * FROM $this->TABLE_NAME WHERE post_id = :post_id AND validated = true ORDER BY created DESC LIMIT :offset, :limit", [
+        $res = $this->sqlConnection->query("SELECT * FROM $this->TABLE_NAME WHERE post_id = :post_id AND is_validated = true ORDER BY created DESC LIMIT :offset, :limit", [
             "post_id" => $post_id,
             "offset" => [$offset, \PDO::PARAM_INT],
             "limit" => [$limit, \PDO::PARAM_INT]
@@ -95,7 +95,7 @@ class CommentTable extends Table
 
     public function countForPost($id): int
     {
-        $res = $this->sqlConnection->query("SELECT count(*) AS nb_comments FROM $this->TABLE_NAME WHERE post_id = :id AND validated = true", [
+        $res = $this->sqlConnection->query("SELECT count(*) AS nb_comments FROM $this->TABLE_NAME WHERE post_id = :id AND is_validated = true", [
             "id" => [$id, \PDO::PARAM_INT]
         ]);
 

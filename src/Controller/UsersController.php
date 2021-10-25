@@ -25,7 +25,7 @@ class UsersController extends AppController
             if (!empty($form['email']) && !empty($form['password'])) {
                 try {
                     $userTable = new UserTable();
-                    $rows = $userTable->get($form['email']);
+                    $rows = $userTable->getForLogin($form['email']);
                     $first_user = $rows[0];
 
                     $password_verified = password_verify($form['password'], $first_user['password']);
