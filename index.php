@@ -291,7 +291,6 @@ if (str_starts_with($request_url, "/admin")) {
             $resolver->resolve(["code" => "401", 'message' => $error]);
         }
     });
-
     $router->both('/admin/users/delete/:user_id', function ($user_id) use ($error) {
         if (empty($error)) {
             $resolver = new Resolver("Admin\UsersController", "delete");
