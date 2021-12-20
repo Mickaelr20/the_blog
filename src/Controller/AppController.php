@@ -23,4 +23,11 @@ class AppController
             throw new \Exception('L\'action ' . $name . ' n\'exsite pas.');
         }
     }
+
+    public function debug($str, $toDump)
+    {
+        echo "<br /> $str: </br />";
+        var_dump($toDump);
+        echo "<br /><br />";
+    }
 }

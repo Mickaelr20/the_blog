@@ -160,6 +160,16 @@ if (str_starts_with($request_url, "/admin")) {
         }
     });
 
+    $router->post('/admin/posts/edit_image/', function () use ($error) {
+        if (empty($error)) {
+            $resolver = new Resolver("Admin\PostsController", "edit_image");
+            $resolver->resolve([]);
+        } else {
+            $resolver = new Resolver("ErrorsController", "error");
+            $resolver->resolve(["code" => "401", 'message' => $error]);
+        }
+    });
+
     /* COMMENTS */
     $router->get('/admin/comments/', function () use ($error) {
         if (empty($error)) {

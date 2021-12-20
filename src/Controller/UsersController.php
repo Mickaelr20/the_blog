@@ -68,7 +68,7 @@ class UsersController extends AppController
 
         if ($this->request->getServer()["REQUEST_METHOD"] === "POST") {
             $requestData = $this->request->getRequestData();
-            $userEntity->fromArray($requestData);
+            $userEntity = UserEntity::fromArray($requestData);
             $errors = $userEntity->verifyEntity();
 
             if (empty($errors)) {

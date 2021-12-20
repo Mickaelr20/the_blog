@@ -1,0 +1,6 @@
+.img-post-preview {
+    object-fit: cover;
+    height: 100%;
+    border: 0.2rem solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+}

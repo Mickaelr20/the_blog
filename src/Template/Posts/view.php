@@ -1,7 +1,8 @@
-<div class="container">
-    <h1><?= $post['title'] ?></h1>
-    <p class="text-justify card-text"><?= $post['content'] ?></p>
-    <p>Le <?= date_create($post['created'])->format("d/m/Y") ?> par <?= $post['author'] ?></p>
+<div class="container my-2">
+    <img src="../<?= $post->image->getFullPath() ?>" class="img-fluid" alt="" />
+    <h1><?= $post->title ?></h1>
+    <p class="text-justify card-text"><?= $post->content ?></p>
+    <p>Le <?= date_create($post->created)->format("d/m/Y") ?> par <?= $post->author ?></p>
     <hr />
 
     <?php
@@ -18,15 +19,15 @@
     <form class="" method="POST" action="/comments/new/">
         <div class="d-none form-group pb-2">
             <label for="post_id">Id de la publication</label>
-            <input name="post_id" type="text" class="form-control" placeholder="Id de la publication" value="<?= !empty($post['id']) ? $post['id'] : "" ?>" required>
+            <input name="post_id" type="text" class="form-control" placeholder="Id de la publication" value="<?= !empty($post->id) ? $post->id : "" ?>" required>
         </div>
         <div class="form-group pb-2">
             <label for="author">Auteur</label>
-            <input name="author" type="text" class="form-control" placeholder="Auteur" value="<?= !empty($comment['author']) ? $comment['author'] : "" ?>" required>
+            <input name="author" type="text" class="form-control" placeholder="Auteur" value="<?= !empty($comment->author) ? $comment->author : "" ?>" required>
         </div>
         <div class="form-group pb-2">
             <label for="content">Contenu</label>
-            <textarea name="content" class="form-control" placeholder="Contenu" required><?= !empty($forcommentm['content']) ? $comment['content'] : "" ?></textarea>
+            <textarea name="content" class="form-control" placeholder="Contenu" required><?= !empty($comment->content) ? $comment->content : "" ?></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Envoyer</button>
     </form>
@@ -34,8 +35,8 @@
     <h1>Commentaires</h1>
     <div class="row">
         <?php
-        if (!empty($post['comments']) && is_array($post['comments']) && count($post['comments']) > 0) {
-            foreach ($post['comments'] as $comment) {
+        if (!empty($post->comments) && is_array($post->comments) && count($post->comments) > 0) {
+            foreach ($post->comments as $comment) {
                 $renderer->element("comments/comment_card", ["comment" => $comment]);
             }
         } else { ?>

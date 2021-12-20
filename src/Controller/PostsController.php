@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Model\Table\PostTable;
 use App\Controller\CommentsController;
 use App\Model\Table\CommentTable;
+use App\Model\Entity\PostEntity;
 
 class PostsController extends AppController
 {
@@ -25,6 +26,9 @@ class PostsController extends AppController
 
         $postTable = new PostTable();
         $liste_posts = $postTable->liste($page);
+
+        // $this->debug("liste posts", $liste_posts);
+
         $nb_total_posts = $postTable->count();
         $nb_page_max = ceil($nb_total_posts / 5);
 
@@ -43,7 +47,7 @@ class PostsController extends AppController
         $id = $params["id"];
         $comment_page = $params['comment_page'];
 
-        $post = [];
+        $post = new PostEntity();
         $nb_page_max = 0;
         if (is_numeric($id) && $id >= 0) {
             $postTable = new PostTable();
@@ -54,7 +58,7 @@ class PostsController extends AppController
             }
 
             $commentsController = new CommentsController();
-            $post['comments'] = $commentsController->listeForPost($id, $comment_page);
+            $post->comments = $commentsController->listeForPost($id, $comment_page);
 
             $nb_total_comments_for_post = $commentsController->countForPost($id);
             $nb_page_max = ceil($nb_total_comments_for_post / 5);

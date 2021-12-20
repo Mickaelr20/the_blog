@@ -10,12 +10,7 @@ abstract class Entity
     {
     }
 
-    public function fromArray($array)
-    {
-        foreach ($array as $key => $value) {
-            $this->$key = $value;
-        }
-    }
+    abstract public static function fromArray(array $array): Entity;
 
     abstract protected function checkCallable(EntityChecker $entityChecker, string|null $action = null): array;
 

@@ -14,7 +14,7 @@
 <?php } else { ?>
 
     <div class="p-3 bg-light container text-center">
-        <h3 class="pb-2">Voulez - vous vraiment supprimé la publication "<?= empty($post) ? "" : $post['title'] ?>"? </h3>
+        <h3 class="pb-2">Voulez - vous vraiment supprimé la publication "<?= empty($post) ? "" : $post->title ?>"? </h3>
         <form class="d-inline" method="POST" action="">
             <div class="d-none form-group pb-2">
                 <input name="action" type="text" value="0">

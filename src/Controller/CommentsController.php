@@ -44,7 +44,7 @@ class CommentsController extends AppController
 
         if ($this->request->getServer()["REQUEST_METHOD"] === "POST") {
             $requestData = $this->request->getRequestData();
-            $commentEntity->fromArray($requestData);
+            $commentEntity = CommentEntity::fromArray($requestData);
             $errors = $commentEntity->verifyEntity("create");
 
             if (empty($errors)) {
