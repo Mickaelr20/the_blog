@@ -25,7 +25,7 @@
             <div class="row page-subsection p-4">
                 <div class="col-md-4">
                     <div class="team-member">
-                        <img class="mx-auto rounded-circle" src="/agency/assets/img/team/1.jpg" alt="..." />
+                        <img class="mx-auto rounded-circle" src="/img/PP_3.jpg" alt="..." />
                         <h4>Rivière Mickael</h4>
                         <p class="text-muted">Développeur php</p>
 
@@ -39,7 +39,8 @@
                 <div class="col-md-8 mx-auto text-center pt-3">
                     <div class="d-flex flex-row h-100">
                         <p class="large text-muted m-auto">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.
+                            Dévelppeur PHP en freelance depuis peu, j'ai créer ce site pour montrer le travail que j'ai pu effectuer jusqu'a présent.
+
                         </p>
                     </div>
 
@@ -55,7 +56,9 @@
                         <i class="fas fa-shopping-cart fa-stack-1x fa-inverse"></i>
                     </span>
                     <h4 class="my-3">Logiciels</h4>
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                    <p class="text-muted">
+                        Netbeans, Eclipse, visual studio, Git bash, Gitkraken, Github desktop, Bitnami WampServer, FileZila
+                    </p>
                 </div>
                 <div class="col-md-4">
                     <span class="fa-stack fa-4x">
@@ -63,32 +66,41 @@
                         <i class="fas fa-laptop fa-stack-1x fa-inverse"></i>
                     </span>
                     <h4 class="my-3">Languages</h4>
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                    <p class="text-muted">
+                        Programation: PHP, Javascript, SQL, HTML5, CSS3, Java
+                        <br />
+                        Langue parlé: Français, Anglais
+                    </p>
                 </div>
                 <div class="col-md-4">
                     <span class="fa-stack fa-4x">
                         <i class="fas fa-circle fa-stack-2x text-primary"></i>
                         <i class="fas fa-lock fa-stack-1x fa-inverse"></i>
                     </span>
-                    <h4 class="my-3">Autre</h4>
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                    <h4 class="my-3">Technologies</h4>
+                    <p class="text-muted">
+                        Framework maitrisé: Cakephp<br />
+                        Technologies REST et SOAP
+                    </p>
                 </div>
             </div>
 
             <div class="page-subsection">
-                <h2 class="section-heading text-uppercase">Ma formation</h2>
-                <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                <h2 class="section-heading text-uppercase">Mon cursus</h2>
+                <h3 class="section-subheading text-muted">Diplomé en développement d'applications PHP chez OpenClassrooms.</h3>
 
                 <ul class="timeline">
                     <li>
                         <div class="timeline-image"><img class="rounded-circle img-fluid" src="/agency/assets/img/about/1.jpg" alt="..." /></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
-                                <h4>2009-2011</h4>
-                                <h4 class="subheading">Our Humble Beginnings</h4>
+                                <h4>2020 - 2022</h4>
+                                <h4 class="subheading">Formation OpenClassrooms</h4>
                             </div>
                             <div class="timeline-body">
-                                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                                <p class="text-muted">
+                                    Développeur d'applications PHP - Symfony
+                                </p>
                             </div>
                         </div>
                     </li>
@@ -96,11 +108,13 @@
                         <div class="timeline-image"><img class="rounded-circle img-fluid" src="/agency/assets/img/about/2.jpg" alt="..." /></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
-                                <h4>March 2011</h4>
-                                <h4 class="subheading">An Agency is Born</h4>
+                                <h4>2019 - 2020</h4>
+                                <h4 class="subheading"></h4>
                             </div>
                             <div class="timeline-body">
-                                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                                <p class="text-muted">
+                                    Formation en autodidacte (java), Recherche d’emplois et recherche de formation
+                                </p>
                             </div>
                         </div>
                     </li>
@@ -108,11 +122,14 @@
                         <div class="timeline-image"><img class="rounded-circle img-fluid" src="/agency/assets/img/about/3.jpg" alt="..." /></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
-                                <h4>December 2015</h4>
-                                <h4 class="subheading">Transition to Full Service</h4>
+                                <h4>2016 - 2018</h4>
+                                <h4 class="subheading">Formation universitaire</h4>
                             </div>
                             <div class="timeline-body">
-                                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                                <p class="text-muted">
+                                    étude en IEEA
+                                    (informatique, électronique, énergie électrique et Automatique)
+                                </p>
                             </div>
                         </div>
                     </li>
@@ -120,27 +137,17 @@
                         <div class="timeline-image"><img class="rounded-circle img-fluid" src="/agency/assets/img/about/4.jpg" alt="..." /></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
-                                <h4>July 2020</h4>
-                                <h4 class="subheading">Phase Two Expansion</h4>
+                                <h4>2015 - 2016</h4>
+                                <h4 class="subheading">Terminale S</h4>
                             </div>
                             <div class="timeline-body">
-                                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                                <p class="text-muted">
+                                    Spécialité Physique / Chimie au Lycée Boisjoly - Pottier
+                                </p>
                             </div>
-                        </div>
-                    </li>
-                    <li class="timeline-inverted">
-                        <div class="timeline-image">
-                            <h4>
-                                Be Part
-                                <br />
-                                Of Our
-                                <br />
-                                Story!
-                            </h4>
                         </div>
                     </li>
                 </ul>
-
             </div>
         </div>
     </div>
@@ -150,36 +157,36 @@
     <div class="container">
         <div class="text-center">
             <h2 class="section-heading text-uppercase">Portfolio</h2>
-            <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+            <h3 class="section-subheading text-muted">Projets</h3>
         </div>
         <div class="row">
-            <div class="col-lg-4 offset-lg-1 col-sm-6 mb-4">
+            <div class="col-12 offset-md-1 col-md-4 mb-4">
                 <!-- Portfolio item 1-->
                 <div class="portfolio-item">
                     <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal1">
                         <div class="portfolio-hover">
                             <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                         </div>
-                        <img class="img-fluid" src="/agency/assets/img/portfolio/1.jpg" alt="..." />
+                        <img class="img-fluid" src="/img/java_fs_mickae_riviere.png" alt="..." />
                     </a>
                     <div class="portfolio-caption">
-                        <div class="portfolio-caption-heading">Threads</div>
-                        <div class="portfolio-caption-subheading text-muted">Illustration</div>
+                        <div class="portfolio-caption-heading">FightSession</div>
+                        <div class="portfolio-caption-subheading text-muted">Plugin en Java pour le jeu "minecraft".</div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 offset-lg-2 col-sm-6 mb-4">
+            <div class="col-12 offset-md-2 col-md-4 mb-4">
                 <!-- Portfolio item 2-->
                 <div class="portfolio-item">
                     <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal2">
                         <div class="portfolio-hover">
                             <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                         </div>
-                        <img class="img-fluid" src="/agency/assets/img/portfolio/2.jpg" alt="..." />
+                        <img class="img-fluid" src="/img/html_mickae_riviere.png" alt="..." />
                     </a>
                     <div class="portfolio-caption">
-                        <div class="portfolio-caption-heading">Explore</div>
-                        <div class="portfolio-caption-subheading text-muted">Graphic Design</div>
+                        <div class="portfolio-caption-heading">Site web - UR</div>
+                        <div class="portfolio-caption-subheading text-muted">Site web, projet WEB - université de la réunion</div>
                     </div>
                 </div>
             </div>
@@ -187,20 +194,23 @@
     </div>
 </section>
 
-<section class="page-section" id="blog">
-    <p>test</p>
-    <div class="text-center">
-        <a class="btn btn-primary" href="/publications">Voir toutes les publications</a>
+<!-- <section class="page-section" id="portfolio">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="section-heading text-uppercase">Publications</h2>
+        </div>
+        <div class="text-center">
+            <a class="btn btn-primary" href="/publications">Voir toutes les publications</a>
+        </div>
     </div>
-
-</section>
+</section> -->
 
 <!-- Contact-->
 <section class="page-section" id="contact">
     <div class="container">
         <div class="text-center">
-            <h2 class="section-heading text-uppercase">Contact Us</h2>
-            <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+            <h2 class="section-heading text-uppercase">Me contacter</h2>
+            <h3 class="section-subheading text-muted">Un projet ou une demande de devis ? contactez - moi via ce formulaire.</h3>
         </div>
         <!-- * * * * * * * * * * * * * * *-->
         <!-- * * SB Forms Contact Form * *-->
@@ -215,25 +225,25 @@
                     <div class="form-group">
                         <!-- Name input-->
                         <input class="form-control" id="name" type="text" placeholder="Your Name *" data-sb-validations="required" />
-                        <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
+                        <div class="invalid-feedback" data-sb-feedback="name:required">Veuillez entrer un nom.</div>
                     </div>
                     <div class="form-group">
                         <!-- Email address input-->
                         <input class="form-control" id="email" type="email" placeholder="Your Email *" data-sb-validations="required,email" />
-                        <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
-                        <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
+                        <div class="invalid-feedback" data-sb-feedback="email:required">Veuillez entrer un adresse email.</div>
+                        <div class="invalid-feedback" data-sb-feedback="email:email">Adresse email invalide</div>
                     </div>
                     <div class="form-group mb-md-0">
                         <!-- Phone number input-->
                         <input class="form-control" id="phone" type="tel" placeholder="Your Phone *" data-sb-validations="required" />
-                        <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
+                        <div class="invalid-feedback" data-sb-feedback="phone:required">Veuillez entrer un numéro de téléphone.</div>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group form-group-textarea mb-md-0">
                         <!-- Message input-->
                         <textarea class="form-control" id="message" placeholder="Your Message *" data-sb-validations="required"></textarea>
-                        <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
+                        <div class="invalid-feedback" data-sb-feedback="message:required">Veuillez entrer un message.</div>
                     </div>
                 </div>
             </div>
@@ -243,7 +253,7 @@
             <!-- has successfully submitted-->
             <div class="d-none" id="submitSuccessMessage">
                 <div class="text-center text-white mb-3">
-                    <div class="fw-bolder">Form submission successful!</div>
+                    <div class="fw-bolder">Soumission du formulaire réussie !</div>
                     To activate this form, sign up at
                     <br />
                     <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
@@ -254,10 +264,10 @@
             <!-- This is what your users will see when there is-->
             <!-- an error submitting the form-->
             <div class="d-none" id="submitErrorMessage">
-                <div class="text-center text-danger mb-3">Error sending message!</div>
+                <div class="text-center text-danger mb-3">Erreur lors de l'envoie du message.</div>
             </div>
             <!-- Submit Button-->
-            <div class="text-center"><button class="btn btn-primary btn-xl text-uppercase disabled" id="submitButton" type="submit">Send Message</button></div>
+            <div class="text-center"><button class="btn btn-primary btn-xl text-uppercase disabled" id="submitButton" type="submit">Envoyer</button></div>
         </form>
     </div>
 </section>

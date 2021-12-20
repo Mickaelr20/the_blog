@@ -1,6 +1,6 @@
 <div class="container my-2">
-    <img src="../<?= $post->image->getFullPath() ?>" class="img-fluid" alt="" />
-    <h1><?= $post->title ?></h1>
+    <img src="../<?= $post->image->getFullPath() ?>" class="img-fluid p-4" alt="" />
+    <h1 class="text-center"><?= $post->title ?></h1>
     <p class="text-justify card-text"><?= $post->content ?></p>
     <p>Le <?= date_create($post->created)->format("d/m/Y") ?> par <?= $post->author ?></p>
     <hr />
