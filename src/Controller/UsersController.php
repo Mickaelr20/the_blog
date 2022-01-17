@@ -20,19 +20,23 @@ class UsersController extends AppController
         $form = [];
 
         if ($this->request->getType() === "POST") {
+            $csrfCheckResult = $this->checkCsrfToken();
+            if (!$csrfCheckResult) {
+                $errors[] = "Le token csrf ne correspond pas, veuillez réessayer.";
+            }
+
             $form = $this->request->getRequestData();
 
-            if (!empty($form['email']) && !empty($form['password'])) {
+            if (empty($errors) && !empty($form['email']) && !empty($form['password'])) {
                 try {
                     $userTable = new UserTable();
-                    $rows = $userTable->getForLogin($form['email']);
-                    $first_user = $rows[0];
+                    $user = $userTable->getForLogin($form['email']);
 
-                    $password_verified = password_verify($form['password'], $first_user['password']);
+                    $password_verified = password_verify($form['password'], $user->password);
 
                     if ($password_verified) {
                         $session = new SessionHelper();
-                        $session->put("user", $first_user);
+                        $session->put("user", $user->toArray());
                         header('Location: ' . "/users/login_success");
                     } else {
                         $errors[] = "Mot de passe incorrecte.";
@@ -66,27 +70,34 @@ class UsersController extends AppController
         $requestData = [];
         $userEntity = new UserEntity();
 
-        if ($this->request->getServer()["REQUEST_METHOD"] === "POST") {
-            $requestData = $this->request->getRequestData();
-            $userEntity = UserEntity::fromArray($requestData);
-            $errors = $userEntity->verifyEntity();
+        if ($this->request->getType() === "POST") {
+            $csrfCheckResult = $this->checkCsrfToken();
+            if (!$csrfCheckResult) {
+                $errors[] = "Le token csrf ne correspond pas, veuillez réessayer.";
+            }
 
             if (empty($errors)) {
-                $userEntity = $userEntity->securize();
+                $requestData = $this->request->getRequestData();
+                $userEntity = UserEntity::fromArray($requestData);
+                $errors = $userEntity->verifyEntity();
 
-                try {
-                    $userTable = new UserTable();
-                    $userTable->save($userEntity);
-                    header('Location: ' . "/users/signup_success");
-                } catch (\Exception $e) {
-                    $error = "Une erreure est survenue, veuillez réessayer ultérieurement.";
-                    switch ($e->getCode()) {
-                        case "23000":
-                            $error = "Adresse email déjà utilisé.";
-                            break;
+                if (empty($errors)) {
+                    $userEntity = $userEntity->securize();
+
+                    try {
+                        $userTable = new UserTable();
+                        $userTable->save($userEntity);
+                        header('Location: ' . "/users/signup_success");
+                    } catch (\Exception $e) {
+                        $error = "Une erreure est survenue, veuillez réessayer ultérieurement.";
+                        switch ($e->getCode()) {
+                            case "23000":
+                                $error = "Adresse email déjà utilisé.";
+                                break;
+                        }
+
+                        $errors[] = $error;
                     }
-
-                    $errors[] = $error;
                 }
             }
         }

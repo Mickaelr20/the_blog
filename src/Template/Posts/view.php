@@ -17,6 +17,7 @@
 
     <h1>Laisse un commentaire:</h1>
     <form class="" method="POST" action="/comments/new/">
+        <input type="hidden" name="csrf_token" value="<?= App\Helper\SessionHelper::get('csrf_token') ?>">
         <div class="d-none form-group pb-2">
             <label for="post_id">Id de la publication</label>
             <input name="post_id" type="text" class="form-control" placeholder="Id de la publication" value="<?= !empty($post->id) ? $post->id : "" ?>" required>

@@ -1,6 +1,7 @@
 <?php
 
 session_start();
+session_regenerate_id();
 
 require "vendor/autoload.php";
 
@@ -8,6 +9,10 @@ use App\Helper\{SessionHelper, Resolver, RequestHelper};
 use App\Router;
 
 $request = new RequestHelper();
+
+if ($request->getType() === "GET") {
+    SessionHelper::generateNewToken();
+}
 
 $request_url = $request->getServer()["REQUEST_URI"];
 $router = new Router($request_url);
@@ -169,6 +174,17 @@ if (str_starts_with($request_url, "/admin")) {
             $resolver->resolve(["code" => "401", 'message' => $error]);
         }
     });
+
+    $router->get('/admin/posts/edit_image/', function ($post_id) use ($error) {
+        if (empty($error)) {
+            $resolver = new Resolver("Admin\PostsController", "edit");
+            $resolver->resolve([]);
+        } else {
+            $resolver = new Resolver("ErrorsController", "error");
+            $resolver->resolve(["code" => "401", 'message' => $error]);
+        }
+    });
+
 
     /* COMMENTS */
     $router->get('/admin/comments/', function () use ($error) {

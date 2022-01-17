@@ -26,10 +26,20 @@ class CommentTable extends Table
     {
         $offset = $limit * ($page);
 
-        $res = $this->sqlConnection->query("SELECT * FROM $this->TABLE_NAME ORDER BY created DESC LIMIT :offset, :limit", [
+        $query_results = $this->sqlConnection->query("SELECT * FROM $this->TABLE_NAME ORDER BY created DESC LIMIT :offset, :limit", [
             "offset" => [$offset, \PDO::PARAM_INT],
             "limit" => [$limit, \PDO::PARAM_INT]
         ]);
+
+        $res = [];
+
+        foreach ($query_results as $query_result) {
+            $temp_res = $query_result;
+
+            if (!empty($temp_res)) {
+                $res[] = CommentEntity::fromArray($temp_res);
+            }
+        }
 
         return $res;
     }
@@ -63,16 +73,26 @@ class CommentTable extends Table
     {
         $offset = $limit * ($page);
 
-        $res = $this->sqlConnection->query("SELECT * FROM $this->TABLE_NAME WHERE post_id = :post_id AND is_validated = true ORDER BY created DESC LIMIT :offset, :limit", [
+        $query_results = $this->sqlConnection->query("SELECT * FROM $this->TABLE_NAME WHERE post_id = :post_id AND is_validated = true ORDER BY created DESC LIMIT :offset, :limit", [
             "post_id" => $post_id,
             "offset" => [$offset, \PDO::PARAM_INT],
             "limit" => [$limit, \PDO::PARAM_INT]
         ]);
 
+        $res = [];
+
+        foreach ($query_results as $query_result) {
+            $temp_res = $query_result;
+
+            if (!empty($temp_res)) {
+                $res[] = CommentEntity::fromArray($temp_res);
+            }
+        }
+
         return $res;
     }
 
-    public function get($id): array
+    public function get($id): CommentEntity
     {
         $res = [];
         $query_res = $this->sqlConnection->query("SELECT * FROM $this->TABLE_NAME WHERE id = :id", [
@@ -80,17 +100,23 @@ class CommentTable extends Table
         ]);
 
         if (!empty($query_res)) {
-            $res = $query_res[0];
+            $res = CommentEntity::fromArray($query_res[0]);
         }
 
         return $res;
     }
 
-    public function getForEdit($id): array
+    public function getForEdit($id): CommentEntity
     {
-        return $this->sqlConnection->query("SELECT * FROM $this->TABLE_NAME WHERE id = :id", [
+        $res = new CommentEntity();
+        $query_result = $this->sqlConnection->query("SELECT * FROM $this->TABLE_NAME WHERE id = :id", [
             "id" => $id
-        ])[0];
+        ]);
+        if (!empty($query_result[0])) {
+            $res = CommentEntity::fromArray($query_result[0]);
+        }
+
+        return $res;
     }
 
     public function countForPost($id): int

@@ -8,8 +8,6 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="/agency/css/styles.css" rel="stylesheet" />
-
-    <!--- --- --->
     <title><?= $title ?></title>
     <meta name="description" content="Portfolio de Rivière Mickaël" />
     <meta name="author" content="Rivière Mickael" />
@@ -31,7 +29,7 @@
 
     <?= $renderer->element("footer") ?>
 
-    <!-- <?= $renderer->element("modals") ?> -->
+    <?= $renderer->element("modals") ?>
 
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
@@ -41,7 +39,7 @@
     <!-- * *                               SB Forms JS                               * *-->
     <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
     <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-    <!-- <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script> -->
+    <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
     <?= $pageHelper->printScripts('bottom'); ?>
 </body>
 

@@ -15,6 +15,8 @@
 
 <div class="mt-3 bg-light container">
     <form class="p-3" method="POST" action="/users/signup">
+        <input type="hidden" name="csrf_token" value="<?= App\Helper\SessionHelper::get('csrf_token') ?>">
+
         <div class="row">
             <div class="form-group pb-2 col-12 col-md-6">
                 <label for="last_name">Nom</label>

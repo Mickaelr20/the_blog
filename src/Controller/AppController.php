@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Helper\{RequestHelper, Renderer};
+use App\Helper\{SessionHelper, RequestHelper, Renderer};
 
 class AppController
 {
@@ -29,5 +29,17 @@ class AppController
         echo "<br /> $str: </br />";
         var_dump($toDump);
         echo "<br /><br />";
+    }
+
+    public function checkCsrfToken(): bool
+    {
+        $result = false;
+        $requestData = $this->request->getRequestData();
+
+        if (!empty($requestData['csrf_token'])) {
+            $result = $requestData['csrf_token'] === SessionHelper::get('csrf_token');
+        }
+
+        return $result;
     }
 }

@@ -31,7 +31,7 @@ class UserEntity extends Entity
         $userEntity->email = empty($array['email']) ? null : $array['email'];
         $userEntity->is_validated = empty($array['is_validated']) ? null : $array['is_validated'];
 
-        return $userEntity;
+        return $userEntity->sanitize();
     }
 
     protected function checkCallable(EntityChecker $entityChecker, string $action = null): array

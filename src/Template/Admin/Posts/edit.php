@@ -14,11 +14,19 @@
 <?php } ?>
 
 <?php
-if (!empty($_GET['editState']) && $_GET['editState'] === 'success') {
+if (!empty($_GET['editState'])) {
+    $alert_edit_state_class = "success";
+    $alert_edit_state_text = "La publication a été mise à jour";
+
+    switch ($_GET['editState']) {
+        case "wrong_type":
+            $alert_edit_state_class = "danger";
+            $alert_edit_state_text = "Erreur: Le fichier doit être une image";
+    }
 ?>
     <div class="m-auto container">
-        <div class="text-center alert alert-success" role="alert">
-            <h3>La publication a été mise à jour</h3>
+        <div class="text-center alert alert-<?= $alert_edit_state_class ?>" role="alert">
+            <h3><?= $alert_edit_state_text ?></h3>
         </div>
     </div>
 <?php } ?>
@@ -46,6 +54,8 @@ if (!empty($_GET['deletedId']) && is_numeric($_GET['deletedId'])) {
 <div class="mt-3 bg-light container">
     <div class="row">
         <form class="p-3 col-md-9 col-12" method="POST" action="/admin/posts/edit_image" enctype="multipart/form-data">
+            <input type="hidden" name="csrf_token" value="<?= App\Helper\SessionHelper::get('csrf_token') ?>">
+
             <div class="p-2">
                 <div class="d-none form-group pb-2">
                     <label for="id">Id</label>
@@ -78,6 +88,8 @@ if (!empty($_GET['deletedId']) && is_numeric($_GET['deletedId'])) {
 
 <div class="mt-3 bg-light container">
     <form class="p-3" method="POST" action="">
+        <input type="hidden" name="csrf_token" value="<?= App\Helper\SessionHelper::get('csrf_token') ?>">
+
         <div class="d-none form-group pb-2">
             <label for="id">Id</label>
             <input name="id" type="text" class="form-control" placeholder="Id" value="<?= !empty($form->id) ? $form->id : "" ?>" required>

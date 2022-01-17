@@ -47,31 +47,39 @@ class CommentsController extends AppController
 
         if ($this->request->getServer()["REQUEST_METHOD"] === "POST") {
             $form = $this->request->getRequestData();
-            $commentEntity = CommentEntity::fromArray($form);
-            $errors = $commentEntity->verifyEntity("update");
+            $csrfCheckResult = $this->checkCsrfToken();
+            if (!$csrfCheckResult) {
+                $errors[] = "Le token csrf ne correspond pas, veuillez réessayer.";
+            }
 
             if (empty($errors)) {
-                if (empty($commentEntity->is_validated) || !filter_var($commentEntity->is_validated, FILTER_VALIDATE_BOOLEAN)) {
-                    $commentEntity->is_validated = false;
-                }
+                $commentEntity = CommentEntity::fromArray($form);
+                $errors = $commentEntity->verifyEntity("update");
 
-                try {
-                    $commentTable = new CommentTable();
-                    $commentTable->update($commentEntity);
-                    header('Location: ' . "/admin/comments/edit/$commentEntity->id?editState=success");
-                } catch (\Exception $e) {
-                    $error = "Une erreure est survenue, veuillez réessayer ultérieurement.";
-                    switch ($e->getCode()) {
+                if (empty($errors)) {
+                    if (empty($commentEntity->is_validated) || !filter_var($commentEntity->is_validated, FILTER_VALIDATE_BOOLEAN)) {
+                        $commentEntity->is_validated = false;
                     }
 
-                    $errors[] = $error;
-                    var_dump($e);
-                    // var_dump($commentEntity->toArray());
+                    try {
+                        $commentTable = new CommentTable();
+                        $commentTable->update($commentEntity);
+                        header('Location: ' . "/admin/comments/edit/$commentEntity->id?editState=success");
+                    } catch (\Exception $e) {
+                        $error = "Une erreure est survenue, veuillez réessayer ultérieurement.";
+                        switch ($e->getCode()) {
+                        }
+
+                        $errors[] = $error;
+                        var_dump($e);
+                        // var_dump($commentEntity->toArray());
+                    }
                 }
             }
         } else if ($this->request->getServer()["REQUEST_METHOD"] === "GET") {
             $commentTable = new CommentTable();
             $form = $commentTable->getForEdit($comment_id);
+            // var_dump($form);
         }
 
         $this->renderer->render("edit", ["title" => "Modifier un commentaire", "errors" => $errors, "form" => $form]);
@@ -85,22 +93,27 @@ class CommentsController extends AppController
         $serverRequestMethod = $this->request->getServer()["REQUEST_METHOD"];
 
         if ($serverRequestMethod === "POST") {
-            $form = $this->request->getRequestData();
+            $csrfCheckResult = $this->checkCsrfToken();
+            if (!$csrfCheckResult) {
+                $errors[] = "Le token csrf ne correspond pas, veuillez réessayer.";
+            }
 
-            var_dump($form);
+            if (empty($errors)) {
+                $form = $this->request->getRequestData();
 
-            if (is_numeric($form['action'])) {
-                $action = $form['action'];
+                if (is_numeric($form['action'])) {
+                    $action = $form['action'];
 
-                switch ($action) {
-                    case "0": //ne pas supprimer
-                        header('Location: ' . "/admin/comments");
-                        break;
-                    case "1": //supprimer
-                        $commentTable = new CommentTable();
-                        $commentTable->delete($comment_id);
-                        header('Location: ' . "/admin/comments/deleted_comment/$comment_id");
-                        break;
+                    switch ($action) {
+                        case "0": //ne pas supprimer
+                            header('Location: ' . "/admin/comments");
+                            break;
+                        case "1": //supprimer
+                            $commentTable = new CommentTable();
+                            $commentTable->delete($comment_id);
+                            header('Location: ' . "/admin/comments/deleted_comment/$comment_id");
+                            break;
+                    }
                 }
             }
         } else if ($serverRequestMethod === "GET") {

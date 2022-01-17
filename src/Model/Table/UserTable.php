@@ -23,18 +23,33 @@ class UserTable extends Table
         return $userEntity;
     }
 
-    public function getForLogin($email): array
+    public function getForLogin($email): UserEntity
     {
-        return $this->sqlConnection->query("SELECT * FROM $this->TABLE_NAME WHERE email = :email", [
+        $res = null;
+        $query_result = $this->sqlConnection->query("SELECT * FROM $this->TABLE_NAME WHERE email = :email", [
             "email" => $email
         ]);
+
+        if (!empty($query_result)) {
+            $res = UserEntity::fromArray($query_result[0]);
+        }
+
+        return $res;
     }
 
-    public function get($id): array
+    public function get($id): UserEntity
     {
-        return $this->sqlConnection->query("SELECT * FROM $this->TABLE_NAME WHERE id = :id", [
+        $query_result = $this->sqlConnection->query("SELECT * FROM $this->TABLE_NAME WHERE id = :id", [
             "id" => [$id, \PDO::PARAM_INT]
-        ])[0];
+        ]);
+
+        $res = new UserEntity();
+
+        if (!empty($query_result[0])) {
+            $res = UserEntity::fromArray($query_result[0]);
+        }
+
+        return $res;
     }
 
     public function getForEdit($id): array

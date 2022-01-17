@@ -194,17 +194,6 @@
     </div>
 </section>
 
-<!-- <section class="page-section" id="portfolio">
-    <div class="container">
-        <div class="text-center">
-            <h2 class="section-heading text-uppercase">Publications</h2>
-        </div>
-        <div class="text-center">
-            <a class="btn btn-primary" href="/publications">Voir toutes les publications</a>
-        </div>
-    </div>
-</section> -->
-
 <!-- Contact-->
 <section class="page-section" id="contact">
     <div class="container">

@@ -28,7 +28,7 @@ class CommentEntity extends Entity
         $commentEntity->created = empty($array['created']) ? null : $array['created'];
         $commentEntity->is_validated = empty($array['is_validated']) ? null : $array['is_validated'];
 
-        return $commentEntity;
+        return $commentEntity->sanitize();
     }
 
     protected function checkCallable(EntityChecker $entityChecker, string $action = null): array

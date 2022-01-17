@@ -15,6 +15,8 @@
 
 <div class="mt-3 bg-light container">
     <form class="p-3 row" method="POST" action="/admin/posts/new" enctype="multipart/form-data">
+        <input type="hidden" name="csrf_token" value="<?= App\Helper\SessionHelper::get('csrf_token') ?>">
+
         <div class="p-3 col-md-9 col-12">
             <div class="form-group pb-2">
                 <label for="image[display_name]">Nom de l'image</label>
@@ -26,7 +28,8 @@
             </div>
         </div>
         <div id="postImagePreview" class="col-md-3 col-12 d-flex">
-            <?php if (!empty($form['image'])) { ?>
+            <?php if (!empty($form['image']['path']) && !empty($form['image']['file_name']) && !empty($form['image']['type'])) { ?>
+                <?= var_dump($form); ?>
                 <img class="image-preview" src="<?= $form['image']['path'] ?><?= $form['image']['file_name'] ?>.<?= $form['image']['type'] ?>" alt="test">
             <?php } else { ?>
                 <img class="image-preview" src="/img/empty_image.jpg" alt="aucune image">
@@ -45,10 +48,6 @@
             <label for="hat">chapeau introductif</label>
             <input name="hat" class="form-control" placeholder="chapeau introductif" value="<?= !empty($form['hat']) ? $form['hat'] : "" ?>" required>
         </div>
-        <!-- <div>
-            <div id="postTrumbowyg"></div>
-        </div> -->
-
         <div class="form-group pb-2">
             <label for="content">Contenu</label>
             <textarea name="content" id="postTrumbowyg" class="form-control" placeholder="Contenu" required><?= !empty($form['content']) ? $form['content'] : "" ?></textarea>

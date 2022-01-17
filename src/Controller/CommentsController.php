@@ -42,7 +42,12 @@ class CommentsController extends AppController
         $requestData = [];
         $commentEntity = new CommentEntity();
 
-        if ($this->request->getServer()["REQUEST_METHOD"] === "POST") {
+        $csrfCheckResult = $this->checkCsrfToken();
+        if (!$csrfCheckResult) {
+            $errors[] = "Le token csrf ne correspond pas, veuillez réessayer.";
+        }
+
+        if (empty($errors) && $this->request->getType() === "POST") {
             $requestData = $this->request->getRequestData();
             $commentEntity = CommentEntity::fromArray($requestData);
             $errors = $commentEntity->verifyEntity("create");
@@ -55,8 +60,6 @@ class CommentsController extends AppController
                 try {
                     $commentTable = new CommentTable();
                     $commentTable->save($commentEntity);
-
-                    // var_dump($this->request->getServer()["HTTP_REFERER"]);
 
                     header('Location: /publication/' . $commentEntity->post_id . "/?saveState=success");
                 } catch (\Exception $e) {

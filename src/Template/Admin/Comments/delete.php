@@ -14,14 +14,16 @@
 <?php } else { ?>
 
     <div class="p-3 bg-light container text-center">
-        <h3 class="pb-2">Voulez - vous vraiment supprimé la publication "<?= empty($comment) ? "" : $comment['id'] ?>"? </h3>
+        <h3 class="pb-2">Voulez - vous vraiment supprimé la publication "<?= empty($comment->id) ? "" : $comment->id ?>"? </h3>
         <form class="d-inline" method="POST" action="">
+            <input type="hidden" name="csrf_token" value="<?= App\Helper\SessionHelper::get('csrf_token') ?>">
             <div class="d-none form-group pb-2">
                 <input name="action" type="text" value="0">
             </div>
             <button type="submit" class="btn btn-secondary">Non, annuler</button>
         </form>
         <form class="d-inline" method="POST" action="">
+            <input type="hidden" name="csrf_token" value="<?= App\Helper\SessionHelper::get('csrf_token') ?>">
             <div class="d-none form-group pb-2">
                 <input name="action" type="text" value="1">
             </div>

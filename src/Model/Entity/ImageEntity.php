@@ -24,7 +24,7 @@ class ImageEntity extends Entity
         $imageEntity->file_name = empty($array['file_name']) ? null : $array['file_name'];
         $imageEntity->path = empty($array['path']) ? null : $array['path'];
 
-        return $imageEntity;
+        return $imageEntity->sanitize();
     }
 
     protected function checkCallable(EntityChecker $entityChecker, string $action = null): array

@@ -47,34 +47,32 @@ class PostsController extends AppController
         $postEntity = new PostEntity();
 
         if ($this->request->getServer()["REQUEST_METHOD"] === "POST") {
-            $requestData = $this->request->getRequestData();
-
-            // $this->debug("requestData", $requestData);
-
-            $postEntity = PostEntity::fromArray($requestData);
-            // $this->debug("post entity", $postEntity);
-
-            // return;
-            $errors = $postEntity->verifyEntity("create");
-
+            $csrfCheckResult = $this->checkCsrfToken();
+            if (!$csrfCheckResult) {
+                $errors[] = "Le token csrf ne correspond pas, veuillez réessayer.";
+            }
             if (empty($errors)) {
-                $postEntity->image->completeEntity($_FILES['image']['name']);
-                $errors = $this->trySaveImage($postEntity->image);
-                // $this->debug("post entity", $postEntity);
-                // return;
+                $requestData = $this->request->getRequestData();
+                $postEntity = PostEntity::fromArray($requestData);
+                $errors = $postEntity->verifyEntity("create");
 
                 if (empty($errors)) {
-                    try {
-                        $postEntity->image_id = $postEntity->image->id;
-                        $postTable = new PostTable();
-                        $postTable->save($postEntity);
-                        header('Location: ' . "/admin/posts/edit/$postEntity->id?saveState=success");
-                    } catch (\Exception $e) {
-                        $error = "Une erreure est survenue, veuillez réessayer ultérieurement.";
-                        switch ($e->getCode()) {
-                        }
+                    $postEntity->image->completeEntity($_FILES['image']['name']);
+                    $errors = $this->trySaveImage($postEntity->image);
 
-                        $errors[] = $error;
+                    if (empty($errors)) {
+                        try {
+                            $postEntity->image_id = $postEntity->image->id;
+                            $postTable = new PostTable();
+                            $postTable->save($postEntity);
+                            header('Location: ' . "/admin/posts/edit/$postEntity->id?saveState=success");
+                        } catch (\Exception $e) {
+                            $error = "Une erreure est survenue, veuillez réessayer ultérieurement.";
+                            switch ($e->getCode()) {
+                            }
+
+                            $errors[] = $error;
+                        }
                     }
                 }
             }
@@ -90,12 +88,17 @@ class PostsController extends AppController
             $imageTable = new ImageTable();
             $imageTable->save($imageEntity);
         } catch (\Exception $e) {
-            $this->debug("exception - save image", $e);
             $error = "Une erreure est survenue lors de la sauvegarde de l'image, veuillez réessayer ultérieurement.";
             switch ($e->getCode()) {
             }
 
             $errors[] = $error;
+        }
+
+        if (empty($errors)) {
+            if (!str_contains($_FILES['image']['type'], "image/")) {
+                $errors[] = "Le fichier doit être une image.";
+            }
         }
 
         if (empty($errors)) {
@@ -140,7 +143,6 @@ class PostsController extends AppController
         }
 
         if (empty($errors)) {
-            // $this->debug("post entity - DEBUG", $imageEntity->getFullPath());
             if (file_exists($imageEntity->getFullPath())) {
                 unlink($imageEntity->getFullPath());
             } else {
@@ -157,63 +159,55 @@ class PostsController extends AppController
         $newImageEntity = new ImageEntity();
 
         if ($this->request->getServer()["REQUEST_METHOD"] === "POST") {
-            $form = $this->request->getRequestData();
-            $newImageEntity = ImageEntity::fromArray($form);
-            // $this->debug("Formulaire", $form);
-
-            $newImageEntity->completeEntity($_FILES['image']['name']);
-            $newImageEntity->id = null;
-            // $this->debug("New image entity", $newImageEntity);
-
-            $errors = $newImageEntity->verifyEntity("create");
-            // $this->debug("Errors", $errors);
-
-            $imageTable = new ImageTable();
+            $csrfCheckResult = $this->checkCsrfToken();
+            if (!$csrfCheckResult) {
+                $errors[] = "Le token csrf ne correspond pas, veuillez réessayer.";
+            }
 
             if (empty($errors)) {
-                // $imageTable->save($imageEntity);
-                $errors = $this->trySaveImage($newImageEntity);
-                // $this->debug("Errors try save image", $errors);
-                // $this->debug("New image entity after save", $newImageEntity);
-
-                // $this->debug("Image entity full path", "");
-
-                // return;
-
-                $postTable = new PostTable();
-                $postEntity = $postTable->get($form['post_id']);
-                $oldImageEntity = $postEntity->image;
-                // $this->debug("Post entity", $postEntity);
-
-                $postEntity->setImage($newImageEntity);
-                // $this->debug("Post entity - after set new image", $postEntity);
-
-                try {
-                    $postTable = new PostTable();
-                    $postTable->update($postEntity);
-                } catch (\Exception $e) {
-                    $this->debug("exception - save post", $e);
-                    $error = "Une erreure est survenue lors de la sauvegarde de l'image, veuillez réessayer ultérieurement.";
-                    switch ($e->getCode()) {
-                    }
-
-                    $errors[] = $error;
-                }
+                $form = $this->request->getRequestData();
+                $newImageEntity = ImageEntity::fromArray($form);
+                $newImageEntity->completeEntity($_FILES['image']['name']);
+                $newImageEntity->id = null;
+                $errors = $newImageEntity->verifyEntity("create");
 
                 if (empty($errors)) {
-                    if (!empty($oldEntity)) {
-                        // $this->debug("Old image entity", $oldImageEntity);
-                        $errors = $this->tryDeleteImage($oldImageEntity);
+                    $errors = $this->trySaveImage($newImageEntity);
+
+                    if (empty($errors)) {
+                        $postTable = new PostTable();
+                        $postEntity = $postTable->get($form['post_id']);
+                        $oldImageEntity = $postEntity->image;
+                        $postEntity->setImage($newImageEntity);
+
+                        try {
+                            $postTable = new PostTable();
+                            $postTable->update($postEntity);
+                        } catch (\Exception $e) {
+                            $error = "Une erreure est survenue lors de la sauvegarde de l'image, veuillez réessayer ultérieurement.";
+                            switch ($e->getCode()) {
+                            }
+
+                            $errors[] = $error;
+                        }
+
+                        if (empty($errors)) {
+                            if (!empty($oldEntity)) {
+                                $errors = $this->tryDeleteImage($oldImageEntity);
+                            }
+                        }
                     }
                 }
-
-                $this->debug("Post entity - after update", $postEntity);
             }
         }
 
         if (empty($errors)) {
-            header('Location: ' . "/admin/posts/edit/$postEntity->id?editState=success");
-        }
+            header('Location: ' . "/admin/posts/edit/{$form['post_id']}?editState=success");
+        } //else {
+        //     header('Location: ' . "/admin/posts/edit/{$form['post_id']}?editState=wrong_type");
+        // }
+
+        $this->renderer->render("edit", ["title" => "Modifier une publication", "errors" => $errors, "form" => $form]);
     }
 
     public function edit($params)
@@ -224,32 +218,33 @@ class PostsController extends AppController
         $postEntity = new PostEntity();
 
         if ($this->request->getServer()["REQUEST_METHOD"] === "POST") {
-            $form = $this->request->getRequestData();
-            $postEntity = PostEntity::fromArray($form);
-            $errors = $postEntity->verifyEntity("update");
-
+            $csrfCheckResult = $this->checkCsrfToken();
+            if (!$csrfCheckResult) {
+                $errors[] = "Le token csrf ne correspond pas, veuillez réessayer.";
+            }
             if (empty($errors)) {
-                try {
-                    $postTable = new PostTable();
-                    $postTable->update($postEntity);
+                $form = $this->request->getRequestData();
+                $postEntity = PostEntity::fromArray($form);
+                $errors = $postEntity->verifyEntity("update");
 
-                    header('Location: ' . "/admin/posts/edit/$postEntity->id?editState=success");
-                } catch (\Exception $e) {
-                    $error = "Une erreure est survenue, veuillez réessayer ultérieurement.";
-                    switch ($e->getCode()) {
+                if (empty($errors)) {
+                    try {
+                        $postTable = new PostTable();
+                        $postTable->update($postEntity);
+
+                        header('Location: ' . "/admin/posts/edit/$postEntity->id?editState=success");
+                    } catch (\Exception $e) {
+                        $error = "Une erreure est survenue, veuillez réessayer ultérieurement.";
+                        switch ($e->getCode()) {
+                        }
+
+                        $errors[] = $error;
                     }
-
-                    $errors[] = $error;
-                    // var_dump($e);
-                    // var_dump($postEntity->toArray());
                 }
             }
         } else if ($this->request->getServer()["REQUEST_METHOD"] === "GET") {
             $postTable = new PostTable();
             $form = $postTable->get($post_id);
-
-            // $imageTable = new ImageTable();
-            // $form->image = $imageTable->get($form->image_id);
         }
 
         $this->renderer->render("edit", ["title" => "Modifier une publication", "errors" => $errors, "form" => $form]);
@@ -263,26 +258,33 @@ class PostsController extends AppController
         $serverRequestMethod = $this->request->getServer()["REQUEST_METHOD"];
 
         if ($serverRequestMethod === "POST") {
-            $form = $this->request->getRequestData();
+            $csrfCheckResult = $this->checkCsrfToken();
+            if (!$csrfCheckResult) {
+                $errors[] = "Le token csrf ne correspond pas, veuillez réessayer.";
+            }
+
+            if (empty($errors)) {
+                $form = $this->request->getRequestData();
 
 
-            if (is_numeric($form['action'])) {
-                $action = $form['action'];
+                if (is_numeric($form['action'])) {
+                    $action = $form['action'];
 
-                switch ($action) {
-                    case "0": //ne pas supprimer
-                        header('Location: ' . "/admin/posts");
-                        break;
-                    case "1": //supprimer
-                        $postTable = new PostTable();
-                        $postEntity = $postTable->get($post_id);
-                        $postTable->delete($post_id);
-                        $imageTable = new ImageTable();
-                        $imageEntity = $imageTable->get($postEntity->image_id);
-                        $this->tryDeleteImage($imageEntity);
+                    switch ($action) {
+                        case "0": //ne pas supprimer
+                            header('Location: ' . "/admin/posts");
+                            break;
+                        case "1": //supprimer
+                            $postTable = new PostTable();
+                            $postEntity = $postTable->get($post_id);
+                            $postTable->delete($post_id);
+                            $imageTable = new ImageTable();
+                            $imageEntity = $imageTable->get($postEntity->image_id);
+                            $this->tryDeleteImage($imageEntity);
 
-                        header('Location: ' . "/admin/posts/deleted_post/$post_id");
-                        break;
+                            header('Location: ' . "/admin/posts/deleted_post/$post_id");
+                            break;
+                    }
                 }
             }
         } else if ($serverRequestMethod === "GET") {

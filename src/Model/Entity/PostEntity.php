@@ -27,10 +27,12 @@ class PostEntity extends Entity
         $postEntity->author = empty($array['author']) ? null : $array['author'];
         $postEntity->hat = empty($array['hat']) ? null : $array['hat'];
         $postEntity->title = empty($array['title']) ? null : $array['title'];
-        $postEntity->content = empty($array['content']) ? null : $array['content'];
         $postEntity->created = empty($array['created']) ? null : $array['created'];
         $postEntity->image = empty($array['image']) ? null : ImageEntity::fromArray($array['image']);
         $postEntity->image_id = empty($array['image_id']) ? null : $array['image_id'];
+
+        $postEntity = $postEntity->sanitize();
+        $postEntity->content = empty($array['content']) ? null : $array['content'];
 
         return $postEntity;
     }

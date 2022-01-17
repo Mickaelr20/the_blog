@@ -39,4 +39,16 @@ abstract class Entity
 
         return $res;
     }
+
+    public function sanitize()
+    {
+        $output = $this;
+        foreach ($output as $k => $v) {
+            if (!is_array($v) && !is_object($v)) {
+                $output->$k = htmlspecialchars(trim($v));
+            }
+        }
+
+        return $output;
+    }
 }
