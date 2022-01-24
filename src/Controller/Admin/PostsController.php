@@ -203,9 +203,7 @@ class PostsController extends AppController
 
         if (empty($errors)) {
             header('Location: ' . "/admin/posts/edit/{$form['post_id']}?editState=success");
-        } //else {
-        //     header('Location: ' . "/admin/posts/edit/{$form['post_id']}?editState=wrong_type");
-        // }
+        }
 
         $this->renderer->render("edit", ["title" => "Modifier une publication", "errors" => $errors, "form" => $form]);
     }

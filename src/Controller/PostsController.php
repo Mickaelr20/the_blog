@@ -27,8 +27,6 @@ class PostsController extends AppController
         $postTable = new PostTable();
         $liste_posts = $postTable->liste($page);
 
-        // $this->debug("liste posts", $liste_posts);
-
         $nb_total_posts = $postTable->count();
         $nb_page_max = ceil($nb_total_posts / 5);
 

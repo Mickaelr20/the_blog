@@ -47,7 +47,6 @@ class ImageEntity extends Entity
 
     public function completeEntity($name): ImageEntity
     {
-        // $name = $_FILES['image']['name'];
         $path = 'img/posts/';
 
         $this->file_name = time() . "_" . $this->generateRandomString() . "." . $this->getFileExtension($name);

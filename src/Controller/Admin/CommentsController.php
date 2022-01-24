@@ -72,14 +72,12 @@ class CommentsController extends AppController
 
                         $errors[] = $error;
                         var_dump($e);
-                        // var_dump($commentEntity->toArray());
-                    }
+=                    }
                 }
             }
         } else if ($this->request->getServer()["REQUEST_METHOD"] === "GET") {
             $commentTable = new CommentTable();
             $form = $commentTable->getForEdit($comment_id);
-            // var_dump($form);
         }
 
         $this->renderer->render("edit", ["title" => "Modifier un commentaire", "errors" => $errors, "form" => $form]);

@@ -100,8 +100,6 @@ class UsersController extends AppController
                     }
 
                     $errors[] = $error;
-                    // var_dump($e);
-                    // var_dump($userEntity->toArray());
                 }
             }
         } else if ($this->request->getServer()["REQUEST_METHOD"] === "GET") {

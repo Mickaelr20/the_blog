@@ -16,12 +16,12 @@ class Resolver
 
     public function resolve($params)
     {
-        // try {
-        $controller = new $this->controllerName();
-        $controller->call($this->action, $params);
-        // } catch (\Exception $e) {
-        //     $resolver = new Resolver("ErrorsController", "error");
-        //     $resolver->resolve(['code' => '404']);
-        // }
+        try {
+            $controller = new $this->controllerName();
+            $controller->call($this->action, $params);
+        } catch (\Exception $e) {
+            $resolver = new Resolver("ErrorsController", "error");
+            $resolver->resolve(['code' => '404']);
+        }
     }
 }
