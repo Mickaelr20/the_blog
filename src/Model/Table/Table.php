@@ -62,7 +62,6 @@ abstract class Table
                         $row_id_name = $entity_name . "_id";
                         $str_sql_contains = sprintf('SELECT * FROM %s WHERE id = :id', $table_name);
                         $query_params = [
-                            // "tablename" => [$table_name, \PDO::PARAM_STR],
                             "id" => [$query_result_row[$row_id_name], \PDO::PARAM_INT]
                         ];
 

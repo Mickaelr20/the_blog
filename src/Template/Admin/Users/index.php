@@ -20,10 +20,8 @@ if (!empty($_GET['deletedId']) && is_numeric($_GET['deletedId'])) {
         <div>Actions</div>
     </div>
     <div class="list-body">
-        <!-- < ?= var_dump($liste_users) ? > -->
         <?php
         foreach ($liste_users as $user) {
-            // echo json_encode($user);
             echo $renderer->element("admin_user_row", ["vuser" => $user]);
         }
         ?>

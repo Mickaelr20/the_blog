@@ -49,8 +49,6 @@ class PostTable extends Table
 
         foreach ($query_results as $query_result) {
             $temp_res = $query_result;
-            // var_dump($query_result);
-
             if (!empty($temp_res)) {
                 if (!empty($temp_res['image_id'])) {
                     $imageTable = new ImageTable();
