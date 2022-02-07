@@ -1,13 +1,13 @@
 .sb-sidenav-dark .sb-sidenav-menu .nav-link i {
- transition: 0.3s;
+  transition: 0.3s;
 }
 
 .sb-sidenav-dark .sb-sidenav-menu .nav-link:hover i {
- color: white;
- transition: 0.45s;
+  color: white;
+  transition: 0.45s;
 }
 
 .sb-sidenav-dark .sb-sidenav-menu .nav-link.active {
- color: white;
- background-color: black;
+  color: white;
+  background-color: black;
 }
