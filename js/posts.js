@@ -1,6 +1,6 @@
 $(function () {
 
-    $('#postImageInput').on('change', function (e) {
+    $('#postImageInput').on('change', function () {
         const [file] = $(this).prop('files');
 
         if (file) {

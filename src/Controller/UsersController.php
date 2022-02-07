@@ -31,7 +31,6 @@ class UsersController extends AppController
                 try {
                     $userTable = new UserTable();
                     $user = $userTable->getForLogin($form['email']);
-
                     $password_verified = password_verify($form['password'], $user->password);
 
                     if ($password_verified) {
@@ -42,13 +41,7 @@ class UsersController extends AppController
                         $errors[] = "Mot de passe incorrecte.";
                     }
                 } catch (\Exception $e) {
-                    $error = "Une erreure est survenue, veuillez réessayer ultérieurement.";
-                    switch ($e->getCode()) {
-                        case "":
-                            break;
-                    }
-
-                    $errors[] = $error;
+                    $errors[] = "Une erreure est survenue, veuillez réessayer ultérieurement.";
                 }
             } else {
                 if (empty($form['email'])) {

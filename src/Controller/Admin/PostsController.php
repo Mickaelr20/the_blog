@@ -142,11 +142,8 @@ class PostsController extends AppController
             $errors[] = $error;
         }
 
-        if (empty($errors)) {
-            if (file_exists($imageEntity->getFullPath())) {
-                unlink($imageEntity->getFullPath());
-            } else {
-            }
+        if (empty($errors) && file_exists($imageEntity->getFullPath())) {
+            unlink($imageEntity->getFullPath());
         }
 
         return $errors;
