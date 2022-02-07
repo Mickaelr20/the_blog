@@ -66,12 +66,7 @@ class CommentsController extends AppController
                         $commentTable->update($commentEntity);
                         header('Location: ' . "/admin/comments/edit/$commentEntity->id?editState=success");
                     } catch (\Exception $e) {
-                        $error = "Une erreure est survenue, veuillez réessayer ultérieurement.";
-                        switch ($e->getCode()) {
-                        }
-
-                        $errors[] = $error;
-                        var_dump($e);
+                        $errors[] = "Une erreure est survenue, veuillez réessayer ultérieurement.";
                     }
                 }
             }

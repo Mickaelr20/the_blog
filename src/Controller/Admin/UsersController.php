@@ -55,11 +55,7 @@ class UsersController extends AppController
                     $userTable->save($userEntity);
                     header('Location: ' . "/admin/users/edit/$userEntity->id?saveState=success");
                 } catch (\Exception $e) {
-                    $error = "Une erreure est survenue, veuillez réessayer ultérieurement.";
-                    switch ($e->getCode()) {
-                    }
-
-                    $errors[] = $error;
+                    $errors[] = "Une erreure est survenue, veuillez réessayer ultérieurement.";
                 }
             }
         }
@@ -84,15 +80,12 @@ class UsersController extends AppController
                     $userEntity->is_validated = false;
                 }
 
-                var_dump($userEntity);
-
                 try {
                     $userTable = new UserTable();
                     $userTable->update($userEntity);
                     header('Location: ' . "/admin/users/edit/$userEntity->id?editState=success");
                 } catch (\Exception $e) {
                     $error = "Une erreure est survenue, veuillez réessayer ultérieurement.";
-                    var_dump($e->getMessage());
                     switch ($e->getCode()) {
                         case "23000":
                             $error = "Adresse email déjà utilisé.";

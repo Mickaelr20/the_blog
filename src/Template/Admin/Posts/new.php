@@ -29,7 +29,6 @@
         </div>
         <div id="postImagePreview" class="col-md-3 col-12 d-flex">
             <?php if (!empty($form['image']['path']) && !empty($form['image']['file_name']) && !empty($form['image']['type'])) { ?>
-                <?= var_dump($form); ?>
                 <img class="image-preview" src="<?= $form['image']['path'] ?><?= $form['image']['file_name'] ?>.<?= $form['image']['type'] ?>" alt="test">
             <?php } else { ?>
                 <img class="image-preview" src="/img/empty_image.jpg" alt="aucune image">

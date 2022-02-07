@@ -331,6 +331,7 @@ if (str_starts_with($request_url, "/admin")) {
 try {
     $router->run();
 } catch (\Exception $e) {
+    echo "Erreure de redirection";
     var_dump($e);
     // $resolver = new Resolver("ErrorsController", "error");
     // $resolver->resolve(['code' => '404']);

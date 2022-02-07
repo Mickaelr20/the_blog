@@ -11,10 +11,18 @@ class RequestHelper
 
     public function getRequestData(): array
     {
+        $super_files = $_FILES;
+        $super_get = $_GET;
+        $super_post = $_POST;
+
         $array = [
-            "POST" => !empty($_POST) ? $_POST : [],
-            "GET" => !empty($_GET) ? $_GET : []
+            "POST" => !empty($super_post) ? $super_post : [],
+            "GET" => !empty($super_get) ? $super_get : []
         ];
+
+        if (!empty($super_files)) {
+            $array['FILES'] = $super_files;
+        }
 
         $request_type = $this->getType();
 

@@ -16,9 +16,6 @@ class ImageTable extends Table
     {
 
         $transform_imageEntity = $imageEntity->toArray(["display_name", "file_name", "path"]);
-
-        var_dump($imageEntity);
-
         $this->sqlConnection->query(
             "INSERT INTO $this->TABLE_NAME (display_name, file_name, path) VALUES(:display_name, :file_name, :path)",
             $transform_imageEntity

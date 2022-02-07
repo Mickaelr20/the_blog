@@ -47,17 +47,23 @@ class PostsController extends AppController
         $postEntity = new PostEntity();
 
         if ($this->request->getServer()["REQUEST_METHOD"] === "POST") {
+            $requestData = $this->request->getRequestData();
             $csrfCheckResult = $this->checkCsrfToken();
+
             if (!$csrfCheckResult) {
                 $errors[] = "Le token csrf ne correspond pas, veuillez réessayer.";
             }
+
+            if (empty($requestData['FILES'])) {
+                $errors[] = "Aucune données envoyés";
+            }
+
             if (empty($errors)) {
-                $requestData = $this->request->getRequestData();
                 $postEntity = PostEntity::fromArray($requestData);
                 $errors = $postEntity->verifyEntity("create");
 
                 if (empty($errors)) {
-                    $postEntity->image->completeEntity($_FILES['image']['name']);
+                    $postEntity->image->completeEntity($requestData['FILES']['image']['name']);
                     $errors = $this->trySaveImage($postEntity->image);
 
                     if (empty($errors)) {
@@ -67,42 +73,36 @@ class PostsController extends AppController
                             $postTable->save($postEntity);
                             header('Location: ' . "/admin/posts/edit/$postEntity->id?saveState=success");
                         } catch (\Exception $e) {
-                            $error = "Une erreure est survenue, veuillez réessayer ultérieurement.";
-                            switch ($e->getCode()) {
-                            }
-
-                            $errors[] = $error;
+                            $errors[] = "Une erreure est survenue, veuillez réessayer ultérieurement.";
                         }
                     }
                 }
             }
         }
+
         $this->renderer->render("new", ["title" => "Nouvelle publication", "errors" => $errors, "form" => $requestData]);
     }
 
     private function trySaveImage(ImageEntity $imageEntity)
     {
         $errors = [];
+        $requestData = $this->request->getRequestData();
 
         try {
             $imageTable = new ImageTable();
             $imageTable->save($imageEntity);
         } catch (\Exception $e) {
-            $error = "Une erreure est survenue lors de la sauvegarde de l'image, veuillez réessayer ultérieurement.";
-            switch ($e->getCode()) {
-            }
-
-            $errors[] = $error;
+            $errors[] = "Une erreure est survenue lors de la sauvegarde de l'image, veuillez réessayer ultérieurement.";
         }
 
         if (empty($errors)) {
-            if (!str_contains($_FILES['image']['type'], "image/")) {
+            if (!str_contains($requestData['FILES']['image']['type'], "image/")) {
                 $errors[] = "Le fichier doit être une image.";
             }
         }
 
         if (empty($errors)) {
-            $tmpName = $_FILES['image']['tmp_name'];
+            $tmpName = $requestData['FILES']['image']['tmp_name'];
 
             try {
                 move_uploaded_file($tmpName, $imageEntity->path . $imageEntity->file_name);
@@ -113,11 +113,7 @@ class PostsController extends AppController
                     $imageTable = new ImageTable();
                     $imageTable->delete($imageEntity->id);
                 } catch (\Exception $e) {
-                    $error = "Une erreure est survenue lors de la sauvegarde de l'image, veuillez réessayer ultérieurement.";
-                    switch ($e->getCode()) {
-                    }
-
-                    $errors[] = $error;
+                    $errors[] = "Une erreure est survenue lors de la sauvegarde de l'image, veuillez réessayer ultérieurement.";
                 }
             }
         }
@@ -135,11 +131,7 @@ class PostsController extends AppController
                 $imageTable->delete($imageEntity->id);
             }
         } catch (\Exception $e) {
-            $error = "Une erreure est survenue lors de la suppression de l'image, veuillez réessayer ultérieurement.";
-            switch ($e->getCode()) {
-            }
-
-            $errors[] = $error;
+            $errors[] = "Une erreure est survenue lors de la suppression de l'image, veuillez réessayer ultérieurement.";
         }
 
         if (empty($errors) && file_exists($imageEntity->getFullPath())) {
@@ -181,11 +173,7 @@ class PostsController extends AppController
                             $postTable = new PostTable();
                             $postTable->update($postEntity);
                         } catch (\Exception $e) {
-                            $error = "Une erreure est survenue lors de la sauvegarde de l'image, veuillez réessayer ultérieurement.";
-                            switch ($e->getCode()) {
-                            }
-
-                            $errors[] = $error;
+                            $errors[] = "Une erreure est survenue lors de la sauvegarde de l'image, veuillez réessayer ultérieurement.";
                         }
 
                         if (empty($errors)) {
@@ -229,11 +217,7 @@ class PostsController extends AppController
 
                         header('Location: ' . "/admin/posts/edit/$postEntity->id?editState=success");
                     } catch (\Exception $e) {
-                        $error = "Une erreure est survenue, veuillez réessayer ultérieurement.";
-                        switch ($e->getCode()) {
-                        }
-
-                        $errors[] = $error;
+                        $errors[] = "Une erreure est survenue, veuillez réessayer ultérieurement.";
                     }
                 }
             }

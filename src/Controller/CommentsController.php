@@ -63,12 +63,7 @@ class CommentsController extends AppController
 
                     header('Location: /publication/' . $commentEntity->post_id . "/?saveState=success");
                 } catch (\Exception $e) {
-                    $error = "Une erreure est survenue, veuillez réessayer ultérieurement.";
-                    switch ($e->getCode()) {
-                    }
-
-                    $errors[] = $error;
-                    var_dump($e);
+                    $errors[] = "Une erreure est survenue, veuillez réessayer ultérieurement.";
                 }
             }
         }
