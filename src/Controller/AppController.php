@@ -26,9 +26,9 @@ class AppController
 
     public function debug($str, $toDump)
     {
-        echo "<br /> $str: </br />";
+        echo nl2br("\n$str:\n");
         var_dump($toDump);
-        echo "<br /><br />";
+        echo nl2br("\n\n");
     }
 
     public function checkCsrfToken(): bool
@@ -41,5 +41,13 @@ class AppController
         }
 
         return $result;
+    }
+
+    public function sendMail()
+    {
+        // Create the Transport
+        $transport = (new \Swift_SmtpTransport('smtp.example.org', 25))
+            ->setUsername('your username')
+            ->setPassword('your password');
     }
 }
