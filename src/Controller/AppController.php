@@ -17,11 +17,11 @@ class AppController
 
     public function call($name, $args)
     {
-        if (method_exists($this, $name)) {
-            $this->$name($args);
-        } else {
+        if (!method_exists($this, $name)) {
             throw new \Exception('L\'action ' . $name . ' n\'exsite pas.');
         }
+
+        $this->$name($args);
     }
 
     public function debug($str, $toDump)

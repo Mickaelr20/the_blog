@@ -10,6 +10,7 @@
   color: white;
   font-weight: bold;
   border: 0.1rem solid black;
+    flex-direction: row;
 }
 
 .listing > .list-body > .list-row {
@@ -33,10 +34,6 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-}
-
-.listing > .list-head {
-  flex-direction: row;
 }
 
 .listing > .list-body {

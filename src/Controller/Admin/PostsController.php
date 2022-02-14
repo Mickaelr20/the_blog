@@ -156,7 +156,7 @@ class PostsController extends AppController
             if (empty($errors)) {
                 $form = $this->request->getRequestData();
                 $newImageEntity = ImageEntity::fromArray($form);
-                $newImageEntity->completeEntity($_FILES['image']['name']);
+                $newImageEntity->completeEntity($form['FILES']['image']['name']);
                 $newImageEntity->id = null;
                 $errors = $newImageEntity->verifyEntity("create");
 
