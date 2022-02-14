@@ -35,7 +35,7 @@ class CommentEntity extends Entity
     {
         $entityChecker->check("id", function ($value, $res): string {
             if (!empty($value)) {
-                $res = "L'id ne peut être définit par l'utilisateur.";
+                return "L'id ne peut être définit par l'utilisateur.";
             }
 
             return $res;
@@ -43,7 +43,7 @@ class CommentEntity extends Entity
 
         $entityChecker->check("post_id", function ($value, $res): string {
             if (empty($value)) {
-                $res = "La publication doit être précisé.";
+                return "La publication doit être précisé.";
             }
 
             return $res;
@@ -51,7 +51,7 @@ class CommentEntity extends Entity
 
         $entityChecker->check("author", function ($value, $res): string {
             if (empty($value)) {
-                $res = "L'autheur doit être précisé.";
+                return "L'autheur doit être précisé.";
             }
 
             return $res;
@@ -59,7 +59,7 @@ class CommentEntity extends Entity
 
         $entityChecker->check("content", function ($value, $res): string {
             if (empty($value)) {
-                $res = "Le contenu doit être précisé.";
+                return "Le contenu doit être précisé.";
             }
 
             return $res;
@@ -67,7 +67,7 @@ class CommentEntity extends Entity
 
         $entityChecker->check("created", function ($value, $res): string {
             if (!empty($value)) {
-                $res = "La date de création ne peut pas être précisé";
+                return "La date de création ne peut pas être précisé";
             }
 
             return $res;
@@ -75,7 +75,7 @@ class CommentEntity extends Entity
 
         $entityChecker->check("is_validated", function ($value, $res): string {
             if (!empty($value) || is_bool($value)) {
-                $res = "La validité du commentaire ne pas être définie à la création.";
+                return "La validité du commentaire ne pas être définie à la création.";
             }
 
             return $res;

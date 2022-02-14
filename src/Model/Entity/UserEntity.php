@@ -38,61 +38,58 @@ class UserEntity extends Entity
     {
         $entityChecker->check("id", function ($value, $res): string {
             if (!empty($value)) {
-                $res = "L'id ne peut être définit par l'utilisateur.";
+                return "L'id ne peut être définit par l'utilisateur.";
             }
 
             return $res;
         }, "create");
 
         $entityChecker->check("first_name", function ($value, $res): string {
-            if (!empty($value)) {
-                if (gettype($value) === "string") {
-                    if (strlen($value) <= 3) {
-                        $res = "Le prénom est trop court, il doit contenir plus de 3 caractères.";
-                    } else if (strlen($value) > 255) {
-                        $res = "Le prénom est trop long, il doit contenir moins de 255 caractères.";
-                    }
-                } else {
-                    $res = "Le prénom doit être une chaine de caractère.";
-                }
-            } else {
-                $res = "Un prénom doit être précisé.";
+            if (empty($value)) {
+                return "Un prénom doit être précisé.";
+            }
+            if (gettype($value) !== "string") {
+                return "Le prénom doit être une chaine de caractère.";
+            }
+            if (strlen($value) <= 3) {
+                return "Le prénom est trop court, il doit contenir plus de 3 caractères.";
+            }
+
+            if (strlen($value) > 255) {
+                return "Le prénom est trop long, il doit contenir moins de 255 caractères.";
             }
 
             return $res;
         }, "create");
 
         $entityChecker->check("last_name", function ($value, $res): string {
-            if (!empty($value)) {
-                if (gettype($value) === "string") {
-                    if (strlen($value) <= 3) {
-                        $res = "Le nom est trop court, il doit contenir plus de 3 caractères.";
-                    } else if (strlen($value) > 255) {
-                        $res = "Le nom est trop long, il doit contenir moins de 255 caractères.";
-                    }
-                } else {
-                    $res = "Le nom doit être une chaine de caractère.";
-                }
-            } else {
-                $res = "Un nom doit être précisé.";
+            if (empty($value)) {
+                return "Un nom doit être précisé.";
             }
-
+            if (gettype($value) !== "string") {
+                return "Le nom doit être une chaine de caractère.";
+            }
+            if (strlen($value) <= 3) {
+                return "Le nom est trop court, il doit contenir plus de 3 caractères.";
+            }
+            if (strlen($value) > 255) {
+                return "Le nom est trop long, il doit contenir moins de 255 caractères.";
+            }
             return $res;
         }, "create");
 
         $entityChecker->check("nickname", function ($value, $res): string {
-            if (!empty($value)) {
-                if (gettype($value) === "string") {
-                    if (strlen($value) <= 3) {
-                        $res = "Le pseudo est trop court, il doit contenir plus de 3 caractères.";
-                    } else if (strlen($value) > 255) {
-                        $res = "Le pseudo est trop long, il doit contenir moins de 255 caractères.";
-                    }
-                } else {
-                    $res = "Le pseudo doit être une chaine de caractère.";
-                }
-            } else {
-                $res = "Un pseudo doit être précisé.";
+            if (empty($value)) {
+                return "Un pseudo doit être précisé.";
+            }
+            if (gettype($value) !== "string") {
+                return "Le pseudo doit être une chaine de caractère.";
+            }
+            if (strlen($value) <= 3) {
+                return "Le pseudo est trop court, il doit contenir plus de 3 caractères.";
+            }
+            if (strlen($value) > 255) {
+                return "Le pseudo est trop long, il doit contenir moins de 255 caractères.";
             }
 
             return $res;
@@ -100,34 +97,32 @@ class UserEntity extends Entity
 
 
         $entityChecker->check("password", function ($value, $res): string {
-            if (!empty($value)) {
-                if (gettype($value) === "string") {
-                    if (strlen($value) <= 4) {
-                        $res = "Le mot de passe est trop court, il doit contenir plus de 4 caractères.";
-                    } else if (strlen($value) > 255) {
-                        $res = "Le mot de passe est trop long, il doit contenir moins de 255 caractères.";
-                    }
-                } else {
-                    $res = "Le mot de passe doit être une chaine de caractère.";
-                }
-            } else {
-                $res = "Un mot de passe doit être précisé.";
+            if (empty($value)) {
+                return "Un mot de passe doit être précisé.";
+            }
+
+            if (gettype($value) !== "string") {
+                return "Le mot de passe doit être une chaine de caractère.";
+            }
+            if (strlen($value) <= 4) {
+                return "Le mot de passe est trop court, il doit contenir plus de 4 caractères.";
+            }
+            if (strlen($value) > 255) {
+                return "Le mot de passe est trop long, il doit contenir moins de 255 caractères.";
             }
 
             return $res;
         }, "create");
 
         $entityChecker->check("email", function ($value, $res): string {
-            if (!empty($value)) {
-                if (gettype($value) === "string") {
-                    if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
-                        $res = "L'email fournit est invalide.";
-                    }
-                } else {
-                    $res = "L'email doit être une chaine de caractère.";
-                }
-            } else {
-                $res = "Un email doit être précisé.";
+            if (empty($value)) {
+                return "Un email doit être précisé.";
+            }
+            if (gettype($value) === "string" && !filter_var($value, FILTER_VALIDATE_EMAIL)) {
+                return "L'email fournit est invalide.";
+            }
+            if (gettype($value) !== "string") {
+                return "L'email doit être une chaine de caractère.";
             }
 
             return $res;
@@ -135,7 +130,7 @@ class UserEntity extends Entity
 
         $entityChecker->check("is_validated", function ($value, $res): string {
             if (!empty($value) || is_bool($value)) {
-                $res = "La validité de l'utilisateur ne pas être définie à la création.";
+                return "La validité de l'utilisateur ne pas être définie à la création.";
             }
 
             return $res;
