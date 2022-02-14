@@ -3,12 +3,11 @@
         <div class="text-center alert alert-danger" role="alert">
             <?php
             $title = count($errors) > 1 ? "Des problèmes ont été détectés." : "Un problème a été détecté.";
-            echo "<h3>$title:</h3>";
-
-            foreach ($errors as $field_name => $error) {
-                echo "<p>$error</p>";
-            }
             ?>
+            <h3><?= $title ?>:</h3>
+            <?php foreach ($errors as $field_name => $error) { ?>
+                <p><?= $error ?></p>
+            <?php } ?>
         </div>
     </div>
 <?php } else { ?>
