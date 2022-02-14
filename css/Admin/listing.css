@@ -5,54 +5,48 @@
   padding: 1rem 0 1rem 0;
 }
 
-.listing>.list-head {
+.listing > .list-head {
   background: #445a6f;
   color: white;
   font-weight: bold;
   border: 0.1rem solid black;
 }
 
-.listing>.list-body>.list-row {
+.listing > .list-body > .list-row {
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   transition: 100ms;
-}
-
-.listing>.list-body>.list-row:hover {
-  background: #d6e3f0;
-}
-
-.listing>.list-body>.list-row {
   background: #f0f0f0;
-}
-
-.listing>.list-body>.list-row {
-  border: 0rem;
+  border: 0;
   border-bottom: 0.1rem;
   border-style: solid;
   border-color: black;
 }
 
-.listing>.list-head, .listing>.list-body {
+.listing > .list-body > .list-row:hover {
+  background: #d6e3f0;
+}
+
+.listing > .list-head, .listing > .list-body {
   width: 100%;
   display: flex;
   justify-content: space-between;
 }
 
-.listing>.list-head {
+.listing > .list-head {
   flex-direction: row;
 }
 
-.listing>.list-body {
+.listing > .list-body {
   flex-direction: column;
 }
 
-.listing>.list-head div, .listing>.list-body>.list-row div {
+.listing > .list-head div, .listing > .list-body > .list-row div {
   width: 100%;
   text-align: center;
-  padding: 0.5rem 0rem;
+  padding: 0.5rem 0;
 }
 
 .flex-basis-1 {
