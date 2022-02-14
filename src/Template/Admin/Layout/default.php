@@ -11,10 +11,10 @@
 
     <link href="/css/stylesheet.css" rel="stylesheet" />
     <link href="/css/Admin/menu.css" rel="stylesheet" />
-    <link href="/sb-admin/css/styles.css" rel="stylesheet" />
+    <link href="/vendors/themes/sb-admin/css/styles.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="/css/Admin/listing.css" rel="stylesheet" />
-    <link rel="stylesheet" href="/css/vendors/line-awesome/css/line-awesome.min.css">
+    <link rel="stylesheet" href="/vendors/line-awesome/css/line-awesome.min.css">
     <?= $pageHelper->printStyles('bottom'); ?>
 
     <link rel="icon" href="/img/favicon_black.svg" />
@@ -33,8 +33,8 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="/js/vendors/jquery-3.6.0.min.js"></script>
-    <script src="/sb-admin/js/scripts.js"></script>
+    <script src="/vendors/js/jquery-3.6.0.min.js"></script>
+    <script src="/vendors/themes/sb-admin/js/scripts.js"></script>
     <?= $pageHelper->printScripts('bottom'); ?>
 </body>
 

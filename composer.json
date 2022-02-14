@@ -5,6 +5,7 @@
         }
     },
     "require": {
-        "amphp/amp": "^2.6"
+        "amphp/amp": "^2.6",
+        "swiftmailer/swiftmailer": "^6.3"
     }
 }

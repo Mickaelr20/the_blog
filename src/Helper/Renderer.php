@@ -89,11 +89,11 @@ class Renderer
 
     public function render($elem, $vars = [])
     {
-
         $session = new SessionHelper();
         $templateVars = array_merge($vars, [
             "renderer" => $this,
             "pageHelper" => new PageHelper(),
+            "requestData" => (new RequestHelper())->getRequestData(),
             "user" => $session->get("user")
         ]);
 

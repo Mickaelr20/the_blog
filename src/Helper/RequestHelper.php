@@ -20,13 +20,14 @@ class RequestHelper
             "GET" => !empty($super_get) ? $super_get : []
         ];
 
-        if (!empty($super_files)) {
-            $array['FILES'] = $super_files;
-        }
-
         $request_type = $this->getType();
 
-        return !empty($array[$request_type]) ? $array[$request_type] : [];
+        $res = !empty($array[$request_type]) ? $array[$request_type] : [];
+        if (!empty($super_files)) {
+            $res['FILES'] = $super_files;
+        }
+
+        return $res;
     }
 
     public function getServer(): array

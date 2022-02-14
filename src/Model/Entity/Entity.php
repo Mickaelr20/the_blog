@@ -26,10 +26,11 @@ abstract class Entity
         if (!empty($options)) {
             $t_res = [];
             foreach ($options as $key => $value) {
-                $t_res[$value] = $res[$value];
 
                 if (!empty($value) && is_array($value)) {
                     $t_res[$key] = [$res[$key], $value[0]];
+                } else {
+                    $t_res[$value] = $res[$value];
                 }
             }
 

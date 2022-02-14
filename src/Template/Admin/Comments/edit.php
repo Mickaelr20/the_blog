@@ -14,7 +14,7 @@
 <?php } ?>
 
 <?php
-if (!empty($_GET['editState']) && $_GET['editState'] === 'success') {
+if (!empty($requestData['editState']) && $requestData['editState'] === 'success') {
 ?>
     <div class="m-auto container">
         <div class="text-center alert alert-success" role="alert">
@@ -24,7 +24,7 @@ if (!empty($_GET['editState']) && $_GET['editState'] === 'success') {
 <?php } ?>
 
 <?php
-if (!empty($_GET['saveState']) && $_GET['saveState'] === 'success') {
+if (!empty($requestData['saveState']) && $requestData['saveState'] === 'success') {
 ?>
     <div class="m-auto container">
         <div class="text-center alert alert-success" role="alert">
@@ -34,11 +34,11 @@ if (!empty($_GET['saveState']) && $_GET['saveState'] === 'success') {
 <?php } ?>
 
 <?php
-if (!empty($_GET['deletedId']) && is_numeric($_GET['deletedId'])) {
+if (!empty($requestData['deletedId']) && is_numeric($requestData['deletedId'])) {
 ?>
     <div class="m-auto container">
         <div class="text-center alert alert-success" role="alert">
-            <h3>Le commentaire <?= $_GET['deletedId'] ?> a été supprimé avec succès</h3>
+            <h3>Le commentaire <?= $requestData['deletedId'] ?> a été supprimé avec succès</h3>
         </div>
     </div>
 <?php } ?>
