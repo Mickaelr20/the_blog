@@ -13,11 +13,11 @@
 <?php } ?>
 
 <?php
-if (!empty($_GET['editState'])) {
+if (!empty($requestData['editState'])) {
     $alert_edit_state_class = "success";
     $alert_edit_state_text = "La publication a été mise à jour";
 
-    switch ($_GET['editState']) {
+    switch ($requestData['editState']) {
         case "wrong_type":
             $alert_edit_state_class = "danger";
             $alert_edit_state_text = "Erreur: Le fichier doit être une image";
@@ -31,7 +31,7 @@ if (!empty($_GET['editState'])) {
 <?php } ?>
 
 <?php
-if (!empty($_GET['saveState']) && $_GET['saveState'] === 'success') {
+if (!empty($requestData['saveState']) && $requestData['saveState'] === 'success') {
 ?>
     <div class="m-auto container">
         <div class="text-center alert alert-success" role="alert">
@@ -41,11 +41,11 @@ if (!empty($_GET['saveState']) && $_GET['saveState'] === 'success') {
 <?php } ?>
 
 <?php
-if (!empty($_GET['deletedId']) && is_numeric($_GET['deletedId'])) {
+if (!empty($requestData['deletedId']) && is_numeric($requestData['deletedId'])) {
 ?>
     <div class="m-auto container">
         <div class="text-center alert alert-success" role="alert">
-            <h3>La publication <?= $_GET['deletedId'] ?> a été supprimé avec succès</h3>
+            <h3>La publication <?= $requestData['deletedId'] ?> a été supprimé avec succès</h3>
         </div>
     </div>
 <?php } ?>

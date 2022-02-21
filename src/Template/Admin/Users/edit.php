@@ -13,7 +13,7 @@
 <?php } ?>
 
 <?php
-if (!empty($_GET['editState']) && $_GET['editState'] === 'success') {
+if (!empty($requestData['editState']) && $requestData['editState'] === 'success') {
 ?>
     <div class="m-auto container">
         <div class="text-center alert alert-success" role="alert">
@@ -23,7 +23,7 @@ if (!empty($_GET['editState']) && $_GET['editState'] === 'success') {
 <?php } ?>
 
 <?php
-if (!empty($_GET['saveState']) && $_GET['saveState'] === 'success') {
+if (!empty($requestData['saveState']) && $requestData['saveState'] === 'success') {
 ?>
     <div class="m-auto container">
         <div class="text-center alert alert-success" role="alert">

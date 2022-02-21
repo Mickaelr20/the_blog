@@ -31,7 +31,7 @@ class ImageEntity extends Entity
     {
         $entityChecker->check("id", function ($value, $res): string {
             if (!empty($value)) {
-                $res = "L'id ne peut être définit par l'utilisateur.";
+                return "L'id ne peut être définit par l'utilisateur.";
             }
 
             return $res;

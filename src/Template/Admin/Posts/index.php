@@ -1,9 +1,9 @@
 <?php
-if (!empty($_GET['deletedId']) && is_numeric($_GET['deletedId'])) {
+if (!empty($requestData['deletedId']) && is_numeric($requestData['deletedId'])) {
 ?>
     <div class="m-auto container">
         <div class="text-center alert alert-success" role="alert">
-            <h3>La publication numero <?= $_GET['deletedId'] ?> a été supprimé</h3>
+            <h3>La publication numero <?= $requestData['deletedId'] ?> a été supprimé</h3>
         </div>
     </div>
 <?php } ?>

@@ -177,7 +177,7 @@ class PostsController extends AppController
                         }
 
                         if (empty($errors)) {
-                            if (!empty($oldEntity)) {
+                            if (!empty($oldImageEntity)) {
                                 $errors = $this->tryDeleteImage($oldImageEntity);
                             }
                         }

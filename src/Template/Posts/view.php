@@ -6,7 +6,7 @@
     <hr />
 
     <?php
-    if (!empty($_GET['saveState']) && $_GET['saveState'] === "success") {
+    if (!empty($requestData['saveState']) && $requestData['saveState'] === "success") {
     ?>
         <div class="m-auto container">
             <div class="text-center alert alert-success" role="alert">

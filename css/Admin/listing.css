@@ -10,7 +10,7 @@
   color: white;
   font-weight: bold;
   border: 0.1rem solid black;
-    flex-direction: row;
+  flex-direction: row;
 }
 
 .listing > .list-body > .list-row {
