@@ -61,7 +61,7 @@ class CommentsController extends AppController
                     $commentTable = new CommentTable();
                     $commentTable->save($commentEntity);
 
-                    header('Location: /publication/' . $commentEntity->post_id . "/?saveState=success");
+                    $this->request->redirect("/publication/" . $commentEntity->post_id, ["saveState" => "success"]);
                 } catch (\Exception $e) {
                     $errors[] = "Une erreure est survenue, veuillez réessayer ultérieurement.";
                 }

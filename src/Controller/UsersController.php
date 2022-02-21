@@ -36,7 +36,7 @@ class UsersController extends AppController
                     if ($password_verified) {
                         $session = new SessionHelper();
                         $session->put("user", $user->toArray());
-                        header('Location: ' . "/users/login_success");
+                        $this->request->redirect("/users/login_success");
                     } else {
                         $errors[] = "Mot de passe incorrecte.";
                     }
@@ -80,7 +80,7 @@ class UsersController extends AppController
                     try {
                         $userTable = new UserTable();
                         $userTable->save($userEntity);
-                        header('Location: ' . "/users/signup_success");
+                        $this->request->redirect("/users/signup_success");
                     } catch (\Exception $e) {
                         $error = "Une erreure est survenue, veuillez réessayer ultérieurement.";
                         switch ($e->getCode()) {
@@ -111,6 +111,6 @@ class UsersController extends AppController
     public function logout()
     {
         session_destroy();
-        header("Location: /");
+        $this->request->redirect("/");
     }
 }

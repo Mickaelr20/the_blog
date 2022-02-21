@@ -64,7 +64,7 @@ class CommentsController extends AppController
                     try {
                         $commentTable = new CommentTable();
                         $commentTable->update($commentEntity);
-                        header('Location: ' . "/admin/comments/edit/$commentEntity->id?editState=success");
+                        $this->request->redirect("/admin/comments/edit/$commentEntity->id", ['editState' => 'success']);
                     } catch (\Exception $e) {
                         $errors[] = "Une erreure est survenue, veuillez réessayer ultérieurement.";
                     }
@@ -99,12 +99,12 @@ class CommentsController extends AppController
 
                     switch ($action) {
                         case "0": //ne pas supprimer
-                            header('Location: ' . "/admin/comments");
+                            $this->request->redirect("/admin/comments");
                             break;
                         case "1": //supprimer
                             $commentTable = new CommentTable();
                             $commentTable->delete($comment_id);
-                            header('Location: ' . "/admin/comments/deleted_comment/$comment_id");
+                            $this->request->redirect("/admin/comments/deleted_comment/$comment_id");
                             break;
                     }
                 }

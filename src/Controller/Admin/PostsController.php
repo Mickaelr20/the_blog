@@ -71,7 +71,7 @@ class PostsController extends AppController
                             $postEntity->image_id = $postEntity->image->id;
                             $postTable = new PostTable();
                             $postTable->save($postEntity);
-                            header('Location: ' . "/admin/posts/edit/$postEntity->id?saveState=success");
+                            $this->request->redirect("/admin/posts/edit/$postEntity->id", ["saveState" => "success"]);
                         } catch (\Exception $e) {
                             $errors[] = "Une erreure est survenue, veuillez réessayer ultérieurement.";
                         }
@@ -187,7 +187,7 @@ class PostsController extends AppController
         }
 
         if (empty($errors)) {
-            header('Location: ' . "/admin/posts/edit/{$form['post_id']}?editState=success");
+            $this->request->redirect("/admin/posts/edit/{$form['post_id']}", ["editState" => "success"]);
         }
 
         $this->renderer->render("edit", ["title" => "Modifier une publication", "errors" => $errors, "form" => $form]);
@@ -214,8 +214,7 @@ class PostsController extends AppController
                     try {
                         $postTable = new PostTable();
                         $postTable->update($postEntity);
-
-                        header('Location: ' . "/admin/posts/edit/$postEntity->id?editState=success");
+                        $this->request->redirect("/admin/posts/edit/$postEntity->id", ["editState" => "success"]);
                     } catch (\Exception $e) {
                         $errors[] = "Une erreure est survenue, veuillez réessayer ultérieurement.";
                     }
@@ -251,7 +250,8 @@ class PostsController extends AppController
 
                     switch ($action) {
                         case "0": //ne pas supprimer
-                            header('Location: ' . "/admin/posts");
+                            $this->request->redirect("/admin/posts");
+
                             break;
                         case "1": //supprimer
                             $postTable = new PostTable();
@@ -261,7 +261,8 @@ class PostsController extends AppController
                             $imageEntity = $imageTable->get($postEntity->image_id);
                             $this->tryDeleteImage($imageEntity);
 
-                            header('Location: ' . "/admin/posts/deleted_post/$post_id");
+                            $this->request->redirect("/admin/posts/deleted_post/$post_id");
+
                             break;
                     }
                 }

@@ -40,4 +40,17 @@ class RequestHelper
         ];
         return $res;
     }
+
+    public function redirect($str, $params = null)
+    {
+        $url = $str;
+        if (!empty($params)) {
+            $url .= "?";
+        }
+        foreach ($params as $key => $value) {
+            $url .= "$key=$value";
+        }
+
+        header("Location: $url");
+    }
 }

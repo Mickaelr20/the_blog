@@ -53,7 +53,7 @@ class UsersController extends AppController
                 try {
                     $userTable = new UserTable();
                     $userTable->save($userEntity);
-                    header('Location: ' . "/admin/users/edit/$userEntity->id?saveState=success");
+                    $this->request->redirect("/admin/users/edit/$userEntity->id", ["saveState" => "success"]);
                 } catch (\Exception $e) {
                     $errors[] = "Une erreure est survenue, veuillez réessayer ultérieurement.";
                 }
@@ -83,7 +83,7 @@ class UsersController extends AppController
                 try {
                     $userTable = new UserTable();
                     $userTable->update($userEntity);
-                    header('Location: ' . "/admin/users/edit/$userEntity->id?editState=success");
+                    $this->request->redirect("/admin/users/edit/$userEntity->id", ["editState" => "success"]);
                 } catch (\Exception $e) {
                     $error = "Une erreure est survenue, veuillez réessayer ultérieurement.";
                     switch ($e->getCode()) {
@@ -118,12 +118,14 @@ class UsersController extends AppController
 
                 switch ($action) {
                     case "0": //ne pas supprimer
-                        header('Location: ' . "/admin/users");
+                        $this->request->redirect("/admin/users");
+
                         break;
                     case "1": //supprimer
                         $userTable = new UserTable();
                         $userTable->delete($user_id);
-                        header('Location: ' . "/admin/users/deleted_user/$user_id");
+                        $this->request->redirect("/admin/users/deleted_user/$user_id");
+
                         break;
                 }
             }
