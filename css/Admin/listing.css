@@ -30,7 +30,8 @@
   background: #d6e3f0;
 }
 
-.listing > .list-head, .listing > .list-body {
+.listing > .list-head,
+.listing > .list-body {
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -40,7 +41,8 @@
   flex-direction: column;
 }
 
-.listing > .list-head div, .listing > .list-body > .list-row div {
+.listing > .list-head div,
+.listing > .list-body > .list-row div {
   width: 100%;
   text-align: center;
   padding: 0.5rem 0;
