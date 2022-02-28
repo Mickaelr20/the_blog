@@ -12,6 +12,6 @@ class ErrorsController extends AppController
 
     public function error($params)
     {
-        $this->renderer->render($params['code'], ["title" => "Error", "message" => $params['message']]);
+        $this->renderer->render($params['code'] ?? "Inconnu", ["title" => "Error", "message" => $params['message'] ?? "Erreur inconnue"]);
     }
 }

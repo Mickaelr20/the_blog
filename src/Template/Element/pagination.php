@@ -13,16 +13,20 @@
             if ($actual_page >= ($nb_page_max - 1)) {
                 $next_disabled = true;
             }
-
-            echo '<li class="page-item' . ($previous_disabled ? " disabled" : "") . '"><a class="page-link" href="' . $base_link . ($actual_page - 1) . '">Précédent</a></li>';
-
+            ?>
+            <li class="page-item <?= $previous_disabled ? " disabled" : "" ?>"><a class="page-link" href="<?= $base_link ?><?= $actual_page - 1 ?>">Précédent</a></li>
+            <?php
             for ($i = 0; $i < $nb_page_max; $i++) {
                 $is_active = $i == $actual_page;
-                echo '<li class="page-item' . ($is_active ? ' active' : '') . '"><a class="page-link" href="' . $base_link . $i  . '">' . ($i + 1) . '</a></li>';
+                // echo '<li class="page-item' . ($is_active ? ' active' : '') . '"><a class="page-link" href="' . $base_link . $i  . '">' . ($i + 1) . '</a></li>';
+            ?>
+                <li class="page-item <?= $is_active ? ' active' : '' ?>"><a class="page-link" href="<?= $base_link ?><?= $i ?>"> <?= $i + 1 ?></a></li>
+            <?php
             }
 
-            echo '<li class="page-item' . ($next_disabled ? " disabled" : "") . '"><a class="page-link" href="' . $base_link . ($actual_page + 1) . '">Suivant</a></li>';
+            // echo '<li class="page-item' . ($next_disabled ? " disabled" : "") . '"><a class="page-link" href="' . $base_link . ($actual_page + 1) . '">Suivant</a></li>';
             ?>
+            <li class="page-item <?= $next_disabled ? " disabled" : "" ?>"><a class="page-link" href="<?= $base_link ?><?= $actual_page + 1 ?>">Suivant</a></li>
         </ul>
     </nav>
 <?php } ?>

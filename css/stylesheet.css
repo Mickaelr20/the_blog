@@ -25,6 +25,7 @@ body {
   filter: invert(1);
 }
 
+/*
 a:not(.btn) {
   text-decoration: none;
   transition: 0.15s;
@@ -34,3 +35,4 @@ a:not(.btn) {
 a:not(.btn):hover {
   border-bottom: 0.1rem solid;
 }
+*/

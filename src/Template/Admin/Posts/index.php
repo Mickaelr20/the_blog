@@ -19,9 +19,9 @@ if (!empty($requestData['deletedId']) && is_numeric($requestData['deletedId'])) 
     <div class="list-body">
         <?php
         foreach ($liste_posts as $post) {
-            echo $renderer->element("admin_post_row", ["post" => $post]);
-        }
         ?>
+            <?= $renderer->element("admin_post_row", ["post" => $post]); ?>
+        <?php } ?>
 
     </div>
 </div>
