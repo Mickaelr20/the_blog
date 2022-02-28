@@ -59,7 +59,7 @@ class PostsController extends AppController
             }
 
             if (empty($errors)) {
-                $postEntity = PostEntity::fromArray($requestData);
+                $postEntity->patchEntity($requestData);
                 $errors = $postEntity->verifyEntity("create");
 
                 if (empty($errors)) {
@@ -155,7 +155,7 @@ class PostsController extends AppController
 
             if (empty($errors)) {
                 $form = $this->request->getRequestData();
-                $newImageEntity = ImageEntity::fromArray($form);
+                $newImageEntity->patchEntity($form);
                 $newImageEntity->completeEntity($form['FILES']['image']['name']);
                 $newImageEntity->id = null;
                 $errors = $newImageEntity->verifyEntity("create");
@@ -207,7 +207,7 @@ class PostsController extends AppController
             }
             if (empty($errors)) {
                 $form = $this->request->getRequestData();
-                $postEntity = PostEntity::fromArray($form);
+                $postEntity->patchEntity($form);
                 $errors = $postEntity->verifyEntity("update");
 
                 if (empty($errors)) {

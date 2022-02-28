@@ -46,7 +46,7 @@ class UsersController extends AppController
 
         if ($this->request->getServer()["REQUEST_METHOD"] === "POST") {
             $requestData = $this->request->getRequestData();
-            $userEntity = UserEntity::fromArray($requestData);
+            $userEntity->patchEntity($requestData);
             $errors = $userEntity->verifyEntity("create");
 
             if (empty($errors)) {
@@ -72,7 +72,7 @@ class UsersController extends AppController
 
         if ($this->request->getServer()["REQUEST_METHOD"] === "POST") {
             $form = $this->request->getRequestData();
-            $userEntity = UserEntity::fromArray($form);
+            $userEntity->patchEntity($form);
             $errors = $userEntity->verifyEntity("update");
 
             if (empty($errors)) {

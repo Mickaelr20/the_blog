@@ -47,6 +47,7 @@ class PostsController extends AppController
 
         $post = new PostEntity();
         $nb_page_max = 0;
+
         if (is_numeric($id) && $id >= 0) {
             $postTable = new PostTable();
             $post = $postTable->get($id);

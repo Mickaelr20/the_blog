@@ -71,7 +71,7 @@ class UsersController extends AppController
 
             if (empty($errors)) {
                 $requestData = $this->request->getRequestData();
-                $userEntity = UserEntity::fromArray($requestData);
+                $userEntity->patchEntity($requestData);
                 $errors = $userEntity->verifyEntity();
 
                 if (empty($errors)) {

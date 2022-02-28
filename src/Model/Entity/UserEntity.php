@@ -19,7 +19,7 @@ class UserEntity extends Entity
     {
     }
 
-    public static function fromArray(array $array): UserEntity
+    public function patchEntity(array $array): UserEntity
     {
         $userEntity = new UserEntity();
 

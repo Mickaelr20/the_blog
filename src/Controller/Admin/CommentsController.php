@@ -53,7 +53,7 @@ class CommentsController extends AppController
             }
 
             if (empty($errors)) {
-                $commentEntity = CommentEntity::fromArray($form);
+                $commentEntity->patchEntity($form);
                 $errors = $commentEntity->verifyEntity("update");
 
                 if (empty($errors)) {

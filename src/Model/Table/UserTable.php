@@ -31,7 +31,7 @@ class UserTable extends Table
         ]);
 
         if (!empty($query_result)) {
-            $res = UserEntity::fromArray($query_result[0]);
+            $res = (new UserEntity())->patchEntity($query_result[0]);
         }
 
         return $res;
@@ -46,7 +46,7 @@ class UserTable extends Table
         $res = new UserEntity();
 
         if (!empty($query_result[0])) {
-            $res = UserEntity::fromArray($query_result[0]);
+            $res = (new UserEntity())->patchEntity($query_result[0]);
         }
 
         return $res;

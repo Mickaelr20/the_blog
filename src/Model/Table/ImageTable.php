@@ -37,7 +37,7 @@ class ImageTable extends Table
             $res = $query_res[0];
         }
 
-        return ImageEntity::fromArray($res);
+        return (new ImageEntity())->patchEntity($res);
     }
 
     public function update(ImageEntity $imageEntity): ImageEntity

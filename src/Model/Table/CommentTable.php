@@ -37,7 +37,7 @@ class CommentTable extends Table
             $temp_res = $query_result;
 
             if (!empty($temp_res)) {
-                $res[] = CommentEntity::fromArray($temp_res);
+                $res[] = (new CommentEntity())->patchEntity($temp_res);
             }
         }
 
@@ -85,7 +85,7 @@ class CommentTable extends Table
             $temp_res = $query_result;
 
             if (!empty($temp_res)) {
-                $res[] = CommentEntity::fromArray($temp_res);
+                $res[] = (new CommentEntity())->patchEntity($temp_res);
             }
         }
 
@@ -100,7 +100,7 @@ class CommentTable extends Table
         ]);
 
         if (!empty($query_res)) {
-            $res = CommentEntity::fromArray($query_res[0]);
+            $res = (new CommentEntity())->patchEntity($query_res[0]);
         }
 
         return $res;
@@ -113,7 +113,7 @@ class CommentTable extends Table
             "id" => $id
         ]);
         if (!empty($query_result[0])) {
-            $res = CommentEntity::fromArray($query_result[0]);
+            $res = (new CommentEntity())->patchEntity($query_result[0]);
         }
 
         return $res;

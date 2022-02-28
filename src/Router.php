@@ -54,7 +54,11 @@ class Router
             throw new \Exception('REQUEST_METHOD does not exist');
         }
         foreach ($this->routes[$this->request->getServer()["REQUEST_METHOD"]] as $route) {
-            if ($route->match($this->url)) {
+            //On enlève les paramètres GET pour le match de la route
+            $offset = strpos($this->url, "?");
+            $urlToTest = empty($offset) ? $this->url : substr($this->url, 0, $offset);
+
+            if ($route->match($urlToTest)) {
                 return $route->call();
             }
         }

@@ -15,16 +15,14 @@ class ImageEntity extends Entity
     {
     }
 
-    public static function fromArray(array $array): ImageEntity
+    public function patchEntity(array $array): ImageEntity
     {
-        $imageEntity = new ImageEntity();
+        $this->id = empty($array['id']) ? null : $array['id'];
+        $this->display_name = empty($array['display_name']) ? null : $array['display_name'];
+        $this->file_name = empty($array['file_name']) ? null : $array['file_name'];
+        $this->path = empty($array['path']) ? null : $array['path'];
 
-        $imageEntity->id = empty($array['id']) ? null : $array['id'];
-        $imageEntity->display_name = empty($array['display_name']) ? null : $array['display_name'];
-        $imageEntity->file_name = empty($array['file_name']) ? null : $array['file_name'];
-        $imageEntity->path = empty($array['path']) ? null : $array['path'];
-
-        return $imageEntity->sanitize();
+        return $this->sanitize();
     }
 
     protected function checkCallable(EntityChecker $entityChecker, string $action = null): array

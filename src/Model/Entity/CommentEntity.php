@@ -17,18 +17,16 @@ class CommentEntity extends Entity
     {
     }
 
-    public static function fromArray(array $array): CommentEntity
+    public function patchEntity(array $array): CommentEntity
     {
-        $commentEntity = new CommentEntity();
+        $this->id = empty($array['id']) ? null : $array['id'];
+        $this->post_id = empty($array['post_id']) ? null : $array['post_id'];
+        $this->author = empty($array['author']) ? null : $array['author'];
+        $this->content = empty($array['content']) ? null : $array['content'];
+        $this->created = empty($array['created']) ? null : $array['created'];
+        $this->is_validated = empty($array['is_validated']) ? null : $array['is_validated'];
 
-        $commentEntity->id = empty($array['id']) ? null : $array['id'];
-        $commentEntity->post_id = empty($array['post_id']) ? null : $array['post_id'];
-        $commentEntity->author = empty($array['author']) ? null : $array['author'];
-        $commentEntity->content = empty($array['content']) ? null : $array['content'];
-        $commentEntity->created = empty($array['created']) ? null : $array['created'];
-        $commentEntity->is_validated = empty($array['is_validated']) ? null : $array['is_validated'];
-
-        return $commentEntity->sanitize();
+        return $this->sanitize();
     }
 
     protected function checkCallable(EntityChecker $entityChecker, string $action = null): array

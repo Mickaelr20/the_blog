@@ -19,22 +19,20 @@ class PostEntity extends Entity
     {
     }
 
-    public static function fromArray(array $array): PostEntity
+    public function patchEntity(array $array): PostEntity
     {
-        $postEntity = new PostEntity();
+        $this->id = empty($array['id']) ? null : $array['id'];
+        $this->author = empty($array['author']) ? null : $array['author'];
+        $this->hat = empty($array['hat']) ? null : $array['hat'];
+        $this->title = empty($array['title']) ? null : $array['title'];
+        $this->created = empty($array['created']) ? null : $array['created'];
+        $this->image = empty($array['image']) ? null : (new ImageEntity())->patchEntity($array['image']);
+        $this->image_id = empty($array['image_id']) ? null : $array['image_id'];
 
-        $postEntity->id = empty($array['id']) ? null : $array['id'];
-        $postEntity->author = empty($array['author']) ? null : $array['author'];
-        $postEntity->hat = empty($array['hat']) ? null : $array['hat'];
-        $postEntity->title = empty($array['title']) ? null : $array['title'];
-        $postEntity->created = empty($array['created']) ? null : $array['created'];
-        $postEntity->image = empty($array['image']) ? null : ImageEntity::fromArray($array['image']);
-        $postEntity->image_id = empty($array['image_id']) ? null : $array['image_id'];
+        $this->sanitize();
+        $this->content = empty($array['content']) ? null : $array['content'];
 
-        $postEntity = $postEntity->sanitize();
-        $postEntity->content = empty($array['content']) ? null : $array['content'];
-
-        return $postEntity;
+        return $this;
     }
 
     protected function checkCallable(EntityChecker $entityChecker, string $action = null): array

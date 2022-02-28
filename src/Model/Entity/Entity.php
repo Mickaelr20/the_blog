@@ -10,7 +10,8 @@ abstract class Entity
     {
     }
 
-    abstract public static function fromArray(array $array): Entity;
+    // abstract public static function fromArray(array $array): Entity;
+    abstract public function patchEntity(array $array): Entity;
 
     abstract protected function checkCallable(EntityChecker $entityChecker, string|null $action = null): array;
 
@@ -42,13 +43,12 @@ abstract class Entity
 
     public function sanitize()
     {
-        $output = $this;
-        foreach ($output as $k => $v) {
+        foreach ($this as $k => $v) {
             if (!is_array($v) && !is_object($v)) {
-                $output->$k = htmlspecialchars(trim($v));
+                $this->$k = htmlspecialchars(trim($v));
             }
         }
 
-        return $output;
+        return $this;
     }
 }

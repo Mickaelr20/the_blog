@@ -20,7 +20,9 @@ if (!empty($requestData['deletedId']) && is_numeric($requestData['deletedId'])) 
         <?php
         if ($liste_comments) {
             foreach ($liste_comments as $comment) {
-                echo $renderer->element("admin_comment_row", ["comment" => $comment]);
+        ?>
+                <?= $renderer->element("admin_comment_row", ["comment" => $comment]); ?>
+        <?php
             }
         } else {
             echo "<div class=\"list-row\"><div>Aucunes données à afficher.</div></div>";

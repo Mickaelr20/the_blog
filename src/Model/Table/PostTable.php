@@ -56,7 +56,7 @@ class PostTable extends Table
                 }
             }
 
-            $res[] = PostEntity::fromArray($temp_res);
+            $res[] = (new PostEntity())->patchEntity($temp_res);
         }
 
         return $res;
@@ -92,6 +92,6 @@ class PostTable extends Table
             }
         }
 
-        return PostEntity::fromArray($res);
+        return (new PostEntity())->patchEntity($res);
     }
 }
