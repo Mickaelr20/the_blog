@@ -59,8 +59,8 @@ class PostsController extends AppController
             $commentsController = new CommentsController();
             $post->comments = $commentsController->listeForPost($id, $comment_page);
 
-            $nb_total_comments_for_post = $commentsController->countForPost($id);
-            $nb_page_max = ceil($nb_total_comments_for_post / 5);
+            $nb_comments = $commentsController->countForPost($id);
+            $nb_page_max = ceil($nb_comments / 5);
         }
 
         $this->renderer->render("view", [

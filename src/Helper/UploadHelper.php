@@ -54,13 +54,6 @@ class UploadHelper
         return [];
     }
 
-    public function update(Entity $entity): array
-    {
-        $result = [];
-
-        return $result;
-    }
-
     public function delete(Entity $entity, string $fullPath): array
     {
         try {
