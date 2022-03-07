@@ -16,9 +16,9 @@ class PostTable extends Table
 
     public function save(PostEntity $postEntity): PostEntity
     {
-        $transform_postEntity = $postEntity->toArray(["author", "hat", "title", "content", 'image_id' => [\PDO::PARAM_INT]]);
+        $t__postEntity = $postEntity->toArray(["author", "hat", "title", "content", 'image_id' => [\PDO::PARAM_INT]]);
 
-        $this->sqlConnection->query("INSERT INTO $this->TABLE_NAME (author, hat, title, content, image_id) VALUES(:author, :hat, :title, :content, :image_id)", $transform_postEntity);
+        $this->sqlConnection->query("INSERT INTO $this->TABLE_NAME (author, hat, title, content, image_id) VALUES(:author, :hat, :title, :content, :image_id)", $t__postEntity);
 
         $postEntity->id = $this->sqlConnection->pdo->lastInsertId();
 
@@ -27,10 +27,10 @@ class PostTable extends Table
 
     public function update(PostEntity $postEntity): PostEntity
     {
-        $transform_postEntity = $postEntity->toArray(["author", "hat", "title", "content", "id" => [\PDO::PARAM_INT], "image_id" => [\PDO::PARAM_INT]]);
+        $t__postEntity = $postEntity->toArray(["author", "hat", "title", "content", "id" => [\PDO::PARAM_INT], "image_id" => [\PDO::PARAM_INT]]);
         $this->sqlConnection->query(
             "UPDATE $this->TABLE_NAME SET author = :author, hat = :hat, title = :title, content = :content, image_id = :image_id WHERE id = :id",
-            $transform_postEntity
+            $t__postEntity
         );
 
         return $postEntity;

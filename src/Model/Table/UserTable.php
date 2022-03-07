@@ -81,11 +81,11 @@ class UserTable extends Table
 
     public function update(UserEntity $userEntity): UserEntity
     {
-        $transform_userEntity = $userEntity->toArray(["first_name", "last_name", "email", "nickname", "is_validated" => [\PDO::PARAM_BOOL], "id" => [\PDO::PARAM_INT]]);
+        $t__userEntity = $userEntity->toArray(["first_name", "last_name", "email", "nickname", "is_validated" => [\PDO::PARAM_BOOL], "id" => [\PDO::PARAM_INT]]);
 
         $this->sqlConnection->query(
             "UPDATE $this->TABLE_NAME SET first_name = :first_name, last_name = :last_name, email = :email, nickname = :nickname, is_validated = :is_validated WHERE id = :id",
-            $transform_userEntity
+            $t__userEntity
         );
 
         return $userEntity;

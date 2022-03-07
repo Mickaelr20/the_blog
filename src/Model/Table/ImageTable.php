@@ -15,10 +15,10 @@ class ImageTable extends Table
     public function save(ImageEntity $imageEntity): ImageEntity
     {
 
-        $transform_imageEntity = $imageEntity->toArray(["display_name", "file_name", "path"]);
+        $t__imageEntity = $imageEntity->toArray(["display_name", "file_name", "path"]);
         $this->sqlConnection->query(
             "INSERT INTO $this->TABLE_NAME (display_name, file_name, path) VALUES(:display_name, :file_name, :path)",
-            $transform_imageEntity
+            $t__imageEntity
         );
 
         $imageEntity->id = $this->sqlConnection->pdo->lastInsertId();
@@ -42,11 +42,11 @@ class ImageTable extends Table
 
     public function update(ImageEntity $imageEntity): ImageEntity
     {
-        $transform_imageEntity = $imageEntity->toArray(["display_name" => [\PDO::PARAM_STR], "file_name" => [\PDO::PARAM_STR], "path" => [\PDO::PARAM_STR], "id" => [\PDO::PARAM_INT]]);
+        $t__imageEntity = $imageEntity->toArray(["display_name" => [\PDO::PARAM_STR], "file_name" => [\PDO::PARAM_STR], "path" => [\PDO::PARAM_STR], "id" => [\PDO::PARAM_INT]]);
 
         $this->sqlConnection->query(
             "UPDATE $this->TABLE_NAME SET display_name = :display_name, file_name = :file_name, path = :path WHERE id = :id",
-            $transform_imageEntity
+            $t__imageEntity
         );
 
         return $this->get($imageEntity->id);

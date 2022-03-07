@@ -15,9 +15,9 @@ class CommentTable extends Table
 
     public function save(CommentEntity $commentEntity): CommentEntity
     {
-        $transform_commentEntity = $commentEntity->toArray(["post_id" => [\PDO::PARAM_INT], "author", "content"]);
+        $t__commentEntity = $commentEntity->toArray(["post_id" => [\PDO::PARAM_INT], "author", "content"]);
 
-        $this->sqlConnection->query("INSERT INTO $this->TABLE_NAME (post_id, author, content) VALUES(:post_id, :author, :content)", $transform_commentEntity);
+        $this->sqlConnection->query("INSERT INTO $this->TABLE_NAME (post_id, author, content) VALUES(:post_id, :author, :content)", $t__commentEntity);
 
         return $commentEntity;
     }
@@ -46,10 +46,10 @@ class CommentTable extends Table
 
     public function update(CommentEntity $commentEntity): CommentEntity
     {
-        $transform_commentEntity = $commentEntity->toArray(["author", "content", "is_validated" => [\PDO::PARAM_BOOL], "id" => [\PDO::PARAM_INT]]);
+        $t__commentEntity = $commentEntity->toArray(["author", "content", "is_validated" => [\PDO::PARAM_BOOL], "id" => [\PDO::PARAM_INT]]);
         $this->sqlConnection->query(
             "UPDATE $this->TABLE_NAME SET author = :author, content = :content, is_validated = :is_validated WHERE id = :id",
-            $transform_commentEntity
+            $t__commentEntity
         );
 
         return $commentEntity;
