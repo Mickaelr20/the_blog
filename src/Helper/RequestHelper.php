@@ -7,10 +7,10 @@ class RequestHelper
 
     public function __construct()
     {
-        $this->request_server = $_SERVER ?? [];
-        $this->request_files = $_FILES ?? [];
-        $this->request_get = $_GET ?? [];
-        $this->request_post = $_POST ?? [];
+        $this->request_server = !empty($_SERVER) ? $_SERVER : [];
+        $this->request_files = !empty($_FILES) ? $_FILES : [];
+        $this->request_get = !empty($_GET) ? $_GET : [];
+        $this->request_post = !empty($_POST) ? $_POST : [];
     }
 
     public function getType(): String

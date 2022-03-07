@@ -7,7 +7,7 @@ class SessionHelper
 
     public function __construct()
     {
-        $this->session = $_SESSION ?? [];
+        $this->session = !empty($_SESSION) ? $_SESSION : [];
     }
 
     public function put($key, $value)
