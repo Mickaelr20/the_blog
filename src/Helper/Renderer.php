@@ -70,7 +70,10 @@ class Renderer
 
 
         if (empty($path)) {
-            echo "element namespace: $this->namespace, url: $url n'a pas été trouvé.";
+            include sprintf(
+                'src/Template%s/Element/element_not_found.php',
+                empty($this->namespace) ? "" : "/" . $this->namespace
+            );
             return;
         }
 

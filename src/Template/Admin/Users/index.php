@@ -21,10 +21,9 @@ if (!empty($requestData['deletedId']) && is_numeric($requestData['deletedId'])) 
     </div>
     <div class="list-body">
         <?php
-        foreach ($liste_users as $user) {
-            echo $renderer->element("admin_user_row", ["vuser" => $user]);
-        }
-        ?>
+        foreach ($liste_users as $user) { ?>
+            <?= $renderer->element("admin_user_row", ["vuser" => $user]) ?>
+        <?php } ?>
 
     </div>
 </div>

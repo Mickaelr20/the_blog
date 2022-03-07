@@ -16,7 +16,6 @@ class TestsController extends AppController
 
     public function test()
     {
-        $this->debug("test", "test");
         try {
             // Create the Transport
             $transport = (new \Swift_SmtpTransport('smtp.gmail.com', 25))
@@ -35,7 +34,7 @@ class TestsController extends AppController
             // Send the message
             $result = $mailer->send($message);
         } catch (\Exception $e) {
-            $this->debug("Exception email", $e);
+            var_dump($e);
         }
     }
 }

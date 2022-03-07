@@ -25,13 +25,6 @@ class AppController
         $this->$name($args);
     }
 
-    public function debug($str, $toDump)
-    {
-        echo nl2br("\n$str:\n");
-        var_dump($toDump);
-        echo nl2br("\n\n");
-    }
-
     public function checkCsrfToken(): bool
     {
         $result = false;
