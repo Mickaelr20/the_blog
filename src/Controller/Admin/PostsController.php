@@ -7,6 +7,7 @@ use App\Model\Entity\PostEntity;
 use App\Model\Table\PostTable;
 use App\Model\Entity\ImageEntity;
 use App\Model\Table\ImageTable;
+use App\Helper\UploadHelper;
 
 class PostsController extends AppController
 {
@@ -14,6 +15,8 @@ class PostsController extends AppController
     public function __construct()
     {
         parent::__construct("Posts", "Admin");
+        $this->uploadHelper = new UploadHelper(new ImageTable(), "image");
+        $this->uploadHelper->setPossibleTypes(["image/jpeg", "image/jpg", "image/png"]);
     }
 
     public function index($params)
@@ -64,7 +67,7 @@ class PostsController extends AppController
 
                 if (empty($errors)) {
                     $postEntity->image->completeEntity($requestData['FILES']['image']['name']);
-                    $errors = $this->trySaveImage($postEntity->image);
+                    $errors = $this->uploadHelper->create($postEntity->image, $postEntity->image->getFullPath());
 
                     if (empty($errors)) {
                         try {
@@ -81,64 +84,6 @@ class PostsController extends AppController
         }
 
         $this->renderer->render("new", ["title" => "Nouvelle publication", "errors" => $errors, "form" => $requestData]);
-    }
-
-    private function trySaveImage(ImageEntity $imageEntity)
-    {
-        $errors = [];
-        $requestData = $this->request->getRequestData();
-
-        try {
-            $imageTable = new ImageTable();
-            $imageTable->save($imageEntity);
-        } catch (\Exception $e) {
-            $errors[] = "Une erreure est survenue lors de la sauvegarde de l'image, veuillez réessayer ultérieurement.";
-        }
-
-        if (empty($errors)) {
-            if (!str_contains($requestData['FILES']['image']['type'], "image/")) {
-                $errors[] = "Le fichier doit être une image.";
-            }
-        }
-
-        if (empty($errors)) {
-            $tmpName = $requestData['FILES']['image']['tmp_name'];
-
-            try {
-                move_uploaded_file($tmpName, $imageEntity->path . $imageEntity->file_name);
-            } catch (\Exception $e) {
-                $errors[] = "Impossible d'ajouter l'image sur le disque.";
-
-                try {
-                    $imageTable = new ImageTable();
-                    $imageTable->delete($imageEntity->id);
-                } catch (\Exception $e) {
-                    $errors[] = "Une erreure est survenue lors de la sauvegarde de l'image, veuillez réessayer ultérieurement.";
-                }
-            }
-        }
-
-        return $errors;
-    }
-
-    private function tryDeleteImage(ImageEntity $imageEntity)
-    {
-        $errors = [];
-
-        try {
-            $imageTable = new ImageTable();
-            if (!empty($imageEntity->id)) {
-                $imageTable->delete($imageEntity->id);
-            }
-        } catch (\Exception $e) {
-            $errors[] = "Une erreure est survenue lors de la suppression de l'image, veuillez réessayer ultérieurement.";
-        }
-
-        if (empty($errors) && file_exists($imageEntity->getFullPath())) {
-            unlink($imageEntity->getFullPath());
-        }
-
-        return $errors;
     }
 
     public function edit_image()
@@ -161,7 +106,7 @@ class PostsController extends AppController
                 $errors = $newImageEntity->verifyEntity("create");
 
                 if (empty($errors)) {
-                    $errors = $this->trySaveImage($newImageEntity);
+                    $errors = $this->uploadHelper->create($newImageEntity, $newImageEntity->getFullPath());
 
                     if (empty($errors)) {
                         $postTable = new PostTable();
@@ -173,12 +118,12 @@ class PostsController extends AppController
                             $postTable = new PostTable();
                             $postTable->update($postEntity);
                         } catch (\Exception $e) {
-                            $errors[] = "Une erreure est survenue lors de la sauvegarde de l'image, veuillez réessayer ultérieurement.";
+                            $errors[] = "Une erreure est survenue lors de la sauvegarde de la publication, veuillez réessayer ultérieurement.";
                         }
 
                         if (empty($errors)) {
                             if (!empty($oldImageEntity)) {
-                                $errors = $this->tryDeleteImage($oldImageEntity);
+                                $errors = $this->uploadHelper->delete($oldImageEntity, $oldImageEntity->getFullPath());
                             }
                         }
                     }
@@ -259,7 +204,7 @@ class PostsController extends AppController
                             $postTable->delete($post_id);
                             $imageTable = new ImageTable();
                             $imageEntity = $imageTable->get($postEntity->image_id);
-                            $this->tryDeleteImage($imageEntity);
+                            $this->uploadHelper->delete($imageEntity, $imageEntity->getFullPath());
 
                             $this->request->redirect("/admin/posts/deleted_post/$post_id");
 
