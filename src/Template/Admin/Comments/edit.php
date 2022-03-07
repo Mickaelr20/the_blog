@@ -44,7 +44,7 @@ if (!empty($requestData['deletedId']) && is_numeric($requestData['deletedId'])) 
 
 <div class="mt-3 bg-light container">
     <form class="p-3" method="POST" action="">
-        <input type="hidden" name="csrf_token" value="<?= App\Helper\SessionHelper::get('csrf_token') ?>">
+        <input type="hidden" name="csrf_token" value="<?= $sessionHelper->get('csrf_token') ?>">
 
         <div class="d-none form-group pb-2">
             <label for="id">Id</label>

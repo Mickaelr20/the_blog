@@ -32,14 +32,14 @@ class UsersController extends AppController
                     $userTable = new UserTable();
                     $user = $userTable->getForLogin($form['email']);
                     $password_verified = password_verify($form['password'], $user->password);
+                    $errors[] = "Mot de passe incorrecte.";
 
                     if ($password_verified) {
                         $session = new SessionHelper();
                         $session->put("user", $user->toArray());
                         $this->request->redirect("/users/login_success");
-                    } else {
-                        $errors[] = "Mot de passe incorrecte.";
                     }
+                    
                 } catch (\Exception $e) {
                     $errors[] = "Une erreure est survenue, veuillez réessayer ultérieurement.";
                 }

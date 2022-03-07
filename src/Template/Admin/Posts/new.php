@@ -14,7 +14,7 @@
 
 <div class="mt-3 bg-light container">
     <form class="p-3 row" method="POST" action="/admin/posts/new" enctype="multipart/form-data">
-        <input type="hidden" name="csrf_token" value="<?= App\Helper\SessionHelper::get('csrf_token') ?>">
+        <input type="hidden" name="csrf_token" value="<?= $sessionHelper->get('csrf_token') ?>">
 
         <div class="p-3 col-md-9 col-12">
             <div class="form-group pb-2">

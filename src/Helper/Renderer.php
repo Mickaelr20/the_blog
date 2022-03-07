@@ -45,6 +45,7 @@ class Renderer
         $vars_to_extract = array_merge($vars, [
             "renderer" => $this,
             "pageHelper" => new PageHelper(),
+            "sessionHelper" => new SessionHelper(),
             "user" => $session->get("user")
         ]);
 
@@ -95,6 +96,7 @@ class Renderer
             "renderer" => $this,
             "pageHelper" => new PageHelper(),
             "requestData" => (new RequestHelper())->getRequestData(),
+            "sessionHelper" => new SessionHelper(),
             "user" => $session->get("user")
         ]);
 

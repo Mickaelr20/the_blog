@@ -9,9 +9,10 @@ use App\Helper\{SessionHelper, Resolver, RequestHelper};
 use App\Router;
 
 $request = new RequestHelper();
+$sessionHelper = new SessionHelper();
 
 if ($request->getType() === "GET") {
-    SessionHelper::generateNewToken();
+    $sessionHelper->generateNewToken();
 }
 
 $request_url = $request->getServer()["REQUEST_URI"];

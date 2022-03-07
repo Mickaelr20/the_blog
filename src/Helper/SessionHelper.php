@@ -4,28 +4,34 @@ namespace App\Helper;
 
 class SessionHelper
 {
-    public static function put($key, $value)
+
+    public function __construct()
     {
-        $_SESSION[$key] = $value;
+        $this->session = $_SESSION ?? [];
     }
 
-    public static function get($key)
+    public function put($key, $value)
     {
-        return (!empty($_SESSION[$key]) ? $_SESSION[$key] : null);
+        $this->session[$key] = $value;
     }
 
-    public static function remove($key)
+    public function get($key)
     {
-        unset($_SESSION[$key]);
+        return (!empty($this->session[$key]) ? $this->session[$key] : null);
     }
 
-    public static function generateNewToken()
+    public function remove($key)
     {
-        $newToken = SessionHelper::generateRandomString(32);
-        SessionHelper::put("csrf_token", $newToken);
+        unset($this->session[$key]);
     }
 
-    private static function generateRandomString($length = 10)
+    public function generateNewToken()
+    {
+        $newToken = $this->generateRandomString(32);
+        $this->put("csrf_token", $newToken);
+    }
+
+    private function generateRandomString($length = 10)
     {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);

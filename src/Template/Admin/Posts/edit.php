@@ -53,7 +53,7 @@ if (!empty($requestData['deletedId']) && is_numeric($requestData['deletedId'])) 
 <div class="mt-3 bg-light container">
     <div class="row">
         <form class="p-3 col-md-9 col-12" method="POST" action="/admin/posts/edit_image" enctype="multipart/form-data">
-            <input type="hidden" name="csrf_token" value="<?= App\Helper\SessionHelper::get('csrf_token') ?>">
+            <input type="hidden" name="csrf_token" value="<?= $sessionHelper->get('csrf_token') ?>">
 
             <div class="p-2">
                 <div class="d-none form-group pb-2">
@@ -87,7 +87,7 @@ if (!empty($requestData['deletedId']) && is_numeric($requestData['deletedId'])) 
 
 <div class="mt-3 bg-light container">
     <form class="p-3" method="POST" action="">
-        <input type="hidden" name="csrf_token" value="<?= App\Helper\SessionHelper::get('csrf_token') ?>">
+        <input type="hidden" name="csrf_token" value="<?= $sessionHelper->get('csrf_token') ?>">
 
         <div class="d-none form-group pb-2">
             <label for="id">Id</label>

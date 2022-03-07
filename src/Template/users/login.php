@@ -14,7 +14,7 @@
 
 <div class="mt-3 bg-light container">
     <form class="p-3" method="POST" action="/users/login">
-        <input type="hidden" name="csrf_token" value="<?= App\Helper\SessionHelper::get('csrf_token') ?>">
+        <input type="hidden" name="csrf_token" value="<?= $sessionHelper->get('csrf_token') ?>">
         <div class="form-group pb-2">
             <label for="email">Adresse email</label>
             <input name="email" type="email" class="form-control" placeholder="Entrer email" value="<?= !empty($form['email']) ? $form['email'] : "" ?>" required>

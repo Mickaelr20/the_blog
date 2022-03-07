@@ -13,6 +13,7 @@ class AppController
     {
         $this->renderer = new Renderer($modele, $namespace);
         $this->request = new RequestHelper();
+        $this->sessionHelper = new SessionHelper();
     }
 
     public function call($name, $args)
@@ -37,7 +38,7 @@ class AppController
         $requestData = $this->request->getRequestData();
 
         if (!empty($requestData['csrf_token'])) {
-            $result = $requestData['csrf_token'] === SessionHelper::get('csrf_token');
+            $result = $requestData['csrf_token'] === $this->sessionHelper->get('csrf_token');
         }
 
         return $result;
