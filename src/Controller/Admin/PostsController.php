@@ -92,39 +92,41 @@ class PostsController extends AppController
         $form = [];
         $newImageEntity = new ImageEntity();
 
-        if ($this->request->getServer()["REQUEST_METHOD"] === "POST") {
-            $csrfCheckResult = $this->checkCsrfToken();
-            if (!$csrfCheckResult) {
-                $errors[] = "Le token csrf ne correspond pas, veuillez réessayer.";
-            }
+        if (!$this->request->getServer()["REQUEST_METHOD"] === "POST") {
+            return;
+        }
+
+        $csrfCheckResult = $this->checkCsrfToken();
+        if (!$csrfCheckResult) {
+            $errors[] = "Le token csrf ne correspond pas, veuillez réessayer.";
+        }
+
+        if (empty($errors)) {
+            $form = $this->request->getRequestData();
+            $newImageEntity->patchEntity($form);
+            $newImageEntity->completeEntity($form['FILES']['image']['name']);
+            $newImageEntity->id = null;
+            $errors = $newImageEntity->verifyEntity("create");
 
             if (empty($errors)) {
-                $form = $this->request->getRequestData();
-                $newImageEntity->patchEntity($form);
-                $newImageEntity->completeEntity($form['FILES']['image']['name']);
-                $newImageEntity->id = null;
-                $errors = $newImageEntity->verifyEntity("create");
+                $errors = $this->uploadHelper->create($newImageEntity, $newImageEntity->getFullPath());
 
                 if (empty($errors)) {
-                    $errors = $this->uploadHelper->create($newImageEntity, $newImageEntity->getFullPath());
+                    $postTable = new PostTable();
+                    $postEntity = $postTable->get($form['post_id']);
+                    $oldImageEntity = $postEntity->image;
+                    $postEntity->setImage($newImageEntity);
+
+                    try {
+                        $postTable = new PostTable();
+                        $postTable->update($postEntity);
+                    } catch (\Exception $e) {
+                        $errors[] = "Une erreure est survenue lors de la sauvegarde de la publication, veuillez réessayer ultérieurement.";
+                    }
 
                     if (empty($errors)) {
-                        $postTable = new PostTable();
-                        $postEntity = $postTable->get($form['post_id']);
-                        $oldImageEntity = $postEntity->image;
-                        $postEntity->setImage($newImageEntity);
-
-                        try {
-                            $postTable = new PostTable();
-                            $postTable->update($postEntity);
-                        } catch (\Exception $e) {
-                            $errors[] = "Une erreure est survenue lors de la sauvegarde de la publication, veuillez réessayer ultérieurement.";
-                        }
-
-                        if (empty($errors)) {
-                            if (!empty($oldImageEntity)) {
-                                $errors = $this->uploadHelper->delete($oldImageEntity, $oldImageEntity->getFullPath());
-                            }
+                        if (!empty($oldImageEntity)) {
+                            $errors = $this->uploadHelper->delete($oldImageEntity, $oldImageEntity->getFullPath());
                         }
                     }
                 }
