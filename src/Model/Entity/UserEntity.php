@@ -40,7 +40,6 @@ class UserEntity extends Entity
             if (!empty($value)) {
                 return "L'id ne peut être définit par l'utilisateur.";
             }
-
             return $res;
         }, "create");
 
@@ -58,7 +57,6 @@ class UserEntity extends Entity
             if (strlen($value) > 255) {
                 return "Le prénom est trop long, il doit contenir moins de 255 caractères.";
             }
-
             return $res;
         }, "create");
 
@@ -91,7 +89,6 @@ class UserEntity extends Entity
             if (strlen($value) > 255) {
                 return "Le pseudo est trop long, il doit contenir moins de 255 caractères.";
             }
-
             return $res;
         });
 
@@ -100,7 +97,6 @@ class UserEntity extends Entity
             if (empty($value)) {
                 return "Un mot de passe doit être précisé.";
             }
-
             if (gettype($value) !== "string") {
                 return "Le mot de passe doit être une chaine de caractère.";
             }
@@ -110,7 +106,6 @@ class UserEntity extends Entity
             if (strlen($value) > 255) {
                 return "Le mot de passe est trop long, il doit contenir moins de 255 caractères.";
             }
-
             return $res;
         }, "create");
 
@@ -124,7 +119,6 @@ class UserEntity extends Entity
             if (gettype($value) !== "string") {
                 return "L'email doit être une chaine de caractère.";
             }
-
             return $res;
         }, "create");
 
@@ -132,7 +126,6 @@ class UserEntity extends Entity
             if (!empty($value) || is_bool($value)) {
                 return "La validité de l'utilisateur ne pas être définie à la création.";
             }
-
             return $res;
         }, "create");
 

@@ -26,8 +26,17 @@ class UsersController extends AppController
             }
 
             $form = $this->request->getRequestData();
+            if (empty($errors)) {
+                if (empty($form['email'])) {
+                    $errors[] = "Veuillez précisé une adresse email.";
+                }
 
-            if (empty($errors) && !empty($form['email']) && !empty($form['password'])) {
+                if (empty($form['password'])) {
+                    $errors[] = "Veuillez précisé un mot de passe.";
+                }
+            }
+
+            if (empty($errors)) {
                 try {
                     $userTable = new UserTable();
                     $user = $userTable->getForLogin($form['email']);
@@ -39,17 +48,8 @@ class UsersController extends AppController
                         $session->put("user", $user->toArray());
                         $this->request->redirect("/users/login_success");
                     }
-                    
                 } catch (\Exception $e) {
                     $errors[] = "Une erreure est survenue, veuillez réessayer ultérieurement.";
-                }
-            } else {
-                if (empty($form['email'])) {
-                    $errors[] = "Veuillez précisé une adresse email.";
-                }
-
-                if (empty($form['password'])) {
-                    $errors[] = "Veuillez précisé un mot de passe.";
                 }
             }
         }
