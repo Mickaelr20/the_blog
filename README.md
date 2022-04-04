@@ -34,34 +34,61 @@
 
 Mon blog et portfolio sous forme de site web, réaliser en PHP, html5 et css3.
 
-
-
 <!-- GETTING STARTED -->
+
 ## Installation
 
 Pour installer le projet, vous aurez besoin d'un serveur web php et d'une base de données MySQL.
 
 Copiez le projet à la racine de votre serveur web.
 
-Installez composer sur votre machine et executez la commande suivante dans le repertoire du projet:
+### Installez composer et ses dépendences:
+
+Installez composer sur votre machine.
+
+Pour installer les dépendances composer, executez la commande suivante dans le repertoire du projet:
 ```sh
-   composer update
+  composer install
 ```
 
-Le projet est maintenant installé.
+### Paramétrez la base de données:
+Accédez au fichier SqlConnection.php dans le repertoire: "chemin_du_projet/src/Model/".
+
+Dans ce fichier, changez les attributs "username" et "password" par le username et le password de votre utilisateur MySQL.
+
+
+### Démarrage:
+
+Lancez votre serveur web ou, dans le cadre ou vous installez le projet sur votre machine, executez la commande suivante pour lancer le projet avec le serveur web interne de PHP:
+```sh
+  php -S localhost:8000
+```
+
+Le projet est maintenant installé et lancé, vous pouvez accéder à l'url de votre page web ou "http://localhost:8000" si vous avez lancé le projet avec le serveur web interne de php.
 
 ## Dependences
 
+Composer:
 <ul>
-    <li>SwiftMailer: (https://swiftmailer.symfony.com/docs/introduction.html)</li>
-    <li>Trumbowygg: (https://example.com)</li>
-    <li>JQueyr: (https://example.com)</li>
-    <li>Line Awesome: (https://example.com)</li>
+    <li>SwiftMailer (https://swiftmailer.symfony.com/docs/introduction.html)</li>
+</ul>
+
+Javascript:
+<ul>
+    <li>Trumbowygg (https://alex-d.github.io/Trumbowyg/)</li>
+    <li>Jquery (https://jquery.com/)</li>
+</ul>
+
+Css:
+<ul>
+    <li>Bootstrap 5 (https://getbootstrap.com/docs/5.0/getting-started/introduction/)</li>
+    <li>Line Awesome (https://icons8.com/line-awesome)</li>
+
 </ul>
 Thèmes utilisés:
 <ul>
-    <li>SB Admin: (https://example.com)</li>
-    <li>Agency: (https://example.com)</li>
+    <li>SB Admin: (https://startbootstrap.com/template/sb-admin)</li>
+    <li>Agency: (https://startbootstrap.com/theme/agency)</li>
 </ul>
 
 <!-- LICENSE -->
@@ -74,7 +101,7 @@ Distribué sous GNU GENERAL PUBLIC LICENSE V2. Voir https://github.com/Mickaelr2
 
 ## Contact
 
-Rivière Mickael - mickaelr20@gmail.com
+Rivière Mickael - mickaelr20@gmail.com - [Mon LinkedIn][linkedin-url]
 
 Lien du projet: [https://github.com/Mickaelr20/the_blog](https://github.com/Mickaelr20/the_blog/)
 
