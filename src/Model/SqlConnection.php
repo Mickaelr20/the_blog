@@ -7,12 +7,14 @@ class SqlConnection
     var $pdo;
     var $host;
     var $dbName;
+    var $username = "root";
+    var $password = "admin123";
 
     public function __construct($host, $dbName)
     {
         $this->host = $host;
         $this->dbName = $dbName;
-        $this->pdo = new \PDO("mysql:dbname=$dbName;host=$host", 'root', 'admin123', [\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION]);
+        $this->pdo = new \PDO("mysql:dbname=$dbName;host=$host", $this->username, $this->password, [\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION]);
     }
 
     public function query(String $query, array $args = []): array
@@ -22,11 +24,7 @@ class SqlConnection
 
         foreach ($args as $arg_key => $arg_val) {
             if (is_array($arg_val)) {
-                if (count($arg_val) > 1) {
-                    $query->bindParam(":" . $arg_key, $arg_val[0], $arg_val[1]);
-                } else {
-                    $query->bindParam(":" . $arg_key, $arg_val[0]);
-                }
+                $query->bindParam(":" . $arg_key, $arg_val[0], count($arg_val) > 1 ? $arg_val[1] : null);
             } else if (is_string($arg_val)) {
                 $query->bindValue(":" . $arg_key, $arg_val);
             }
