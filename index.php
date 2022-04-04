@@ -19,7 +19,17 @@ $request_url = $request->getServer()["REQUEST_URI"];
 $router = new Router($request_url);
 $router->get('/', function () {
     $resolver = new Resolver("PagesController", "display");
-    $resolver->resolve(['page' => 'index']);
+    $resolver->resolve(['page' => 'index', 'title' => 'Accueil', 'layout' => "accueil"]);
+});
+
+$router->get('/confidentialite', function () {
+    $resolver = new Resolver("PagesController", "display");
+    $resolver->resolve(['page' => 'confidentialite', 'title' => 'Confidentialité', 'layout' => "default"]);
+});
+
+$router->get('/conditions_utilisation', function () {
+    $resolver = new Resolver("PagesController", "display");
+    $resolver->resolve(['page' => 'conditions_utilisation', 'title' => 'Conditions d\'utilisation', 'layout' => "default"]);
 });
 
 $router->get('/test', function () {
