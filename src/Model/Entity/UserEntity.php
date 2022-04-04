@@ -21,17 +21,15 @@ class UserEntity extends Entity
 
     public function patchEntity(array $array): UserEntity
     {
-        $userEntity = new UserEntity();
+        $this->id = empty($array['id']) ? null : $array['id'];
+        $this->first_name = empty($array['first_name']) ? null : $array['first_name'];
+        $this->last_name = empty($array['last_name']) ? null : $array['last_name'];
+        $this->nickname = empty($array['nickname']) ? null : $array['nickname'];
+        $this->password = empty($array['password']) ? null : $array['password'];
+        $this->email = empty($array['email']) ? null : $array['email'];
+        $this->is_validated = empty($array['is_validated']) ? null : $array['is_validated'];
 
-        $userEntity->id = empty($array['id']) ? null : $array['id'];
-        $userEntity->first_name = empty($array['first_name']) ? null : $array['first_name'];
-        $userEntity->last_name = empty($array['last_name']) ? null : $array['last_name'];
-        $userEntity->nickname = empty($array['nickname']) ? null : $array['nickname'];
-        $userEntity->password = empty($array['password']) ? null : $array['password'];
-        $userEntity->email = empty($array['email']) ? null : $array['email'];
-        $userEntity->is_validated = empty($array['is_validated']) ? null : $array['is_validated'];
-
-        return $userEntity->sanitize();
+        return $this->sanitize();
     }
 
     protected function checkCallable(EntityChecker $entityChecker, string $action = null): array
