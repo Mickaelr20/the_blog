@@ -14,6 +14,6 @@ class PagesController extends AppController
 
     public function display($params)
     {
-        $this->renderer->render($params['page'], ["title" => "Acceuil"]);
+        $this->renderer->render($params['page'], ["title" => "Accueil"]);
     }
 }

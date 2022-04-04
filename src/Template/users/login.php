@@ -1,6 +1,6 @@
-<?php if (!empty($errors) && count($errors) > 0) { ?>
-    <div class="m-auto container">
-        <div class="text-center alert alert-danger" role="alert">
+<div class="mt-3 bg-light container">
+    <?php if (!empty($errors) && count($errors) > 0) { ?>
+        <div class="m-2 text-center alert alert-danger" role="alert">
             <?php
             $title = count($errors) > 1 ? "Des problèmes ont été détectés." : "Un problème a été détecté.";
             ?>
@@ -9,10 +9,8 @@
                 <p><?= $error ?></p>
             <?php } ?>
         </div>
-    </div>
-<?php } ?>
+    <?php } ?>
 
-<div class="mt-3 bg-light container">
     <form class="p-3" method="POST" action="/users/login">
         <input type="hidden" name="csrf_token" value="<?= $sessionHelper->get('csrf_token') ?>">
         <div class="form-group pb-2">

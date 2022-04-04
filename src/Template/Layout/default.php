@@ -23,7 +23,7 @@
 </head>
 
 <body id="page-top">
-    <?= $renderer->element("menu_default", ["user" => $user]); ?>
+    <?= $renderer->element("menu_fixed", ["user" => $user, 'active_link_name' => $active_link_name ?? null]); ?>
 
     <?= $content ?>
 

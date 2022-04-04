@@ -36,7 +36,8 @@ class PostsController extends AppController
             'actual_page' => $page,
             'nb_total_posts' => $nb_total_posts,
             'nb_page_max' => $nb_page_max,
-            'base_link' => "/publications/"
+            'base_link' => "/publications/",
+            'active_link_name' => 'posts'
         ]);
     }
 

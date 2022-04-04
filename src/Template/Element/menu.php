@@ -12,6 +12,7 @@
                 <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
                 <li class="nav-item"><a class="nav-link" href="/publications">Blog</a></li>
                 <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                <li class="nav-item"><a class="nav-link" href="/users/login">Se connecter</a></li>
             </ul>
         </div>
     </div>
