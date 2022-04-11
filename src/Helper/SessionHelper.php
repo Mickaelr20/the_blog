@@ -13,11 +13,12 @@ class SessionHelper
     public function put($key, $value)
     {
         $this->session[$key] = $value;
+        $_SESSION[$key] = $value;
     }
 
     public function get($key)
     {
-        return (!empty($this->session[$key]) ? $this->session[$key] : null);
+        return $this->session[$key] ?? null;
     }
 
     public function remove($key)
