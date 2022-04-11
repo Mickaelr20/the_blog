@@ -201,39 +201,62 @@
             <h2 class="section-heading text-uppercase">Me contacter</h2>
             <h3 class="section-subheading text-muted">Un projet ou une demande de devis ? contactez - moi via ce formulaire.</h3>
         </div>
-
-        <div class="container px-5 my-5">
-            <form id="contactForm" data-sb-form-api-token="c4dd8c74-f55b-49ae-a3b3-73d9a4fc3dc2">
-                <div class="form-floating mb-3">
-                    <input class="form-control" id="email" type="email" placeholder="Email" data-sb-validations="required,email" />
-                    <label for="email">Email</label>
-                    <div class="invalid-feedback" data-sb-feedback="email:required">Une email est nécéssaire.</div>
-                    <div class="invalid-feedback" data-sb-feedback="email:email">L'email n'est pas valide.</div>
-                </div>
-                <div class="form-floating mb-3">
-                    <input class="form-control" id="identite" type="text" placeholder="Identite" data-sb-validations="required" />
-                    <label for="identite">Identité</label>
-                    <div class="invalid-feedback" data-sb-feedback="identite:required">Une identité est nécéssaire.</div>
-                </div>
-                <div class="form-floating mb-3">
-                    <textarea class="form-control" id="message" type="text" placeholder="Message" style="height: 10rem;" data-sb-validations="required"></textarea>
-                    <label for="message">Message</label>
-                    <div class="invalid-feedback" data-sb-feedback="message:required">Un message est requis.</div>
-                </div>
-                <div class="d-none" id="submitSuccessMessage">
-                    <div class="text-center text-white mb-3">
-                        <div class="fw-bolder">Message envoyé ! Je vous répondrais dès que possible, merci.</div>
+        <!-- * * * * * * * * * * * * * * *-->
+        <!-- * * SB Forms Contact Form * *-->
+        <!-- * * * * * * * * * * * * * * *-->
+        <!-- This form is pre-integrated with SB Forms.-->
+        <!-- To make this form functional, sign up at-->
+        <!-- https://startbootstrap.com/solution/contact-forms-->
+        <!-- to get an API token!-->
+        <form id="contactForm" data-sb-form-api-token="c4dd8c74-f55b-49ae-a3b3-73d9a4fc3dc2">
+            <div class="row align-items-stretch mb-5">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <!-- Name input-->
+                        <input class="form-control" id="name" type="text" placeholder="Your Name *" data-sb-validations="required" />
+                        <div class="invalid-feedback" data-sb-feedback="name:required">Veuillez entrer un nom.</div>
+                    </div>
+                    <div class="form-group">
+                        <!-- Email address input-->
+                        <input class="form-control" id="email" type="email" placeholder="Your Email *" data-sb-validations="required,email" />
+                        <div class="invalid-feedback" data-sb-feedback="email:required">Veuillez entrer un adresse email.</div>
+                        <div class="invalid-feedback" data-sb-feedback="email:email">Adresse email invalide</div>
+                    </div>
+                    <div class="form-group mb-md-0">
+                        <!-- Phone number input-->
+                        <input class="form-control" id="phone" type="tel" placeholder="Your Phone *" data-sb-validations="required" />
+                        <div class="invalid-feedback" data-sb-feedback="phone:required">Veuillez entrer un numéro de téléphone.</div>
                     </div>
                 </div>
-                <div class="d-none" id="submitErrorMessage">
-                    <div class="text-center text-danger mb-3">Erreur lors de l'envoie du message.</div>
+                <div class="col-md-6">
+                    <div class="form-group form-group-textarea mb-md-0">
+                        <!-- Message input-->
+                        <textarea class="form-control" id="message" placeholder="Your Message *" data-sb-validations="required"></textarea>
+                        <div class="invalid-feedback" data-sb-feedback="message:required">Veuillez entrer un message.</div>
+                    </div>
                 </div>
-                <div class="d-grid">
-                    <button class="btn btn-primary btn-lg disabled" id="submitButton" type="submit">Submit</button>
+            </div>
+            <!-- Submit success message-->
+            <!---->
+            <!-- This is what your users will see when the form-->
+            <!-- has successfully submitted-->
+            <div class="d-none" id="submitSuccessMessage">
+                <div class="text-center text-white mb-3">
+                    <div class="fw-bolder">Soumission du formulaire réussie !</div>
+                    To activate this form, sign up at
+                    <br />
+                    <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
                 </div>
-            </form>
-        </div>
-        <!-- <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script> -->
-
+            </div>
+            <!-- Submit error message-->
+            <!---->
+            <!-- This is what your users will see when there is-->
+            <!-- an error submitting the form-->
+            <div class="d-none" id="submitErrorMessage">
+                <div class="text-center text-danger mb-3">Erreur lors de l'envoie du message.</div>
+            </div>
+            <!-- Submit Button-->
+            <div class="text-center"><button class="btn btn-primary btn-xl text-uppercase disabled" id="submitButton" type="submit">Envoyer</button></div>
+        </form>
     </div>
 </section>
