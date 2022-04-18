@@ -18,11 +18,11 @@ if (!empty($requestData['deletedId']) && is_numeric($requestData['deletedId'])) 
     </div>
     <div class="list-body">
         <?php
-        foreach ($liste_posts as $post) {
+        foreach ($listePosts as $post) {
         ?>
             <?= $renderer->element("admin_post_row", ["post" => $post]); ?>
         <?php } ?>
 
     </div>
 </div>
-<?= $renderer->element("pagination", ['nb_page_max' => $nb_page_max, 'actual_page' => $actual_page, 'base_link' => $base_link]); ?>
+<?= $renderer->element("pagination", ['nbPageMax' => $nbPageMax, 'actualPage' => $actualPage, 'baseLink' => $baseLink]); ?>

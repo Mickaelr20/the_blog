@@ -42,24 +42,27 @@ Pour installer le projet, vous aurez besoin d'un serveur web php et d'une base d
 
 Copiez le projet à la racine de votre serveur web.
 
-### Installez composer et ses dépendences:
+### Installez composer et ses dépendances:
 
 Installez composer sur votre machine.
 
-Pour installer les dépendances composer, executez la commande suivante dans le repertoire du projet:
+Pour installer les dépendances composer, exécutez la commande suivante dans le répertoire du projet:
 ```sh
   composer install
 ```
 
 ### Paramétrez la base de données:
-Accédez au fichier SqlConnection.php dans le repertoire: "chemin_du_projet/src/Model/".
+Accédez au fichier SqlConnection.php dans le répertoire: "chemin_du_projet/src/Model/".
 
 Dans ce fichier, changez les attributs "username" et "password" par le username et le password de votre utilisateur MySQL.
 
+Accédez aussi fichier Table.php dans le répertoire: "chemin_du_projet/src/Model/Table/" et modifiez les attributs "host" et "dbName" pour y mettre l'url vers votre serveur MySQL et le nom de la base à utiliser.
+
+Vous trouverez un fichier.sql à éxecuté sur la base souhaitée pour créer l'architecture nécéssaire au fonctionnement du projet.
 
 ### Démarrage:
 
-Lancez votre serveur web ou, dans le cadre ou vous installez le projet sur votre machine, executez la commande suivante pour lancer le projet avec le serveur web interne de PHP:
+Lancez votre serveur web ou, dans le cadre ou vous installez le projet sur votre machine, exécutez la commande suivante pour lancer le projet avec le serveur web interne de PHP:
 ```sh
   php -S localhost:8000
 ```

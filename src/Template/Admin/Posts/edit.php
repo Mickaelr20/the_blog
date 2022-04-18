@@ -5,7 +5,7 @@
             $title = count($errors) > 1 ? "Des problèmes ont été détectés." : "Un problème a été détecté.";
             ?>
             <h3><?= $title ?>:</h3>
-            <?php foreach ($errors as $field_name => $error) { ?>
+            <?php foreach ($errors as $fieldName => $error) { ?>
                 <p><?= $error ?></p>
             <?php } ?>
         </div>
@@ -14,18 +14,18 @@
 
 <?php
 if (!empty($requestData['editState'])) {
-    $alert_edit_state_class = "success";
-    $alert_edit_state_text = "La publication a été mise à jour";
+    $alertEditStateClass = "success";
+    $alertEditStateText = "La publication a été mise à jour";
 
     switch ($requestData['editState']) {
         case "wrong_type":
-            $alert_edit_state_class = "danger";
-            $alert_edit_state_text = "Erreur: Le fichier doit être une image";
+            $alertEditStateClass = "danger";
+            $alertEditStateText = "Erreur: Le fichier doit être une image";
     }
 ?>
     <div class="m-auto container">
-        <div class="text-center alert alert-<?= $alert_edit_state_class ?>" role="alert">
-            <h3><?= $alert_edit_state_text ?></h3>
+        <div class="text-center alert alert-<?= $alertEditStateClass ?>" role="alert">
+            <h3><?= $alertEditStateText ?></h3>
         </div>
     </div>
 <?php } ?>
@@ -53,7 +53,7 @@ if (!empty($requestData['deletedId']) && is_numeric($requestData['deletedId'])) 
 <div class="mt-3 bg-light container">
     <div class="row">
         <form class="p-3 col-md-9 col-12" method="POST" action="/admin/posts/edit_image" enctype="multipart/form-data">
-            <input type="hidden" name="csrf_token" value="<?= $sessionHelper->get('csrf_token') ?>">
+            <input type="hidden" name="csrfToken" value="<?= $sessionHelper->get('csrfToken') ?>">
 
             <div class="p-2">
                 <div class="d-none form-group pb-2">
@@ -87,7 +87,7 @@ if (!empty($requestData['deletedId']) && is_numeric($requestData['deletedId'])) 
 
 <div class="mt-3 bg-light container">
     <form class="p-3" method="POST" action="">
-        <input type="hidden" name="csrf_token" value="<?= $sessionHelper->get('csrf_token') ?>">
+        <input type="hidden" name="csrfToken" value="<?= $sessionHelper->get('csrfToken') ?>">
 
         <div class="d-none form-group pb-2">
             <label for="id">Id</label>

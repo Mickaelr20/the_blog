@@ -30,18 +30,10 @@ class AppController
         $result = false;
         $requestData = $this->request->getRequestData();
 
-        if (!empty($requestData['csrf_token'])) {
-            $result = $requestData['csrf_token'] === $this->sessionHelper->get('csrf_token');
+        if (!empty($requestData['csrfToken'])) {
+            $result = $requestData['csrfToken'] === $this->sessionHelper->get('csrfToken');
         }
 
         return $result;
-    }
-
-    public function sendMail()
-    {
-        // Create the Transport
-        $transport = (new \Swift_SmtpTransport('smtp.example.org', 25))
-            ->setUsername('your username')
-            ->setPassword('your password');
     }
 }

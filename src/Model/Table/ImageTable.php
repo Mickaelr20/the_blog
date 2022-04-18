@@ -15,10 +15,10 @@ class ImageTable extends Table
     public function save(ImageEntity $imageEntity): ImageEntity
     {
 
-        $t__imageEntity = $imageEntity->toArray(["display_name", "file_name", "path"]);
+        $imageEntityArray = $imageEntity->toArray(["display_name", "file_name", "path"]);
         $this->sqlConnection->query(
             "INSERT INTO $this->TABLE_NAME (display_name, file_name, path) VALUES(:display_name, :file_name, :path)",
-            $t__imageEntity
+            $imageEntityArray
         );
 
         $imageEntity->id = $this->sqlConnection->pdo->lastInsertId();
@@ -29,12 +29,12 @@ class ImageTable extends Table
     public function get($id): ImageEntity
     {
         $res = [];
-        $query_res = $this->sqlConnection->query("SELECT * FROM $this->TABLE_NAME WHERE id = :id", [
+        $queryRes = $this->sqlConnection->query("SELECT * FROM $this->TABLE_NAME WHERE id = :id", [
             "id" => [$id, \PDO::PARAM_INT]
         ]);
 
-        if (!empty($query_res)) {
-            $res = $query_res[0];
+        if (!empty($queryRes)) {
+            $res = $queryRes[0];
         }
 
         return (new ImageEntity())->patchEntity($res);
@@ -42,11 +42,11 @@ class ImageTable extends Table
 
     public function update(ImageEntity $imageEntity): ImageEntity
     {
-        $t__imageEntity = $imageEntity->toArray(["display_name" => [\PDO::PARAM_STR], "file_name" => [\PDO::PARAM_STR], "path" => [\PDO::PARAM_STR], "id" => [\PDO::PARAM_INT]]);
+        $imageEntityArray = $imageEntity->toArray(["display_name" => [\PDO::PARAM_STR], "file_name" => [\PDO::PARAM_STR], "path" => [\PDO::PARAM_STR], "id" => [\PDO::PARAM_INT]]);
 
         $this->sqlConnection->query(
             "UPDATE $this->TABLE_NAME SET display_name = :display_name, file_name = :file_name, path = :path WHERE id = :id",
-            $t__imageEntity
+            $imageEntityArray
         );
 
         return $this->get($imageEntity->id);

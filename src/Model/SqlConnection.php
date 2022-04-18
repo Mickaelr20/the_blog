@@ -22,11 +22,11 @@ class SqlConnection
         $result = [];
         $query = $this->pdo->prepare($query);
 
-        foreach ($args as $arg_key => $arg_val) {
-            if (is_array($arg_val)) {
-                $query->bindParam(":" . $arg_key, $arg_val[0], count($arg_val) > 1 ? $arg_val[1] : null);
-            } else if (is_string($arg_val)) {
-                $query->bindValue(":" . $arg_key, $arg_val);
+        foreach ($args as $argKey => $argVal) {
+            if (is_array($argVal)) {
+                $query->bindParam(":" . $argKey, $argVal[0], count($argVal) > 1 ? $argVal[1] : null);
+            } else if (is_string($argVal)) {
+                $query->bindValue(":" . $argKey, $argVal);
             }
         }
 

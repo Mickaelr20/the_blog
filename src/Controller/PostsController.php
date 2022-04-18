@@ -19,57 +19,57 @@ class PostsController extends AppController
     {
         $page = $params["page"];
 
-        $liste_posts = [];
+        $listePosts = [];
         if (!is_numeric($page) || $page < 0) {
             $page = 0;
         }
 
         $postTable = new PostTable();
-        $liste_posts = $postTable->liste($page);
+        $listePosts = $postTable->liste($page);
 
-        $nb_total_posts = $postTable->count();
-        $nb_page_max = ceil($nb_total_posts / 5);
+        $nbTotalPosts = $postTable->count();
+        $nbPageMax = ceil($nbTotalPosts / 5);
 
         $this->renderer->render("index", [
             "title" => "Publications",
-            "liste_posts" => $liste_posts,
-            'actual_page' => $page,
-            'nb_total_posts' => $nb_total_posts,
-            'nb_page_max' => $nb_page_max,
-            'base_link' => "/publications/",
-            'active_link_name' => 'posts'
+            "listePosts" => $listePosts,
+            'actualPage' => $page,
+            'nbTotalPosts' => $nbTotalPosts,
+            'nbPageMax' => $nbPageMax,
+            'baseLink' => "/publications/",
+            'activeLinkBame' => 'posts'
         ]);
     }
 
     public function view($params)
     {
         $id = $params["id"];
-        $comment_page = $params['comment_page'];
+        $commentPage = $params['comment_page'];
 
         $post = new PostEntity();
-        $nb_page_max = 0;
+        $nbPageMax = 0;
 
         if (is_numeric($id) && $id >= 0) {
             $postTable = new PostTable();
             $post = $postTable->get($id);
 
-            if (!is_numeric($comment_page) || $comment_page < 0) {
-                $comment_page = 0;
+            if (!is_numeric($commentPage) || $commentPage < 0) {
+                $commentPage = 0;
             }
 
             $commentsController = new CommentsController();
-            $post->comments = $commentsController->listeForPost($id, $comment_page);
+            $post->comments = $commentsController->listeForPost($id, $commentPage);
 
-            $nb_comments = $commentsController->countForPost($id);
-            $nb_page_max = ceil($nb_comments / 5);
+            $nbComments = $commentsController->countForPost($id);
+            $nbPageMax = ceil($nbComments / 5);
         }
 
         $this->renderer->render("view", [
             "title" => "Publication",
             "post" => $post,
-            'nb_page_comments_max' => $nb_page_max,
-            'actual_comments_page' => $comment_page,
-            'base_comments_link' => "/publication/$id/"
+            'nbPageCommentsMax' => $nbPageMax,
+            'actualCommentsPage' => $commentPage,
+            'baseCommentsLink' => "/publication/$id/"
         ]);
     }
 }

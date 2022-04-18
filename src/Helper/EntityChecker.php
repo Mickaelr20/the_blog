@@ -17,12 +17,12 @@ class EntityChecker
         $this->action = $action;
     }
 
-    public function check($field_name, callable $callable, string|null $when = null): EntityChecker
+    public function check($fieldName, callable $callable, string|null $when = null): EntityChecker
     {
         if (empty($when) || $when === $this->action) {
-            $res = $callable($this->entity->$field_name, $res = "", $when);
+            $res = $callable($this->entity->$fieldName, $res = "", $when);
             if (!empty($res)) {
-                $this->errors[$field_name] = $res;
+                $this->errors[$fieldName] = $res;
             }
         }
         return $this; //Pour le chainage

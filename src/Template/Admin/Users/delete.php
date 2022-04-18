@@ -5,14 +5,14 @@
             $title = count($errors) > 1 ? "Des problèmes ont été détectés." : "Un problème a été détecté.";
             ?>
             <h3><?= $title ?>:</h3>
-            <?php foreach ($errors as $field_name => $error) { ?>
+            <?php foreach ($errors as $fieldName => $error) { ?>
                 <p><?= $error ?></p>
             <?php } ?>
         </div>
     </div>
 <?php } else { ?>
     <div class="p-3 bg-light container text-center">
-        <h3 class="pb-2">Voulez - vous vraiment supprimé l'utilisateur "<?= empty($user_to_delete) ? "" : $user_to_delete->email ?>"? </h3>
+        <h3 class="pb-2">Voulez - vous vraiment supprimé l'utilisateur "<?= empty($userToDelete) ? "" : $userToDelete->email ?>"? </h3>
         <form class="d-inline" method="POST" action="">
             <div class="d-none form-group pb-2">
                 <input name="action" type="text" value="0">

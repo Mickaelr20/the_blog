@@ -18,23 +18,23 @@ class UsersController extends AppController
     {
         $page = $params["page"];
 
-        $liste_users = [];
+        $listeUsers = [];
         if (!is_numeric($page) || $page < 0) {
             $page = 0;
         }
 
         $userTable = new UserTable();
-        $liste_users = $userTable->liste($page);
+        $listeUsers = $userTable->liste($page);
         $nb_total_users = $userTable->count();
-        $nb_page_max = ceil($nb_total_users / 5);
+        $nbPageMax = ceil($nb_total_users / 5);
 
         $this->renderer->render("index", [
             "title" => "Publications",
-            "liste_users" => $liste_users,
-            'actual_page' => $page,
+            "listeUsers" => $listeUsers,
+            'actualPage' => $page,
             'nb_total_users' => $nb_total_users,
-            'nb_page_max' => $nb_page_max,
-            'base_link' => "/admin/users/"
+            'nbPageMax' => $nbPageMax,
+            'baseLink' => "/admin/users/"
         ]);
     }
 
@@ -143,6 +143,6 @@ class UsersController extends AppController
     public function deleted_user($params)
     {
         $user_id = $params['user_id'];
-        $this->renderer->render("deleted_user", ["title" => "Publication supprimé", "deleted_user_id" => $user_id]);
+        $this->renderer->render("deleted_user", ["title" => "Publication supprimé", "deletedUserId" => $user_id]);
     }
 }

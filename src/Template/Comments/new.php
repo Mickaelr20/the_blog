@@ -5,7 +5,7 @@
             $title = count($errors) > 1 ? "Des problèmes ont été détectés." : "Un problème a été détecté.";
             ?>
             <h3><?= $title ?>:</h3>
-            <?php foreach ($errors as $field_name => $error) { ?>
+            <?php foreach ($errors as $fieldName => $error) { ?>
                 <p><?= $error ?></p>
             <?php } ?>
         </div>

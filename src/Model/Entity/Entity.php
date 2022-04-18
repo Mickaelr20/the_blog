@@ -25,17 +25,17 @@ abstract class Entity
         $res = (array) $this;
 
         if (!empty($options)) {
-            $t_res = [];
+            $tempRes = [];
             foreach ($options as $key => $value) {
 
                 if (!empty($value) && is_array($value)) {
-                    $t_res[$key] = [$res[$key], $value[0]];
+                    $tempRes[$key] = [$res[$key], $value[0]];
                 } else {
-                    $t_res[$value] = $res[$value];
+                    $tempRes[$value] = $res[$value];
                 }
             }
 
-            $res = $t_res;
+            $res = $tempRes;
         }
 
         return $res;
