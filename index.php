@@ -22,6 +22,16 @@ $router->get('/', function () {
     $resolver->resolve(['page' => 'index', 'title' => 'Accueil', 'layout' => "accueil"]);
 });
 
+$router->get('/login', function () {
+    $resolver = new Resolver("UsersController", "login");
+    $resolver->resolve(['title' => 'Connexion']);
+});
+
+$router->get('/logout', function () {
+    $resolver = new Resolver("UsersController", "logout");
+    $resolver->resolve(['title' => 'Déconnxion']);
+});
+
 $router->get('/confidentialite', function () {
     $resolver = new Resolver("PagesController", "display");
     $resolver->resolve(['page' => 'confidentialite', 'title' => 'Confidentialité', 'layout' => "default"]);
@@ -102,8 +112,8 @@ if (str_starts_with($request_url, "/admin")) {
 
     $router->get('/admin/', function () use ($error) {
         if (empty($error)) {
-            $resolver = new Resolver("Admin\PagesController", "display");
-            $resolver->resolve(["page" => "index"]);
+            $resolver = new Resolver("Admin\UsersController", "index");
+            $resolver->resolve(["page" => 0]);
         } else {
             $resolver = new Resolver("ErrorsController", "error");
             $resolver->resolve(["code" => "401", 'message' => $error]);
