@@ -42,11 +42,6 @@ $router->get('/conditions_utilisation', function () {
     $resolver->resolve(['page' => 'conditions_utilisation', 'title' => 'Conditions d\'utilisation', 'layout' => "default"]);
 });
 
-$router->get('/test', function () {
-    $resolver = new Resolver("TestsController", "test");
-    $resolver->resolve([]);
-});
-
 $router->both('/users/login/', function () {
     $resolver = new Resolver("UsersController", "login");
     $resolver->resolve([]);
