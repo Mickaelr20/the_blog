@@ -42,16 +42,16 @@ class Renderer
     public function element($url, $vars = [])
     {
         $session = new SessionHelper();
-        $vars_to_extract = array_merge($vars, [
+        $varsToExtract = array_merge($vars, [
             "renderer" => $this,
             "pageHelper" => new PageHelper(),
             "sessionHelper" => new SessionHelper(),
             "user" => $session->get("user")
         ]);
 
-        extract($vars_to_extract);
+        extract($varsToExtract);
 
-        $path_to_test = [sprintf(
+        $pathToTest = [sprintf(
             'src/Template%s/Element/%s.php',
             empty($this->namespace) ? "" : "/" . $this->namespace,
             $url
@@ -62,7 +62,7 @@ class Renderer
         $found = false;
 
         do {
-            $path = array_shift($path_to_test);
+            $path = array_shift($pathToTest);
             if (file_exists($path)) {
                 $found = true;
             }

@@ -29,7 +29,7 @@ class SessionHelper
     public function generateNewToken()
     {
         $newToken = $this->generateRandomString(32);
-        $this->put("csrf_token", $newToken);
+        $this->put("csrfToken", $newToken);
     }
 
     private function generateRandomString($length = 10)

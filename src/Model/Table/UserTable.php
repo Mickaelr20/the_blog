@@ -26,12 +26,12 @@ class UserTable extends Table
     public function getForLogin($email): UserEntity
     {
         $res = null;
-        $query_result = $this->sqlConnection->query("SELECT * FROM $this->TABLE_NAME WHERE email = :email", [
+        $queryResult = $this->sqlConnection->query("SELECT * FROM $this->TABLE_NAME WHERE email = :email", [
             "email" => $email
         ]);
 
-        if (!empty($query_result)) {
-            $res = (new UserEntity())->patchEntity($query_result[0]);
+        if (!empty($queryResult)) {
+            $res = (new UserEntity())->patchEntity($queryResult[0]);
         }
 
         return $res;
@@ -39,14 +39,14 @@ class UserTable extends Table
 
     public function get($id): UserEntity
     {
-        $query_result = $this->sqlConnection->query("SELECT * FROM $this->TABLE_NAME WHERE id = :id", [
+        $queryResult = $this->sqlConnection->query("SELECT * FROM $this->TABLE_NAME WHERE id = :id", [
             "id" => [$id, \PDO::PARAM_INT]
         ]);
 
         $res = new UserEntity();
 
-        if (!empty($query_result[0])) {
-            $res = (new UserEntity())->patchEntity($query_result[0]);
+        if (!empty($queryResult[0])) {
+            $res = (new UserEntity())->patchEntity($queryResult[0]);
         }
 
         return $res;
@@ -81,11 +81,11 @@ class UserTable extends Table
 
     public function update(UserEntity $userEntity): UserEntity
     {
-        $t__userEntity = $userEntity->toArray(["first_name", "last_name", "email", "nickname", "is_validated" => [\PDO::PARAM_BOOL], "id" => [\PDO::PARAM_INT]]);
+        $userEntityArray = $userEntity->toArray(["first_name", "last_name", "email", "nickname", "is_validated" => [\PDO::PARAM_BOOL], "id" => [\PDO::PARAM_INT]]);
 
         $this->sqlConnection->query(
             "UPDATE $this->TABLE_NAME SET first_name = :first_name, last_name = :last_name, email = :email, nickname = :nickname, is_validated = :is_validated WHERE id = :id",
-            $t__userEntity
+            $userEntityArray
         );
 
         return $userEntity;

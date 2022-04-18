@@ -13,24 +13,24 @@ class CommentsController extends AppController
         parent::__construct("Comments");
     }
 
-    public function listeForPost($post_id, $page): array
+    public function listeForPost($postId, $page): array
     {
         $comments = [];
-        if (is_numeric($post_id) && $post_id >= 0) {
+        if (is_numeric($postId) && $postId >= 0) {
             $commentTable = new CommentTable();
-            $comments = $commentTable->listeForPost($post_id, $page);
+            $comments = $commentTable->listeForPost($postId, $page);
         }
 
         return $comments;
     }
 
 
-    public function countForPost($post_id): int
+    public function countForPost($postId): int
     {
         $comments = 0;
-        if (is_numeric($post_id) && $post_id >= 0) {
+        if (is_numeric($postId) && $postId >= 0) {
             $commentTable = new CommentTable();
-            $comments = $commentTable->countForPost($post_id);
+            $comments = $commentTable->countForPost($postId);
         }
 
         return $comments;

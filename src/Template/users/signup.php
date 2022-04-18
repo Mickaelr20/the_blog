@@ -5,7 +5,7 @@
             $title = count($errors) > 1 ? "Des problèmes ont été détectés." : "Un problème a été détecté.";
             ?>
             <h3><?= $title ?>:</h3>
-            <?php foreach ($errors as $field_name => $error) { ?>
+            <?php foreach ($errors as $fieldName => $error) { ?>
                 <p><?= $error ?></p>
             <?php } ?>
         </div>
@@ -14,7 +14,7 @@
 
 <div class="mt-3 bg-light container">
     <form class="p-3" method="POST" action="/users/signup">
-        <input type="hidden" name="csrf_token" value="<?= $sessionHelper->get('csrf_token') ?>">
+        <input type="hidden" name="csrfToken" value="<?= $sessionHelper->get('csrfToken') ?>">
 
         <div class="row">
             <div class="form-group pb-2 col-12 col-md-6">
@@ -43,6 +43,6 @@
             <input type="checkbox" class="form-check-input">
             <label class="form-check-label" for="exampleCheck1">Check me out</label>
         </div> -->
-        <button type="submit" class="btn btn-primary">Se connecter</button>
+        <button type="submit" class="btn btn-primary">S'inscrire</button>
     </form>
 </div>

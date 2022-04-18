@@ -7,29 +7,29 @@ class RequestHelper
 
     public function __construct()
     {
-        $this->request_server = !empty($_SERVER) ? $_SERVER : [];
-        $this->request_files = !empty($_FILES) ? $_FILES : [];
-        $this->request_get = !empty($_GET) ? $_GET : [];
-        $this->request_post = !empty($_POST) ? $_POST : [];
+        $this->requestServer = !empty($_SERVER) ? $_SERVER : [];
+        $this->requestFiles = !empty($_FILES) ? $_FILES : [];
+        $this->requestGet = !empty($_GET) ? $_GET : [];
+        $this->requestPost = !empty($_POST) ? $_POST : [];
     }
 
     public function getType(): String
     {
-        return !empty($this->request_server['REQUEST_METHOD']) ? $this->request_server['REQUEST_METHOD'] : "none";
+        return !empty($this->requestServer['REQUEST_METHOD']) ? $this->requestServer['REQUEST_METHOD'] : "none";
     }
 
     public function getRequestData(): array
     {
         $array = [
-            "POST" => $this->request_post,
-            "GET" => $this->request_get
+            "POST" => $this->requestPost,
+            "GET" => $this->requestGet
         ];
 
-        $request_type = $this->getType();
+        $requestType = $this->getType();
 
-        $res = !empty($array[$request_type]) ? $array[$request_type] : [];
-        if (!empty($this->request_files)) {
-            $res['FILES'] = $this->request_files;
+        $res = !empty($array[$requestType]) ? $array[$requestType] : [];
+        if (!empty($this->requestFiles)) {
+            $res['FILES'] = $this->requestFiles;
         }
 
         return $res;
@@ -37,7 +37,7 @@ class RequestHelper
 
     public function getServer(): array
     {
-        $server = $this->request_server;
+        $server = $this->requestServer;
         $res = [
             "REQUEST_URI" => !empty($server['REQUEST_URI']) ? $server['REQUEST_URI'] : "/",
             "REQUEST_METHOD" => !empty($server['REQUEST_METHOD']) ? $server['REQUEST_METHOD'] : "none",

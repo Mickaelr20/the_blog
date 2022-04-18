@@ -18,8 +18,8 @@ class PageHelper
 
     public function is_menu_link_active($link): bool
     {
-        $requested_page = $this->request->getServer()["REQUEST_URI"];
-        return str_contains($requested_page, $link);
+        $requestedPage = $this->request->getServer()["REQUEST_URI"];
+        return str_contains($requestedPage, $link);
     }
 
     public function addScript($link, $bloc = 'default')
@@ -31,8 +31,8 @@ class PageHelper
     {
         $res = "";
         if (!empty($this->scripts[$bloc])) {
-            foreach ($this->scripts[$bloc] as $script_link) {
-                $res .= '<script type="text/javascript" src="/js/' . $script_link . '"></script>';
+            foreach ($this->scripts[$bloc] as $scriptLink) {
+                $res .= '<script type="text/javascript" src="/js/' . $scriptLink . '"></script>';
             }
         }
         return $res;
@@ -47,8 +47,8 @@ class PageHelper
     {
         $res = "";
         if (!empty($this->styles[$bloc])) {
-            foreach ($this->styles[$bloc] as $style_link) {
-                $res .= '<link rel="stylesheet" href="/css/' . $style_link . '">';
+            foreach ($this->styles[$bloc] as $styleLink) {
+                $res .= '<link rel="stylesheet" href="/css/' . $styleLink . '">';
             }
         }
         return $res;

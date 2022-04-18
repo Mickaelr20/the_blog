@@ -5,7 +5,7 @@
             $title = count($errors) > 1 ? "Des problèmes ont été détectés." : "Un problème a été détecté.";
             ?>
             <h3><?= $title ?>:</h3>
-            <?php foreach ($errors as $field_name => $error) { ?>
+            <?php foreach ($errors as $fieldName => $error) { ?>
                 <p><?= $error ?></p>
             <?php } ?>
         </div>
@@ -15,14 +15,14 @@
     <div class="p-3 bg-light container text-center">
         <h3 class="pb-2">Voulez - vous vraiment supprimé la publication "<?= empty($post) ? "" : $post->title ?>"? </h3>
         <form class="d-inline" method="POST" action="">
-            <input type="hidden" name="csrf_token" value="<?= $sessionHelper->get('csrf_token') ?>">
+            <input type="hidden" name="csrfToken" value="<?= $sessionHelper->get('csrfToken') ?>">
             <div class="d-none form-group pb-2">
                 <input name="action" type="text" value="0">
             </div>
             <button type="submit" class="btn btn-secondary">Non, annuler</button>
         </form>
         <form class="d-inline" method="POST" action="">
-            <input type="hidden" name="csrf_token" value="<?= $sessionHelper->get('csrf_token') ?>">
+            <input type="hidden" name="csrfToken" value="<?= $sessionHelper->get('csrfToken') ?>">
             <div class="d-none form-group pb-2">
                 <input name="action" type="text" value="1">
             </div>

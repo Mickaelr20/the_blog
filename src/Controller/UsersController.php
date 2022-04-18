@@ -40,10 +40,10 @@ class UsersController extends AppController
                 try {
                     $userTable = new UserTable();
                     $user = $userTable->getForLogin($form['email']);
-                    $password_verified = password_verify($form['password'], $user->password);
+                    $passwordVerified = password_verify($form['password'], $user->password);
                     $errors[] = "Mot de passe incorrecte.";
 
-                    if ($password_verified) {
+                    if ($passwordVerified) {
                         $session = new SessionHelper();
                         $session->put("user", $user->toArray());
                         $this->request->redirect("/users/login_success");
@@ -100,7 +100,7 @@ class UsersController extends AppController
 
     public function signup_success()
     {
-        $this->renderer->render("signup_success");
+        $this->renderer->render("signup_success", ['title' => "Inscription effectué"]);
     }
 
     public function login_success()

@@ -18,23 +18,23 @@ class CommentsController extends AppController
     {
         $page = $params["page"];
 
-        $liste_comments = [];
+        $listeComments = [];
         if (!is_numeric($page) || $page < 0) {
             $page = 0;
         }
 
         $commentTable = new CommentTable();
-        $liste_comments = $commentTable->liste($page);
-        $nb_total_comments = $commentTable->count();
-        $nb_page_max = ceil($nb_total_comments / 5);
+        $listeComments = $commentTable->liste($page);
+        $nbTotalComments = $commentTable->count();
+        $nbPageMax = ceil($nbTotalComments / 5);
 
         $this->renderer->render("index", [
             "title" => "Commentaires",
-            "liste_comments" => $liste_comments,
-            'actual_page' => $page,
-            'nb_total_comments' => $nb_total_comments,
-            'nb_page_max' => $nb_page_max,
-            'base_link' => "/admin/comments/"
+            "listeComments" => $listeComments,
+            'actualPage' => $page,
+            'nbTotalComments' => $nbTotalComments,
+            'nbPageMax' => $nbPageMax,
+            'baseLink' => "/admin/comments/"
         ]);
     }
 
@@ -123,6 +123,6 @@ class CommentsController extends AppController
     public function deleted_comment($params)
     {
         $comment_id = $params['comment_id'];
-        $this->renderer->render("deleted_comment", ["title" => "Commentaire supprimé", "deleted_comment_id" => $comment_id]);
+        $this->renderer->render("deleted_comment", ["title" => "Commentaire supprimé", "deletedCommentId" => $comment_id]);
     }
 }

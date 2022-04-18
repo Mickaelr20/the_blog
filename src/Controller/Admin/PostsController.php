@@ -23,23 +23,23 @@ class PostsController extends AppController
     {
         $page = $params["page"];
 
-        $liste_posts = [];
+        $listePosts = [];
         if (!is_numeric($page) || $page < 0) {
             $page = 0;
         }
 
         $postTable = new PostTable();
-        $liste_posts = $postTable->liste($page);
-        $nb_total_posts = $postTable->count();
-        $nb_page_max = ceil($nb_total_posts / 5);
+        $listePosts = $postTable->liste($page);
+        $nbTotalPosts = $postTable->count();
+        $nbPageMax = ceil($nbTotalPosts / 5);
 
         $this->renderer->render("index", [
             "title" => "Publications",
-            "liste_posts" => $liste_posts,
-            'actual_page' => $page,
-            'nb_total_posts' => $nb_total_posts,
-            'nb_page_max' => $nb_page_max,
-            'base_link' => "/admin/posts/"
+            "listePosts" => $listePosts,
+            'actualPage' => $page,
+            'nbTotalPosts' => $nbTotalPosts,
+            'nbPageMax' => $nbPageMax,
+            'baseLink' => "/admin/posts/"
         ]);
     }
 
@@ -142,7 +142,7 @@ class PostsController extends AppController
 
     public function edit($params)
     {
-        $post_id = $params['post_id'];
+        $postId = $params['post_id'];
         $errors = [];
         $form = [];
         $postEntity = new PostEntity();
@@ -169,7 +169,7 @@ class PostsController extends AppController
             }
         } else if ($this->request->getServer()["REQUEST_METHOD"] === "GET") {
             $postTable = new PostTable();
-            $form = $postTable->get($post_id);
+            $form = $postTable->get($postId);
         }
 
         $this->renderer->render("edit", ["title" => "Modifier une publication", "errors" => $errors, "form" => $form]);
@@ -177,7 +177,7 @@ class PostsController extends AppController
 
     public function delete($params)
     {
-        $post_id = $params['post_id'];
+        $postId = $params['post_id'];
         $post = [];
         $errors = [];
         $serverRequestMethod = $this->request->getServer()["REQUEST_METHOD"];
@@ -202,13 +202,13 @@ class PostsController extends AppController
                             break;
                         case "1": //supprimer
                             $postTable = new PostTable();
-                            $postEntity = $postTable->get($post_id);
-                            $postTable->delete($post_id);
+                            $postEntity = $postTable->get($postId);
+                            $postTable->delete($postId);
                             $imageTable = new ImageTable();
                             $imageEntity = $imageTable->get($postEntity->image_id);
                             $this->uploadHelper->delete($imageEntity, $imageEntity->getFullPath());
 
-                            $this->request->redirect("/admin/posts/deleted_post/$post_id");
+                            $this->request->redirect("/admin/posts/deleted_post/$postId");
 
                             break;
                     }
@@ -216,9 +216,9 @@ class PostsController extends AppController
             }
         } else if ($serverRequestMethod === "GET") {
             $postTable = new PostTable();
-            $post = $postTable->get($post_id);
+            $post = $postTable->get($postId);
             if (empty($post)) {
-                $errors[] = "La publication $post_id n'existe pas.";
+                $errors[] = "La publication $postId n'existe pas.";
             }
         }
 
@@ -227,7 +227,7 @@ class PostsController extends AppController
 
     public function deleted_post($params)
     {
-        $post_id = $params['post_id'];
-        $this->renderer->render("deleted_post", ["title" => "Publication supprimé", "deleted_post_id" => $post_id]);
+        $postId = $params['post_id'];
+        $this->renderer->render("deleted_post", ["title" => "Publication supprimé", "deletedPostId" => $postId]);
     }
 }

@@ -17,7 +17,7 @@
 
     <h1>Laisse un commentaire:</h1>
     <form class="" method="POST" action="/comments/new/">
-        <input type="hidden" name="csrf_token" value="<?= $sessionHelper->get('csrf_token') ?>">
+        <input type="hidden" name="csrfToken" value="<?= $sessionHelper->get('csrfToken') ?>">
         <div class="d-none form-group pb-2">
             <label for="post_id">Id de la publication</label>
             <input name="post_id" type="text" class="form-control" placeholder="Id de la publication" value="<?= !empty($post->id) ? $post->id : "" ?>" required>
@@ -45,5 +45,5 @@
         <?php } ?>
     </div>
 
-    <?= $renderer->element("pagination", ['nb_page_max' => $nb_page_comments_max, 'actual_page' => $actual_comments_page, 'base_link' => $base_comments_link]); ?>
+    <?= $renderer->element("pagination", ['nbPageMax' => $nbPageCommentsMax, 'actualPage' => $actualCommentsPage, 'baseLink' => $baseCommentsLink]); ?>
 </div>

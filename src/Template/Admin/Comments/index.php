@@ -18,8 +18,8 @@ if (!empty($requestData['deletedId']) && is_numeric($requestData['deletedId'])) 
     </div>
     <div class="list-body">
         <?php
-        if ($liste_comments) {
-            foreach ($liste_comments as $comment) {
+        if ($listeComments) {
+            foreach ($listeComments as $comment) {
         ?>
                 <?= $renderer->element("admin_comment_row", ["comment" => $comment]); ?>
             <?php
@@ -32,4 +32,4 @@ if (!empty($requestData['deletedId']) && is_numeric($requestData['deletedId'])) 
 
     </div>
 </div>
-<?= $renderer->element("pagination", ['nb_page_max' => $nb_page_max, 'actual_page' => $actual_page, 'base_link' => $base_link]); ?>
+<?= $renderer->element("pagination", ['nbPageMax' => $nbPageMax, 'actualPage' => $actualPage, 'baseLink' => $baseLink]); ?>
