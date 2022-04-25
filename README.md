@@ -71,11 +71,6 @@ Le projet est maintenant installé et lancé, vous pouvez accéder à l'url de v
 
 ## Dependences
 
-Composer:
-<ul>
-    <li>SwiftMailer (https://swiftmailer.symfony.com/docs/introduction.html)</li>
-</ul>
-
 Javascript:
 <ul>
     <li>Trumbowygg (https://alex-d.github.io/Trumbowyg/)</li>
