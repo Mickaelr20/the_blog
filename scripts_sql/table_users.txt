@@ -1,0 +1,12 @@
+CREATE TABLE `users` (
+ `id` int NOT NULL AUTO_INCREMENT,
+ `last_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+ `first_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+ `nickname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+ `password` text COLLATE utf8mb4_unicode_ci NOT NULL,
+ `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+ `is_validated` tinyint(1) NOT NULL DEFAULT '0',
+ PRIMARY KEY (`id`),
+ UNIQUE KEY `email` (`email`),
+ UNIQUE KEY `nickname` (`nickname`)
+)

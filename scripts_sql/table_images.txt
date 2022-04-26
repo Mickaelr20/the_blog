@@ -1,0 +1,7 @@
+CREATE TABLE `images` (
+ `id` int NOT NULL AUTO_INCREMENT,
+ `path` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '/',
+ `display_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+ `file_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+ PRIMARY KEY (`id`)
+)
