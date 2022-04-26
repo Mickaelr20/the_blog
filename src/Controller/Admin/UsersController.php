@@ -137,7 +137,7 @@ class UsersController extends AppController
             }
         }
 
-        $this->renderer->render("delete", ["title" => "Supprimer un utilisateur", "errors" => $errors, "user_to_delete" => $user]);
+        $this->renderer->render("delete", ["title" => "Supprimer un utilisateur", "errors" => $errors, "userToDelete" => $user]);
     }
 
     public function deleted_user($params)
