@@ -205,20 +205,20 @@
         <div class="container px-5 my-5">
             <form id="contactForm" data-sb-form-api-token="c4dd8c74-f55b-49ae-a3b3-73d9a4fc3dc2">
                 <div class="form-floating mb-3">
-                    <input class="form-control" id="email" type="email" placeholder="Email" data-sb-validations="required,email" />
+                    <input class="form-control" id="email" type="email" placeholder="" data-sb-validations="required,email" />
                     <label for="email">Email</label>
-                    <div class="invalid-feedback" data-sb-feedback="email:required">Une email est nécéssaire.</div>
-                    <div class="invalid-feedback" data-sb-feedback="email:email">L'email n'est pas valide.</div>
+                    <div class="invalid-feedback fw-bold" data-sb-feedback="email:required">&nbsp;Une email est nécéssaire.&nbsp;</div>
+                    <div class="invalid-feedback fw-bold" data-sb-feedback="email:email">&nbsp;L'email n'est pas valide.&nbsp;</div>
                 </div>
                 <div class="form-floating mb-3">
-                    <input class="form-control" id="identite" type="text" placeholder="Identite" data-sb-validations="required" />
+                    <input class="form-control" id="identite" type="text" placeholder="" data-sb-validations="required" />
                     <label for="identite">Identité</label>
-                    <div class="invalid-feedback" data-sb-feedback="identite:required">Une identité est nécéssaire.</div>
+                    <div class="invalid-feedback fw-bold" data-sb-feedback="identite:required">&nbsp;Une identité est nécéssaire.&nbsp;</div>
                 </div>
                 <div class="form-floating mb-3">
-                    <textarea class="form-control" id="message" type="text" placeholder="Message" style="height: 10rem;" data-sb-validations="required"></textarea>
+                    <textarea class="form-control" id="message" type="text" placeholder="" style="height: 10rem;" data-sb-validations="required"></textarea>
                     <label for="message">Message</label>
-                    <div class="invalid-feedback" data-sb-feedback="message:required">Un message est requis.</div>
+                    <div class="invalid-feedback fw-bold" data-sb-feedback="message:required">&nbsp;Un message est requis.&nbsp;</div>
                 </div>
                 <div class="d-none" id="submitSuccessMessage">
                     <div class="text-center text-white mb-3">
