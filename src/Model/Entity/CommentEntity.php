@@ -60,6 +60,10 @@ class CommentEntity extends Entity
                 return "Le contenu doit être précisé.";
             }
 
+            if(strlen($value) > 512){
+                return "Le contenu est trop long, il doit faire moins de 512 caractères.";
+            }
+
             return $res;
         }, "create");
 
