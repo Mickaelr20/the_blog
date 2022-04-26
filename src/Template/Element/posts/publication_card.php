@@ -3,7 +3,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-12 col-sm-4 col-md-3">
-                    <img src="/<?= $post->image->getFullPath() ?>" class="img-fluid img-post-preview" alt="" />
+                    <img src="/<?= $post->image->getFullPath() ?>" class="img-fluid img-post-preview" alt="<?= $post->image->display_name ?>" />
                 </div>
                 <div class="d-flex flex-column col-12 col-sm-8 col-md-9">
                     <h5 class="card-title"><?= $post->title ?></h5>
