@@ -13,23 +13,36 @@
 <?php } ?>
 
 <div class="mt-3 bg-light container">
-    <form class="p-3" method="POST" action="/admin/posts/new">
+    <form class="p-3" method="POST" action="/admin/users/new">
+        <input type="hidden" name="csrfToken" value="<?= $sessionHelper->get('csrfToken') ?>">
+
+        <div class="row">
+            <div class="form-group pb-2 col-12 col-md-6">
+                <label for="last_name">Nom</label>
+                <input name="last_name" type="text" class="form-control" placeholder="Entrer nom" value="<?= !empty($form['last_name']) ? $form['last_name'] : "" ?>" required>
+            </div>
+            <div class="form-group pb-2 col-12 col-md-6">
+                <label for="first_name">Prénom</label>
+                <input name="first_name" type="text" class="form-control" placeholder="Entrer prénom" value="<?= !empty($form['first_name']) ? $form['first_name'] : "" ?>" required>
+            </div>
+        </div>
+
         <div class="form-group pb-2">
-            <label for="author">Auteur</label>
-            <input name="author" type="text" class="form-control" placeholder="Auteur" value="<?= !empty($form['author']) ? $form['author'] : "" ?>" required>
+            <label for="email">Adresse email</label>
+            <input name="email" type="email" class="form-control" placeholder="Entrer email" value="<?= !empty($form['email']) ? $form['email'] : "" ?>" required>
         </div>
         <div class="form-group pb-2">
-            <label for="title">Titre</label>
-            <input name="title" class="form-control" placeholder="Titre" value="<?= !empty($form['title']) ? $form['title'] : "" ?>" required>
+            <label for="nickname">Pseudo</label>
+            <input name="nickname" type="text" class="form-control" placeholder="Entrer pseudo" value="<?= !empty($form['nickname']) ? $form['nickname'] : "" ?>" required>
         </div>
         <div class="form-group pb-2">
-            <label for="hat">chapeau introductif</label>
-            <input name="hat" class="form-control" placeholder="chapeau introductif" value="<?= !empty($form['hat']) ? $form['hat'] : "" ?>" required>
+            <label for="password">Mot de passe</label>
+            <input name="password" type="password" class="form-control" placeholder="Entrer mot de passe" required>
         </div>
-        <div class="form-group pb-2">
-            <label for="content">Contenu</label>
-            <textarea name="content" class="form-control" placeholder="Contenu" required><?= !empty($form['content']) ? $form['content'] : "" ?></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Ajouter</button>
+        <!-- <div class="form-check">
+            <input type="checkbox" class="form-check-input">
+            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+        </div> -->
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
     </form>
 </div>

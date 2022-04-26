@@ -85,7 +85,7 @@ class UsersController extends AppController
                         $error = "Une erreure est survenue, veuillez réessayer ultérieurement.";
                         switch ($e->getCode()) {
                             case "23000":
-                                $error = "Adresse email déjà utilisé.";
+                                $error = "Adresse email ou pseudo déjà utilisé.";
                                 break;
                         }
 
