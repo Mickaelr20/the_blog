@@ -30,7 +30,7 @@
 
 ## A propos
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Product Name Screen Shot][product-screenshot]](http://localhost:8000/)
 
 Mon blog et portfolio sous forme de site web, réaliser en PHP, html5 et css3.
 
@@ -58,7 +58,10 @@ Dans ce fichier, changez les attributs "username" et "password" par le username 
 
 Accédez aussi fichier Table.php dans le répertoire: "chemin_du_projet/src/Model/Table/" et modifiez les attributs "host" et "dbName" pour y mettre l'url vers votre serveur MySQL et le nom de la base à utiliser.
 
-Vous trouverez un fichier.sql à éxecuté sur la base souhaitée pour créer l'architecture nécéssaire au fonctionnement du projet.
+Vous aurez aussi besoins de créer les tables sql utilisé par l'application, les tables sont:
+"posts", "comments", "users" et "images".
+
+Vous trouverez les scripts sql pour créer les différentes tables à l'adresse suivante: https://github.com/Mickaelr20/the_blog/tree/main/scripts_sql
 
 ### Démarrage:
 
