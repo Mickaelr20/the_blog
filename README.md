@@ -21,7 +21,7 @@
   <ol>
     <li><a href="#a-propos">À propos</a></li>
     <li><a href="#installation">Installation</a></li>
-    <li><a href="#license">License</a></li>
+    <li><a href="#license">Licence</a></li>
     <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
@@ -32,7 +32,7 @@
 
 [![Product Name Screen Shot][product-screenshot]](http://localhost:8000/)
 
-Mon blog et portfolio sous forme de site web, réaliser en PHP, html5 et css3.
+Mon blog et portfolio sous forme de site web, réaliser en PHP, HTML 5 et CSS 3.
 
 <!-- GETTING STARTED -->
 
@@ -42,35 +42,34 @@ Pour installer le projet, vous aurez besoin d'un serveur web php et d'une base d
 
 Copiez le projet à la racine de votre serveur web.
 
-### Installez composer et ses dépendances:
+### Installer composer et ses dépendances :
 
-Installez composer sur votre machine.
+Vous devez Installer composer sur votre machine.
 
-Pour installer les dépendances composer, exécutez la commande suivante dans le répertoire du projet:
+Pour installer les dépendances composer, exécutez la commande suivante dans le répertoire du projet :
 ```sh
-  composer install
+composer install
 ```
 
-### Paramétrez la base de données:
-Accédez au fichier SqlConnection.php dans le répertoire: "chemin_du_projet/src/Model/".
+### Paramétrer la base de données :
 
-Dans ce fichier, changez les attributs "username" et "password" par le username et le password de votre utilisateur MySQL.
-
-Accédez aussi fichier Table.php dans le répertoire: "chemin_du_projet/src/Model/Table/" et modifiez les attributs "host" et "dbName" pour y mettre l'url vers votre serveur MySQL et le nom de la base à utiliser.
-
-Vous aurez aussi besoins de créer les tables sql utilisé par l'application, les tables sont:
+Vous aurez besoin de créer les tables SQL utilisées par l'application, les tables sont :
 "posts", "comments", "users" et "images".
 
-Vous trouverez les scripts sql pour créer les différentes tables à l'adresse suivante: https://github.com/Mickaelr20/the_blog/tree/main/scripts_sql
+Vous trouverez les scripts SQL pour créer les différentes tables à l'adresse suivante: https://github.com/Mickaelr20/the_blog/tree/main/scripts_sql
 
-### Démarrage:
+Accédez ensuite au fichier SqlConnection.php dans le répertoire: "chemin_du_projet/src/Model/" et changez les attributs "username" et "password" par le username et le password de votre utilisateur MySQL.
 
-Lancez votre serveur web ou, dans le cadre ou vous installez le projet sur votre machine, exécutez la commande suivante pour lancer le projet avec le serveur web interne de PHP:
+Accédez au fichier Table.php dans le répertoire: "chemin_du_projet/src/Model/Table/" et modifiez les attributs "host" et "dbName" pour y mettre l'URL vers votre serveur MySQL et le nom de la base à utiliser.
+
+### Démarrage :
+
+Lancez votre serveur web ou, dans le cadre ou vous installez le projet sur votre machine, exécutez la commande suivante pour lancer le projet avec le serveur web interne de PHP :
 ```sh
-  php -S localhost:8000
+php -S localhost:8000
 ```
 
-Le projet est maintenant installé et lancé, vous pouvez accéder à l'url de votre page web ou "http://localhost:8000" si vous avez lancé le projet avec le serveur web interne de php.
+Le projet est maintenant installé et lancé, vous pouvez accéder à l'URL de votre page web ou "http://localhost:8000" si vous avez lancé le projet avec le serveur web interne de php.
 
 ## Dependences
 
@@ -104,7 +103,7 @@ Distribué sous GNU GENERAL PUBLIC LICENSE V2. Voir https://github.com/Mickaelr2
 
 Rivière Mickael - mickaelr20@gmail.com - [Mon LinkedIn][linkedin-url]
 
-Lien du projet: [https://github.com/Mickaelr20/the_blog](https://github.com/Mickaelr20/the_blog/)
+Lien du projet : [https://github.com/Mickaelr20/the_blog](https://github.com/Mickaelr20/the_blog/)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
