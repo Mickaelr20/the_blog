@@ -71,6 +71,19 @@ php -S localhost:8000
 
 Le projet est maintenant installé et lancé, vous pouvez accéder à l'URL de votre page web ou "http://localhost:8000" si vous avez lancé le projet avec le serveur web interne de php.
 
+Lorsque vous démarrez le projet pour la première fois, vous aurez besoin d'un compte validé pour accéder à la partie administration "/admin".
+
+Pour créer votre premier utilisateur, veuillez vous rendre sur l'URL : "/signup" pour inscrire un premier utilisateur.
+Vous devez ensuite accéder à la base de données, dans la base reliée à votre application, cliquez sur "users" et modifiez la valeur dans la colonne "is_validated" et mettre un "1". Voir schéma-ci - dessous :
+
+<div align="center">
+  <a target="_blank" href="img/readme_images/validation_premier_utilisateur.png">
+    <img src="img/readme_images/validation_premier_utilisateur.png" alt="Schema validation utilisateur" height="200">
+  </a>
+</div>
+
+Vous pouvez maintenant vous connecter avec votre compte fraîchement créé et accéder à la partie administration.
+
 ## Dependences
 
 Javascript:
@@ -112,4 +125,4 @@ Lien du projet : [https://github.com/Mickaelr20/the_blog](https://github.com/Mic
 [codacy-url]: https://www.codacy.com/gh/Mickaelr20/the_blog/dashboard?utm_source=github.com&utm_medium=referral&utm_content=Mickaelr20/the_blog&utm_campaign=Badge_Grade
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/mickael-riviere-s/
-[product-screenshot]: img/web_home_screenshot.png
+[product-screenshot]: img/readme_images/home_screenshot.png
